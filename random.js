@@ -641,5 +641,5 @@ function vehicles() {
         new Vehicle("Supers", "Scramjet"),
         new Vehicle("Off-Road", "Freecrawler"),
         new Vehicle("Off-Road", "Menacer")
-    ]
+    ];
 }
