@@ -9,7 +9,7 @@ function randomVehicle(query) {
 
     /* Find all vehicles that match the specified criteria */
     var vehicles = vehicles().filter(function (vehicle) {
-        return vehicle.matches(query);
+        return false;/*vehicle.matches(query);*/
     });
     return "I've been here: " + !!vehicles;
 
