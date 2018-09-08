@@ -78,14 +78,6 @@ function Vehicle(clazz, name, availability) {
 Vehicle.prototype.toString = function () {
     var result = this.name;
     return result;
-    switch (this.availability) {
-        case 'regular':
-            return result;
-        case 'transform':
-            return result + ' [transform race only]';
-        default:
-            return result + ' [not raceable]';
-    }
 }
 
 function all() {
