@@ -72,10 +72,10 @@ function Vehicle(clazz, name, availability) {
     this.clazz = clazz;
     this.name = name;
     this.availability = !!availability ? availability : 'none';
-    
-    function toString() {
-        return this.name;
-    }
+}
+
+Vehicle.prototype.toString = function () {
+    return 'finally';
 }
 
 function all() {
