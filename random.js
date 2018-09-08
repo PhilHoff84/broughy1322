@@ -74,7 +74,15 @@ function Vehicle(clazz, name, availability) {
     this.availability = !!availability ? availability : 'none';
     
     this.toString = function () {
-        return 'finally ' + name;
+        var result = clazz + ' ▸ ' + name;
+        switch (availability) {
+            case 'regular':
+                return result;
+            case 'transform':
+                return result + ' [transform race only]';
+            default:
+                return result + ' [not raceable]';
+        }
     }
 }
 
