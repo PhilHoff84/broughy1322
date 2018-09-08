@@ -117,7 +117,7 @@ Vehicle.prototype.toString = function () {
     }
 }
 
-Vehicle.all = function () {
+function vehicles() {
     return [
         new Vehicle("Boats", "Dinghy", "regular"),
         new Vehicle("Boats", "Jetmax", "regular"),
