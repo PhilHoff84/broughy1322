@@ -106,6 +106,7 @@ Vehicle.prototype.matches = function (query) {
 }
 
 Vehicle.prototype.toString = function () {
+    return this.name;
     var result = this.clazz + ' ▸ ' + this.name;
     switch (this.availability) {
         case 'regular':
