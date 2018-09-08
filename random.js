@@ -6,7 +6,7 @@ function randomVehicle(query) {
     if (query === 'usage') {
         return 'Usage: !random (<class> | car | bike | land | air | sea | all [raceable])';
     }
-    return 'bla'+vehicles()[10];
+    return 'bla'+all()[10];
     /* Find all vehicles that match the specified criteria */
     var vehicles = vehicles()/*.filter(function (vehicle) {
         return false;/*vehicle.matches(query);*/
@@ -74,15 +74,7 @@ function Vehicle(clazz, name, availability) {
     this.availability = !!availability ? availability : 'none';
 }
 
-Vehicle.prototype.matches = function (query) {
-    return false;
-}
-
-Vehicle.prototype.toString = function () {
-    return this.name;
-}
-
-function vehicles() {
+function all() {
     return [
         new Vehicle("Boats", "Dinghy", "regular"),
         new Vehicle("Boats", "Jetmax", "regular"),
