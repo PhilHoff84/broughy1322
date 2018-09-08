@@ -76,8 +76,7 @@ function Vehicle(clazz, name, availability) {
 
 
 Vehicle.prototype.toString = function () {
-    var result = this.name;
-    return result;
+    return this.name | 'no name';
 }
 
 function all() {
