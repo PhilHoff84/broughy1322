@@ -74,6 +74,19 @@ function Vehicle(clazz, name, availability) {
     this.availability = !!availability ? availability : 'none';
 }
 
+
+Vehicle.prototype.toString = function () {
+    var result = this.clazz + ' ▸ ' + this.name;
+    switch (this.availability) {
+        case 'regular':
+            return result;
+        case 'transform':
+            return result + ' [transform race only]';
+        default:
+            return result + ' [not raceable]';
+    }
+}
+
 function all() {
     return [
         new Vehicle("Boats", "Dinghy", "regular"),
