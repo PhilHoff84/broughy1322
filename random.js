@@ -75,6 +75,7 @@ function Vehicle(clazz, name, availability) {
 }
 
 Vehicle.prototype.matches = function (query) {
+    return false;
     /* Normalize the class name to match the normalized query */
     var clazz = normalize(this.clazz);
     switch (query) {
