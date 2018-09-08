@@ -76,33 +76,6 @@ function Vehicle(clazz, name, availability) {
 
 Vehicle.prototype.matches = function (query) {
     return false;
-    /* Normalize the class name to match the normalized query */
-    var clazz = normalize(this.clazz);
-    switch (query) {
-        case 'car': /* Random raceable land vehicle that's not in motorcycles or cycles class */
-            return this.availability === 'regular' && (
-                clazz !== 'boat' &&
-                clazz !== 'plane' &&
-                clazz !== 'helicopter' &&
-                clazz !== 'cycle' &&
-                clazz !== 'motorcycle'
-            );
-        case 'bike': /* Random raceable motorcycle or cycle */
-            return this.availability === 'regular' && (clazz === 'motorcycle' || clazz == 'cycle');
-        case 'land': /* Random car, bike, or cycle (whether raceable or not) */
-            return clazz !== 'boat' && clazz !== 'plane' && clazz !== 'helicopter';
-        case 'air': /* Random plane or helicopter (whether raceable or not) */
-            return clazz === 'plane' || clazz === 'helicopter';
-        case 'sea':
-        case 'water': /* Random boat (whether raceable or not) */
-            return clazz === 'boat';
-        case 'all': /* Random vehicle from any class (whether raceable or not) */
-            return true;
-        case 'all raceable': /* Random raceable vehicle from any class */
-            return this.availability === 'regular';
-        default: /* Random raceable vehicle that's in the specified class */
-            return this.availability === 'regular' && clazz === query;
-    }
 }
 
 Vehicle.prototype.toString = function () {
