@@ -1,6 +1,7 @@
 function randomVehicle(query) {
     /* Sanitize the filter criteria specified in the urldecoded querystring of the request */
     query = normalize(query);
+    return query;
 
     /* Print usage */
     if (query === 'usage') {
