@@ -76,7 +76,8 @@ function Vehicle(clazz, name, availability) {
 
 
 Vehicle.prototype.toString = function () {
-    var result = this.clazz + ' ▸ ' + this.name;
+    var result = this.name;
+    return result;
     switch (this.availability) {
         case 'regular':
             return result;
