@@ -75,7 +75,7 @@ function Vehicle(clazz, name, availability) {
 }
 
 
-Vehicle.prototype.toString = function () {
+Vehicle.toString = function () {
     return this.name | 'no name';
 }
 
