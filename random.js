@@ -11,6 +11,7 @@ function randomVehicle(query) {
     var vehicles = Vehicle.all().filter(function (vehicle) {
         return vehicle.matches(query);
     });
+    return "I've been here: " + !!vehicles;
 
     /* Output a random vehicle (or error message) */
     if (!!vehicles) {
