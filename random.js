@@ -15,7 +15,7 @@ function randomVehicle(query) {
     /* Output a random vehicle (or error message) */
     if (vehicles.length > 0) {
         var vehicle = vehicles[Math.floor(Math.random() * vehicles.length)];
-        return 'Random vehicle (1/' + vehicles.length + '): ' + vehicle;
+        return 'Random vehicle 1/' + vehicles.length + ': ' + vehicle;
     } else {
         return 'Could not find a matching random vehicle ¯\\_(ツ)_/¯';
     }
@@ -69,13 +69,13 @@ function normalize(text) {
 
 function Vehicle(clazz, name, availability) {
     /* Normalize the class name to match the normalized query */
-    this.clazz = clazz;
-    this.name = name;
-    this.availability = !!availability ? availability : 'none';
+    this._clazz = clazz;
+    this._name = name;
+    this._availability = !!availability ? availability : 'none';
 
     this.toString = function () {
-        var result = clazz + ' ▸ ' + name;
-        switch (availability) {
+        var result = _clazz + ' ▸ ' + _name;
+        switch (_availability) {
             case 'regular':
                 return result;
             case 'transform':
@@ -86,11 +86,11 @@ function Vehicle(clazz, name, availability) {
     };
 
     this.matches = function (query) {
-        var clazz = normalize(clazz);
+        var clazz = normalize(_clazz);
         switch (query) {
             /* Random raceable land vehicle that's not in motorcycles or cycles class */
             case 'car':
-                return availability === 'regular' && (
+                return _availability === 'regular' && (
                     clazz !== 'boat' &&
                     clazz !== 'plane' &&
                     clazz !== 'helicopter' &&
@@ -99,7 +99,7 @@ function Vehicle(clazz, name, availability) {
                 );
             /* Random raceable motorcycle or cycle */
             case 'bike':
-                return availability === 'regular' && (clazz === 'motorcycle' || clazz == 'cycle');
+                return _availability === 'regular' && (clazz === 'motorcycle' || clazz == 'cycle');
             /* Random car, bike, or cycle (whether raceable or not) */
             case 'land':
                 return clazz !== 'boat' && clazz !== 'plane' && clazz !== 'helicopter';
@@ -115,10 +115,10 @@ function Vehicle(clazz, name, availability) {
                 return true;
             /* Random raceable vehicle from any class */
             case 'all raceable': 
-                return availability === 'regular';
+                return _availability === 'regular';
             /* Random raceable vehicle that's in the specified class */
             default:
-                return availability === 'regular' && clazz === query;
+                return _availability === 'regular' && clazz === query;
         }
     };
 }
