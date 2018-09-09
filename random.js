@@ -19,9 +19,9 @@ function randomVehicle(query) {
     /* Output a random vehicle (or error message) */
     if (vehicles.length > 0) {
         var vehicle = vehicles[Math.floor(Math.random() * vehicles.length)];
-        return 'Random vehicle 1/' + vehicles.length + ': ' + vehicle;
+        return query + 'Random vehicle 1/' + vehicles.length + ': ' + vehicle;
     } else {
-        return 'Could not find a matching random vehicle ¯\\_(ツ)_/¯';
+        return query + 'Could not find a matching random vehicle ¯\\_(ツ)_/¯';
     }
 }
 
