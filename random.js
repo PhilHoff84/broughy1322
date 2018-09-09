@@ -43,14 +43,12 @@ function normalize(text) {
     text = text.replace(/s\b/, '');
 
     /* Remove accents */
-    text = text.split('').map(function (letter) {
-            var i = this.accents.indexOf(letter)
-            return (i !== -1) ? this.out[i] : letter
-        }.bind({
-            accents: 'ÀÁÂÃÄÅĄàáâãäåąßÒÓÔÕÕÖØÓòóôõöøóÈÉÊËĘèéêëęðÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑŃñńŠŚšśŸÿýŽŻŹžżź',
-            out: 'AAAAAAAaaaaaaaBOOOOOOOOoooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNNnnSSssYyyZZZzzz'
-        })
-    ).join('');
+    var accents = 'ÀÁÂÃÄÅĄàáâãäåąßÒÓÔÕÕÖØÓòóôõöøóÈÉÊËĘèéêëęðÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑŃñńŠŚšśŸÿýŽŻŹžżź";
+    var accentsOut = 'AAAAAAAaaaaaaaBOOOOOOOOoooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNNnnSSssYyyZZZzzz';
+    text = text.split('').map(function (letter, index) {
+        var accentIndex = accents.indexOf(letter);
+        return accentIndex !== -1 ? accentsOut[accentIndex] : letter;
+    }).join('');
 
     /* Substitute common aliases with the correct criteria */
     switch (text) {
