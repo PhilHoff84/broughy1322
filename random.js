@@ -6,12 +6,11 @@ function randomVehicle(query) {
     if (query === 'usage') {
         return 'Usage: !random (<class> | car | bike | land | air | sea | all [raceable])';
     }
-    
-    return 'bla bla bla '+all()[5];
+
     /* Find all vehicles that match the specified criteria */
-    var vehicles = all()/*.filter(function (vehicle) {
+    var vehicles = all().filter(function (vehicle) {
         return false;/*vehicle.matches(query);*/
-    /*})*/;
+    });
     return "I've been here: " + !!vehicles;
 
     /* Output a random vehicle (or error message) */
