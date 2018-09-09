@@ -43,12 +43,7 @@ function normalize(text) {
     text = text.replace(/s\b/, '');
 
     /* Remove accents */
-    var accents = 'ÀÁÂÃÄÅĄàáâãäåąßÒÓÔÕÕÖØÓòóôõöøóÈÉÊËĘèéêëęðÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑŃñńŠŚšśŸÿýŽŻŹžżź";
-    var accentsOut = 'AAAAAAAaaaaaaaBOOOOOOOOoooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNNnnSSssYyyZZZzzz';
-    text = text.split('').map(function (letter, index) {
-        var accentIndex = accents.indexOf(letter);
-        return accentIndex !== -1 ? accentsOut[accentIndex] : letter;
-    }).join('');
+    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     /* Substitute common aliases with the correct criteria */
     switch (text) {
