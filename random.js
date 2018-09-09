@@ -1,5 +1,9 @@
+/*
+ * Nightbot command:
+ * !editcom -ul=everyone -cd=30 !random $(eval $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random.js); randomVehicle('$(query)');)
+ */
 function randomVehicle(query) {
-    /* Sanitize the filter criteria specified in the urldecoded querystring of the request */
+    /* Sanitize the filter criteria specified in the query */
     query = normalize(query);
 
     /* Print usage */
@@ -39,7 +43,14 @@ function normalize(text) {
     text = text.replace(/s\b/, '');
 
     /* Remove accents */
-    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    text = text.split('').map(function (letter) {
+            var i = this.accents.indexOf(letter)
+            return (i !== -1) ? this.out[i] : letter
+        }.bind({
+            accents: 'ÀÁÂÃÄÅĄàáâãäåąßÒÓÔÕÕÖØÓòóôõöøóÈÉÊËĘèéêëęðÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑŃñńŠŚšśŸÿýŽŻŹžżź',
+            out: 'AAAAAAAaaaaaaaBOOOOOOOOoooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNNnnSSssYyyZZZzzz'
+        })
+    ).join('');
 
     /* Substitute common aliases with the correct criteria */
     switch (text) {
@@ -114,7 +125,7 @@ function Vehicle(_clazz, _name, _availability) {
             case 'all':
                 return true;
             /* Random raceable vehicle from any class */
-            case 'all raceable': 
+            case 'all raceable':
                 return _availability === 'regular';
             /* Random raceable vehicle that's in the specified class */
             default:
