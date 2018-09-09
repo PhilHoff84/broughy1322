@@ -36,12 +36,6 @@ function normalize(text) {
     /* Remove plural */
     text = text.replace(/s\b/, '');
 
-    /* Remove all chars that are not letters */
-    text = text.replace(/[^a-z]+/, '');
-
-    /* Remove plural (again) */
-    text = text.replace(/s\b/, '');
-
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
@@ -58,9 +52,10 @@ function normalize(text) {
             return 'helicopter';
         case 'airplane':
             return 'plane';
-        case 'classic':
         case 'sportsclassic':
-            return 'sportclassic';
+        case 'sport classic':
+        case 'sportclassic':
+            return 'classic';
         case 'utilitie':
             return 'utility';
         case 'raceable':
