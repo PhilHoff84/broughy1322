@@ -15,7 +15,7 @@ function randomVehicle(query) {
     /* Output a random vehicle (or error message) */
     if (vehicles.length > 0) {
         var vehicle = vehicles[Math.floor(Math.random() * vehicles.length)];
-        return 'Random vehicle out of ' + vehicles.length + ': ' + vehicle;
+        return 'Random vehicle (1/' + vehicles.length + '): ' + vehicle;
     } else {
         return 'Could not find a matching random vehicle ¯\\_(ツ)_/¯';
     }
@@ -86,30 +86,30 @@ function Vehicle(clazz, name, availability) {
     };
 
     this.matches = function (query) {
-        var c = normalize(clazz);
+        var clazz = normalize(clazz);
         switch (query) {
             /* Random raceable land vehicle that's not in motorcycles or cycles class */
             case 'car':
                 return availability === 'regular' && (
-                    c !== 'boat' &&
-                    c !== 'plane' &&
-                    c !== 'helicopter' &&
-                    c !== 'cycle' &&
-                    c !== 'motorcycle'
+                    clazz !== 'boat' &&
+                    clazz !== 'plane' &&
+                    clazz !== 'helicopter' &&
+                    clazz !== 'cycle' &&
+                    clazz !== 'motorcycle'
                 );
             /* Random raceable motorcycle or cycle */
             case 'bike':
-                return availability === 'regular' && (c === 'motorcycle' || c == 'cycle');
+                return availability === 'regular' && (clazz === 'motorcycle' || clazz == 'cycle');
             /* Random car, bike, or cycle (whether raceable or not) */
             case 'land':
-                return c !== 'boat' && c !== 'plane' && c !== 'helicopter';
+                return clazz !== 'boat' && clazz !== 'plane' && clazz !== 'helicopter';
             /* Random plane or helicopter (whether raceable or not) */
             case 'air':
-                return c === 'plane' || c === 'helicopter';
+                return clazz === 'plane' || clazz === 'helicopter';
             /* Random boat (whether raceable or not) */
             case 'sea':
             case 'water':
-                return c === 'boat';
+                return clazz === 'boat';
             /* Random vehicle from any class (whether raceable or not) */
             case 'all':
                 return true;
@@ -118,7 +118,7 @@ function Vehicle(clazz, name, availability) {
                 return availability === 'regular';
             /* Random raceable vehicle that's in the specified class */
             default:
-                return availability === 'regular' && c === query;
+                return availability === 'regular' && clazz === query;
         }
     };
 }
