@@ -11,7 +11,7 @@ function randomVehicle(query) {
     var vehicles = all().filter(function (vehicle) {
         return vehicle.matches(query);
     });
-    return "I've been here too: " + vehicles.length;
+    return "I've been here again: " + vehicles.length;
 
     /* Output a random vehicle (or error message) */
     if (!!vehicles) {
@@ -70,11 +70,10 @@ function normalize(text) {
 
 function Vehicle(clazz, name, availability) {
     /* Normalize the class name to match the normalized query */
-    this.normalizedClazz = normalize(clazz);
     this.clazz = clazz;
     this.name = name;
     this.availability = !!availability ? availability : 'none';
-    
+
     this.toString = function () {
         var result = clazz + ' ▸ ' + name;
         switch (availability) {
@@ -86,9 +85,10 @@ function Vehicle(clazz, name, availability) {
                 return result + ' [not raceable]';
         }
     };
-    
+
     this.matches = function (query) {
-        return normalizedClazz === query;
+        var c = normalize(clazz);
+        return c === query;
     };
 }
 
