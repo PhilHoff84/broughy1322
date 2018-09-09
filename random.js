@@ -57,7 +57,7 @@ function normalize(text) {
         case 'classic':
         case 'sportsclassic':
             return 'sportclassic';
-        case 'utilities':
+        case 'utilitie':
             return 'utility';
         case 'raceable':
         case 'allraceable':
