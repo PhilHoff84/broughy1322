@@ -40,7 +40,7 @@ function normalize(text) {
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     /* Remove all chars that are not letters */
-    text = text.replace(/[^a-z]+/, '');
+    text = text.replace(/[^a-z]+/g, '');
 
     /* Substitute common aliases with the correct criteria */
     switch (text) {
