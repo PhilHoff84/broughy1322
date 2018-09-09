@@ -39,6 +39,9 @@ function normalize(text) {
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
+    /* Remove all chars that are not letters */
+    text = text.replace(/[^a-z]+/, '');
+
     /* Substitute common aliases with the correct criteria */
     switch (text) {
         case '': /* Print usage, if there was not even a single valid letter in the text */
@@ -52,9 +55,8 @@ function normalize(text) {
             return 'helicopter';
         case 'airplane':
             return 'plane';
-        case 'sportsclassic':
-        case 'sport classic':
         case 'sportclassic':
+        case 'sportsclassic':
             return 'classic';
         case 'utiliti':
         case 'utilitie':
