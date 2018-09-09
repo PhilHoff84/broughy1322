@@ -34,7 +34,7 @@ function normalize(text) {
     text = text.toLowerCase();
 
     /* Remove plural */
-    text = text.replace(/s\b/, '');
+    text = text.replace(/s\b/g, '');
 
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
