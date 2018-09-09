@@ -9,9 +9,9 @@ function randomVehicle(query) {
 
     /* Find all vehicles that match the specified criteria */
     var vehicles = all().filter(function (vehicle) {
-        return false;/*vehicle.matches(query);*/
+        return vehicle.matches(query);
     });
-    return "I've been here: " + vehicles.length;
+    return "I've been here too: " + vehicles.length;
 
     /* Output a random vehicle (or error message) */
     if (!!vehicles) {
