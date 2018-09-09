@@ -88,7 +88,39 @@ function Vehicle(clazz, name, availability) {
 
     this.matches = function (query) {
         var c = normalize(clazz);
-        return c === query;
+        switch (query) {
+            /* Random raceable land vehicle that's not in motorcycles or cycles class */
+            case 'car':
+                return availability === 'regular' && (
+                    c !== 'boat' &&
+                    c !== 'plane' &&
+                    c !== 'helicopter' &&
+                    c !== 'cycle' &&
+                    c !== 'motorcycle'
+                );
+            /* Random raceable motorcycle or cycle */
+            case 'bike':
+                return availability === 'regular' && (c === 'motorcycle' || c == 'cycle');
+            /* Random car, bike, or cycle (whether raceable or not) */
+            case 'land':
+                return c !== 'boat' && c !== 'plane' && c !== 'helicopter';
+            /* Random plane or helicopter (whether raceable or not) */
+            case 'air':
+                return c === 'plane' || c === 'helicopter';
+            /* Random boat (whether raceable or not) */
+            case 'sea':
+            case 'water':
+                return c === 'boat';
+            /* Random vehicle from any class (whether raceable or not) */
+            case 'all':
+                return true;
+            /* Random raceable vehicle from any class */
+            case 'all raceable': 
+                return availability === 'regular';
+            /* Random raceable vehicle that's in the specified class */
+            default:
+                return availability === 'regular' && c === query;
+        }
     };
 }
 
