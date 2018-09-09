@@ -85,11 +85,11 @@ function Vehicle(clazz, name, availability) {
             default:
                 return result + ' [not raceable]';
         }
-    }
+    };
     
     this.matches = function (query) {
         return normalizedClazz === query;
-    }
+    };
 }
 
 function all() {
