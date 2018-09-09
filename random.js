@@ -67,11 +67,11 @@ function normalize(text) {
     }
 }
 
-function Vehicle(clazz, name, availability) {
+function Vehicle(_clazz, _name, _availability) {
     /* Normalize the class name to match the normalized query */
-    this._clazz = clazz;
-    this._name = name;
-    this._availability = !!availability ? availability : 'none';
+    this._clazz = _clazz;
+    this._name = _name;
+    this._availability = !!_availability ? _availability : 'none';
 
     this.toString = function () {
         var result = _clazz + ' ▸ ' + _name;
