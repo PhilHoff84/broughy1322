@@ -11,12 +11,11 @@ function randomVehicle(query) {
     var vehicles = all().filter(function (vehicle) {
         return vehicle.matches(query);
     });
-    return "I've been here again: " + vehicles.length;
 
     /* Output a random vehicle (or error message) */
-    if (!!vehicles) {
+    if (vehicles.length > 0) {
         var vehicle = vehicles[Math.floor(Math.random() * vehicles.length)];
-        return 'Random vehicle: ' + vehicle;
+        return 'Random vehicle out of ' + vehicles.length + ': ' + vehicle;
     } else {
         return 'Could not find a matching random vehicle ¯\\_(ツ)_/¯';
     }
