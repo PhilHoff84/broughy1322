@@ -6,7 +6,7 @@ function randomVehicle(query) {
     if (query === 'usage') {
         return 'Usage: !random (<class> | car | bike | land | air | sea | all [raceable])';
     }
-    return 'refreshed';
+    
     return 'bla bla bla '+all()[5];
     /* Find all vehicles that match the specified criteria */
     var vehicles = all()/*.filter(function (vehicle) {
