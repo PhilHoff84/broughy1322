@@ -31,7 +31,7 @@ function normalize(text) {
     }
 
     /* Convert to lowercase */
-    text = text.toLowerCase();
+    text = ('' + text).toLowerCase();
 
     /* Remove plural */
     text = text.replace(/s\b/g, '');
