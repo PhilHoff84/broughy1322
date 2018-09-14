@@ -5,7 +5,7 @@
 function randomSong(query) {
     /* Sanitize the filter criteria specified in the query */
     query = normalize(query);
-
+return 'song: ' + query;
     /* Print usage */
     if (query === 'usage') {
         return 'Usage: !randomsong (<genre> | <artist> | <year> | all)';
