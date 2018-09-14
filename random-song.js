@@ -72,7 +72,7 @@ function Song(genre, artist, title, year) {
             case 'all':
                 return true;
             /* Random song that mactches the specified genre, artist or year */
-            case normalize(year):
+            case year:
             case normalize(genre):
             case normalize(artist):
                 return true;
