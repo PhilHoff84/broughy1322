@@ -12,9 +12,9 @@ function randomSong(query) {
     }
 
     /* Find all songs that match the specified criteria */
-    var songs = all();/*.filter(function (song) {
+    var songs = all().filter(function (song) {
         return song.matches(query);
-    });*/
+    });
 
     /* Output a random song (or error message) */
     if (songs.length > 0) {
@@ -66,13 +66,12 @@ function Song(genre, artist, title, year) {
     };
 
     this.matches = function (query) {
-        var genre = normalize(genre);
         switch (query) {
             /* Random song from any genre and year */
             case 'all':
                 return true;
             /* Random song that mactches the specified genre, artist or year */
-            case year:
+            case normalize(year):
             case normalize(genre):
             case normalize(artist):
                 return true;
