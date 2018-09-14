@@ -5,16 +5,16 @@
 function randomSong(query) {
     /* Sanitize the filter criteria specified in the query */
     query = normalize(query);
-return 'song: ' + query;
+
     /* Print usage */
     if (query === 'usage') {
         return 'Usage: !randomsong (<genre> | <artist> | <year> | all)';
     }
 
     /* Find all songs that match the specified criteria */
-    var songs = all().filter(function (song) {
+    var songs = all();/*.filter(function (song) {
         return song.matches(query);
-    });
+    });*/
 
     /* Output a random song (or error message) */
     if (songs.length > 0) {
