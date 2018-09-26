@@ -83,6 +83,11 @@ function Song(genre, artist, title, year) {
 
 function all() {
     return [
+        /*
+         * Copy the songs from the spreadsheet: http://bit.ly/rockbandbroughy
+         * then search for: ^([^\t\n]+)\t([^\t\n]+)\t([^\t\n]+)\t([^\t\n]+)$
+         * replace with: new Song("$4", "$2", "$1", $3),
+         */
         new Song("Alternative", "4 Non Blondes", "What's Up?", 1992),
         new Song("Alternative", "At the Drive-In", "One Armed Scissor", 2000),
         new Song("Alternative", "Cake", "Short Skirt/Long Jacket", 2001),
@@ -123,18 +128,21 @@ function all() {
         new Song("Alternative", "Weezer", "Say It Ain't So", 1994),
         new Song("Blues", "Brandi Carlile", "Mainstream Kid", 2015),
         new Song("Classic Rock", "Blue Öyster Cult", "(Don't Fear) The Reaper", 1975),
+        new Song("Classic Rock", "Blue Öyster Cult", "Burnin' for You", 1981),
         new Song("Classic Rock", "Blue Öyster Cult", "Godzilla", 1977),
         new Song("Classic Rock", "Boston", "Foreplay/Long Time", 1976),
         new Song("Classic Rock", "Boston", "More Than a Feeling", 1976),
         new Song("Classic Rock", "Chicago", "25 or 6 to 4", 1970),
         new Song("Classic Rock", "Deep Purple", "Highway Star", 1972),
         new Song("Classic Rock", "Deep Purple", "Smoke on the Water", 1972),
+        new Song("Classic Rock", "Eddie Money", "Two Tickets to Paradise", 1977),
         new Song("Classic Rock", "Elton John", "Saturday Night's Alright for Fighting", 1973),
         new Song("Classic Rock", "Fleetwood Mac", "You Make Loving Fun", 1977),
         new Song("Classic Rock", "Foreigner", "Cold as Ice", 1977),
         new Song("Classic Rock", "Golden Earring", "Radar Love", 1973),
         new Song("Classic Rock", "Heart", "Alone", 1987),
         new Song("Classic Rock", "Heart", "Kick It Out", 1977),
+        new Song("Classic Rock", "Heart", "What About Love?", 1985),
         new Song("Classic Rock", "John Lennon", "Imagine", 1971),
         new Song("Classic Rock", "Kiss", "Detroit Rock City", 1976),
         new Song("Classic Rock", "Pat Benatar", "Heartbreaker", 1979),
@@ -165,6 +173,7 @@ function all() {
         new Song("Glam", "Ratt", "Round and Round", 1984),
         new Song("Glam", "Sweet (As Made Famous By)", "Ballroom Blitz", 1975),
         new Song("Glam", "T. Rex", "20th Century Boy", 1973),
+        new Song("Glam", "Warrant", "Cherry Pie", 1990),
         new Song("Grunge", "Alice in Chains", "A Looking in View", 2009),
         new Song("Grunge", "Alice in Chains", "Check My Brain", 2009),
         new Song("Grunge", "Alice in Chains", "No Excuses", 1994),
@@ -221,6 +230,7 @@ function all() {
         new Song("Pop-Rock", "Hole", "Celebrity Skin", 1998),
         new Song("Pop-Rock", "INXS", "Need You Tonight", 1987),
         new Song("Pop-Rock", "Juanes", "Me Enamora", 2007),
+        new Song("Pop-Rock", "Kenny Loggins", "Danger Zone", 1986),
         new Song("Pop-Rock", "Maná", "Oye Mi Amor", 1992),
         new Song("Pop-Rock", "OK Go", "Here It Goes Again", 2003),
         new Song("Pop-Rock", "Paramore", "Misery Business", 2007),
@@ -240,6 +250,7 @@ function all() {
         new Song("Pop/Dance/Electronic", "Rick Astley", "Never Gonna Give You Up", 1987),
         new Song("Prog", "Coheed and Cambria", "Welcome Home", 2005),
         new Song("Prog", "Dream Theater", "Metropolis - Part 1 'The Miracle and the Sleeper'", 1992),
+        new Song("Prog", "Kansas", "Carry On Wayward Son", 1976),
         new Song("Prog", "Rush", "A Passage to Bangkok", 1976),
         new Song("Prog", "Rush (As Made Famous By)", "Tom Sawyer", 1981),
         new Song("Prog", "Yes", "Owner of a Lonely Heart", 1983),
@@ -321,6 +332,7 @@ function all() {
         new Song("Rock", "Red Hot Chili Peppers", "Dani California", 2006),
         new Song("Rock", "Scandal", "The Warrior", 1984),
         new Song("Rock", "Slydigs", "Light the Fuse", 2015),
+        new Song("Rock", "Survivor", "Eye of the Tiger", 1982),
         new Song("Rock", "The Beach Boys", "Good Vibrations (Live)", 1968),
         new Song("Rock", "The Black Keys", "Fever", 2014),
         new Song("Rock", "The J. Geils Band", "Centerfold", 1981),
