@@ -251,6 +251,7 @@ function all() {
         new Song("Prog", "Coheed and Cambria", "Welcome Home", 2005),
         new Song("Prog", "Dream Theater", "Metropolis - Part 1 'The Miracle and the Sleeper'", 1992),
         new Song("Prog", "Kansas", "Carry On Wayward Son", 1976),
+        new Song("Prog", "Rush", "2112", 1976),
         new Song("Prog", "Rush", "A Passage to Bangkok", 1976),
         new Song("Prog", "Rush (As Made Famous By)", "Tom Sawyer", 1981),
         new Song("Prog", "Yes", "Owner of a Lonely Heart", 1983),
