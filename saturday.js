@@ -1,16 +1,24 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=5 !saturday $(eval schedule(new Date(), 0, 0); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/saturday.js);)
+ * !editcom -ul=everyone -cd=5 !saturday $(eval schedule(0, 0); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/saturday.js);)
  */
-function schedule(date, missedStreams, missedPlatforms) {
-    date.setUTCHours(date.getUTCHours() + 5, 0, 0, 0);
+function schedule(missedStreams, missedPlatforms) {
+    var date = new Date();
+    date = new Date(Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        date.getUTCHours() + 1,
+        date.getUTCMinutes(),
+        date.getUTCSeconds()
+    ));
 
     var stream1 = nextStream(date);
-    var where1 = nextPlatform(stream1, missedStreams, missedPlatforms);
+    var what1 = nextPlatform(stream1, missedStreams, missedPlatforms);
 
     var stream2 = nextStream(nextDay(stream1));
-    var where2 = nextPlatform(stream2, missedStreams, missedPlatforms);
-    return 'Next Saturday evening stream: ' + where1 + '  | Following Saturday: ' + where2;
+    var what2 = nextPlatform(stream2, missedStreams, missedPlatforms);
+    return 'Next Saturday evening stream: ' + what1 + '  | Following Saturday: ' + what2;
 }
 
 function nextPlatform(date, streamOffset, platformOffset) {
@@ -18,17 +26,19 @@ function nextPlatform(date, streamOffset, platformOffset) {
     var from = new Date(Date.UTC(2018, 7, 11));
     var to = new Date(date);
     to.setUTCHours(0, 0, 0, 0);
+
     while (from <= to) {
         if (isStream(from)) {
             count++;
         }
         nextDay(from);
     }
+
     if ((count + streamOffset) % 2 === 0) {
         return 'Podcast on Twitch';
     }
-    var platform = ['Content Creator XB1 on YouTube', 'Content Creator PC on YouTube', 'Content Creator PS4 on YouTube'];
-    return platform[(Math.floor(count / 2) + streamOffset + platformOffset) % platform.length];
+    var platform = ['XB1', 'PC', 'PS4'];
+    return 'Content Creator ' + platform[(Math.floor(count / 2) + streamOffset + platformOffset) % platform.length] + ' on YouTube';
 }
 
 function nextStream(date) {
