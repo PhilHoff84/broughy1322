@@ -18,7 +18,7 @@ function schedule(missedStreams, missedPlatforms) {
 
     var stream2 = nextStream(nextDay(stream1));
     var what2 = nextPlatform(stream2, missedStreams, missedPlatforms);
-    return 'Next Saturday evening stream: ' + what1 + '  | Following Saturday: ' + what2;
+    return 'Next Saturday evening stream: ' + what1 + '  | Following Saturday: ' + what2 + ' | All start at 7pm UK time';
 }
 
 function nextPlatform(date, streamOffset, platformOffset) {
