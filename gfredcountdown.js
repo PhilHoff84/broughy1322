@@ -13,20 +13,20 @@ function countdown() {
         now.getUTCMinutes()
     ));
 
-    /* Gfred starts at 22:30 */
+    /* Gfred starts at 21:30 */
     var start = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
         now.getUTCDate() + (7 - now.getUTCDay()) % 7,
-        22,
+        21,
         30));
 
-    /* Gfred ends at 23:00 */
+    /* Gfred ends at 22:00 */
     var end = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
         now.getUTCDate() + (7 - now.getUTCDay()) % 7,
-        23));
+        22));
 
     /* Gfred just ended; fast-forward to next week */
     if (end < now) {
