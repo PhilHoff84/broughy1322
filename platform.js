@@ -14,12 +14,10 @@ function schedule(missedStreams) {
 
     var stream1 = nextStream(now);
     var when1 = stream1.getUTCDay() !== 0 ? 'Saturday' : 'Sunday';
-    /*  when1 += " " + nth(stream1.getUTCDate()); */
     var where1 = nextPlatform(stream1, missedStreams);
 
     var stream2 = nextStream(nextDay(stream1));
     var when2 = stream2.getUTCDay() !== 0 ? 'Saturday' : 'Sunday';
-    /*  when2 += " " + nth(stream2.getUTCDate()); */
     var where2 = nextPlatform(stream2, missedStreams);
     return 'Upcoming GTA Streams & Platforms: ' + when1 + ' on ' + where1 + ', ' + when2 + ' on ' + where2;
 }
