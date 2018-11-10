@@ -27,7 +27,11 @@ function schedule(missedStreams) {
 function nextPlatform(date, offset) {
     var count = 0; /* count streams since origin */
     var from = new Date(Date.UTC(2018, 7, 11));
-    var to = new Date(date); to.setUTCHours(0, 0, 0, 0);
+    var to = new Date(Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate()
+    ));
     while(from <= to) {
         if(isStream(from)) {
             count++;
@@ -47,11 +51,11 @@ function nextStream(date) {
 }
 
 function nextDay(date) {
-    return date.setDate(date.getDate() + 1);
+    return date.setUTCDate(date.getUTCDate() + 1);
 }
 
 function isStream(date) {
-    return date.getDay() % 6 === 0; /* Saturday or Sunday */
+    return date.getUTCDay() % 6 === 0; /* Saturday or Sunday */
 }
 
 function nth(n) {
