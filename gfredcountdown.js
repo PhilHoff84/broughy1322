@@ -62,5 +62,5 @@ function diff(difference_ms) {
     if (delta.length === 3)
         return delta.shift() + ', ' + delta.join(' and ');
 
-    return delta.join(', ');
+    return delta.join(' and ');
 }
