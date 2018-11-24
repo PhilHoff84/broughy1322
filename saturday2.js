@@ -6,15 +6,15 @@ function schedule(missedStreams, missedPlatforms) {
     var now = utcDate(new Date());
 
     var stream1 = nextStream(now);
-    var what1 = stream1.toUTCString()/*nth(stream1.getUTCDate())*/ +" "+ nextPlatform(stream1, missedStreams, missedPlatforms);
+    var what1 = nextPlatform(stream1, missedStreams, missedPlatforms);
 
     var stream2 = nextStream(nextDay(stream1));
-    var what2 = stream2.toUTCString()/*nth(stream1.getUTCDate())*/ +" "+ nextPlatform(stream2, missedStreams, missedPlatforms);
+    var what2 = nextPlatform(stream2, missedStreams, missedPlatforms);
 
     if (isVacationBetween(now, stream1)) {
-        return 'Next Saturday evening stream: Vacation | Following Saturday: ' + what2 + ' | All start at 7pm UK time';
+        return 'Next Saturday evening stream: No stream! | Following Saturday: ' + what2 + ' | All start at 7pm UK time';
     } else if (isVacationBetween(stream1, stream2)) {
-        return 'Next Saturday evening stream: ' + what1 + ' | Following Saturday: Vacation | All start at 7pm UK time';
+        return 'Next Saturday evening stream: ' + what1 + ' | Following Saturday: No stream! | All start at 7pm UK time';
     }
     return 'Next Saturday evening stream: ' + what1 + ' | Following Saturday: ' + what2 + ' | All start at 7pm UK time';
 }
@@ -75,10 +75,6 @@ function isVacationBetween(from, to) {
     return false;
 }
 
-function nth(n) {
-    return n+(['st','nd','rd'][((n+90)%100-10)%10-1]||'th');
-}
-
 function utcDate(date) {
     return new Date(Date.UTC(
         date.getUTCFullYear(),
@@ -90,3 +86,7 @@ function utcDate(date) {
         date.getUTCMilliseconds()
     ));
 }
+
+/*function nth(n) {
+    return n + (['st', 'nd', 'rd'][((n + 90) % 100 - 10) % 10 - 1] || 'th');
+}*/
