@@ -44,7 +44,7 @@ function nextPlatform(date, streamOffset, platformOffset) {
         return 'Podcast on Twitch';
     }
     var platforms = ['XB1', 'PC', 'PS4'];
-    var platform = platforms[count - (Math.floor(count / 4) + streamOffset + platformOffset) % platform.length];
+    var platform = platforms[count - (Math.floor(count / 4) + streamOffset + platformOffset) % platforms.length];
     return 'Content Creator ' + platform + ' on YouTube';
 }
 
