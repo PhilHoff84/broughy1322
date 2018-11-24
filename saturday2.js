@@ -65,7 +65,7 @@ function isStream(date) {
 }
 
 function isVacationBetween(from, to) {
-    var i = new Date(date);
+    var i = new Date(from);
     while (i <= to) {
         if (i.getUTCDay() === 6 /* Saturday */ && i.getUTCDate() > 4 * 7 /* only 5th Saturday in a month */) {
             return true;
@@ -74,4 +74,3 @@ function isVacationBetween(from, to) {
     }
     return false;
 }
-/* pointless change to update cache */
