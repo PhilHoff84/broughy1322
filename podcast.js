@@ -3,38 +3,33 @@
  * !editcom -ul=everyone -cd=30 !podcast $(eval countdown(); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/podcast.js);)
  */
 function countdown() {
-    var now = new Date();
-    now = new Date(Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        now.getUTCHours(),
-        now.getUTCMinutes()
-    ));
+    var now = utcDate(new Date());
+
+    var begin = utcDate(now);
+    begin.setUTCDate(1); /* first day of the month */
+    var offset = 7 - begin.getUTCDay();
 
     /* podcast starts at 20:00 */
     var start = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
-        now.getUTCDate() + (7 - now.getUTCDay()) % 7,
+        7 * 3 + (offset),
         20));
 
     /* podcast ends at 22:30 */
     var end = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
-        now.getUTCDate() + (7 - now.getUTCDay()) % 7,
+        7 * 3 + (offset),
         22, 30));
 
-    /* podcast just ended; fast-forward to next week */
-    if (end < now) {
-        start.setUTCDate(start.getUTCDate() + 7);
-        end.setUTCDate(start.getUTCDate() + 7);
-    }
-
-    if (start <= now) {
+    if (start <= now && now <= end) {
         return "The next Choking Hazard Podcast will start in approximately… wait… it's happening right now!"
+    } else if (now <= start && now <= end) {
+        return 'The next Choking Hazard Podcast will start in approximately ' + diff(start.getTime() - now.getTime());
     } else {
+        /* this month's podcast already ended; fast-forward to next month */
+        start.setUTCDate(start.getUTCDate() + 4 * 7);
         return 'The next Choking Hazard Podcast will start in approximately ' + diff(start.getTime() - now.getTime());
     }
 }
@@ -58,4 +53,16 @@ function diff(difference_ms) {
         return delta.shift() + ', ' + delta.join(' and ');
 
     return delta.join(', ');
+}
+
+function utcDate(date) {
+    return new Date(Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds(),
+        date.getUTCMilliseconds()
+    ));
 }
