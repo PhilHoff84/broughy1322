@@ -9,19 +9,19 @@ function countdown() {
     begin.setUTCDate(1); /* first day of the month */
     var offset = 7 - begin.getUTCDay();
 
-    /* podcast starts at 20:00 */
+    /* podcast starts at 19:00 UTC*/
     var start = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
         7 * 3 + (offset),
-        20));
+        19));
 
-    /* podcast ends at 22:30 */
+    /* podcast ends at 21:30 UTC */
     var end = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
         7 * 3 + (offset),
-        22, 30));
+        21, 30));
 
     if (start <= now && now <= end) {
         return "The next Choking Hazard Podcast will start in approximately… wait… it's happening right now!"
