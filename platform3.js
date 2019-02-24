@@ -28,6 +28,7 @@ function schedule() {
 function nextRegular(date) {
     var offset = 5; /* number of missed streams */
     var count = 0; /* count streams since origin */
+    var saturdays = 0; /* count Saturdays since origin */
     var from = new Date(Date.UTC(2019, 0, 1));
     var to = utcDate(date);
     to.setUTCHours(0, 0, 0, 0);
@@ -35,12 +36,25 @@ function nextRegular(date) {
     while (from <= to) {
         if (isSaturdayOrSunday(from)) {
             count++;
+
+            if (isSaturday(from)) {
+                saturdays++;
+            }
         }
         from = nextDay(from);
     }
-    var platform = ['XB1', 'PS4', 'PC', 'XB1', 'PS4', 'FiveM'];
-    var max = to.getUTCDay() === 0 ? platform.length : platform.length / 2;
-    return platform[(count + offset) % max];
+    var primary = ['XB1', 'PS4', 'PC', 'XB1', 'PS4', 'FiveM'];
+    var secondary = ['', 'FiveM', '', 'FiveM', '', ''];
+    var max = to.getUTCDay() === 0 ? primary.length : primary.length / 2;
+
+    var schedule = primary[(count + offset) % max];
+    if (to.getUTCDay() === 6) { /* add Saturday afternoon */
+        var extra = secondary[(saturdays + offset) % secondary.length];
+        if (extra) {
+            schedule += ' & ' + extra;
+        }
+    }
+    return schedule;
 }
 
 function nextSpecial(date) {
