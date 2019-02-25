@@ -4,16 +4,19 @@
  */
 function schedule() {
     var now = utcDate(new Date());
+    if (typeof arguments === 'object' && arguments.length === 1 && arguments[0] instanceof Date) {
+        now = utcDate(arguments[0]);
+    }
 
     if (now.getUTCDay() === 0) {
         /* time-travel back to Saturday on Sunday, to keep the output stable */
         now = nextDay(now, -1);
     }
 
-    var stream1 = nextStream(now, isSaturdayOrSunday);
+    var stream1 = nextStream(now, isSaturday || isSunday);
     var satMorn = nextRegular(stream1);
 
-    var stream3 = nextStream(nextDay(stream1), isSaturdayOrSunday);
+    var stream3 = nextStream(nextDay(stream1), isSunday || isSunday);
     var sunday = nextRegular(stream3);
 
     var stream2 = nextStream(now, isSaturday);
@@ -26,35 +29,29 @@ function schedule() {
 }
 
 function nextRegular(date) {
-    var offset = 5; /* number of missed streams */
-    var count = 0; /* count streams since origin */
+    var offset = -1; /* number of missed streams */
     var saturdays = 0; /* count Saturdays since origin */
+    var sundays = 0; /* count Sundays since origin */
     var from = new Date(Date.UTC(2019, 0, 1));
     var to = utcDate(date);
     to.setUTCHours(0, 0, 0, 0);
 
     while (from <= to) {
-        if (isSaturdayOrSunday(from)) {
-            count++;
-
-            if (isSaturday(from)) {
-                saturdays++;
-            }
+        if (isSaturday(from)) {
+            saturdays++;
+        } else if (isSunday(from)) {
+            sundays++;
         }
         from = nextDay(from);
     }
-    var primary = ['XB1', 'PS4', 'PC', 'XB1', 'PS4', 'FiveM'];
-    var secondary = ['', 'FiveM', '', 'FiveM', '', ''];
-    var max = to.getUTCDay() === 0 ? primary.length : primary.length / 2;
 
-    var schedule = primary[(count + offset) % max];
-    if (to.getUTCDay() === 6) { /* add Saturday afternoon */
-        var extra = secondary[(saturdays + offset) % secondary.length];
-        if (extra) {
-            schedule += ' & ' + extra;
-        }
+    if (to.getUTCDay() === 6) { /* Saturday */
+        var saturday = ['XB1', 'PC & FiveM', 'PS4', 'XB1 & FiveM', 'PC', 'PS4'];
+        return saturday[(saturdays + offset) % saturday.length];
+    } else { /* Sunday */
+        var sunday = ['PS4', 'XB1', 'PC', 'PS4', 'XB1', 'FiveM'];
+        return sunday[(sundays + offset) % sunday.length];
     }
-    return schedule;
 }
 
 function nextSpecial(date) {
@@ -107,8 +104,8 @@ function isSaturday(date) {
     return date.getUTCDay() === 6; /* Saturday */
 }
 
-function isSaturdayOrSunday(date) {
-    return date.getUTCDay() % 6 === 0; /* Saturday or Sunday */
+function isSunday(date) {
+    return date.getUTCDay() === 0; /* Sunday */
 }
 
 function utcDate(date) {
