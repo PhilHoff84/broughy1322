@@ -71,7 +71,7 @@ function nextSpecial(date) {
         case 0:
             return 'PS4';
         case 1:
-            return 'PS4' /* due to lack of tracks not 'XB1' */;
+            return 'XB1';
         case 2:
             return 'PC';
         /* case 3: return 'Podcast'; */
