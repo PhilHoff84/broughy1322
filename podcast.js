@@ -14,14 +14,14 @@ function countdown() {
         now.getUTCFullYear(),
         now.getUTCMonth(),
         7 * 3 + (offset),
-        19));
+        18));
 
     /* podcast ends at 21:30 UTC */
     var end = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
         7 * 3 + (offset),
-        21, 30));
+        20, 30));
 
     if (start <= now && now <= end) {
         return "The next Choking Hazard Podcast will start in approximately… wait… it's happening right now!"
