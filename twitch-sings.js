@@ -54,7 +54,7 @@ function normalize(text) {
     }
 }
 
-function Song(artist, title) {
+function Song(title, artist) {
     this.artist = artist;
     this.title = title;
 
