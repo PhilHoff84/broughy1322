@@ -60,7 +60,7 @@ function nextRegular(date) {
 }
 
 function nextSpecial(date, offset = 0) {
-    var count = offset; /* count streams since origin */
+    var count = 0 - offset; /* count streams since origin */
     var from = utcDate(date);
     from.setUTCDate(1);
     var to = utcDate(date);
