@@ -9,8 +9,10 @@ function schedule(query = '', regularOffset = -2, specialOffset = 0) {
     }
 
     /* conveniently move platforms for regular & special streams forward/backwards */
+    var prefix = "This";
     query = normalize(query);
     if (query === 'next') {
+        prefix = "Next";
         now = nextDay(now, 7);
     }
 
@@ -28,7 +30,7 @@ function schedule(query = '', regularOffset = -2, specialOffset = 0) {
     var stream2 = nextStream(now, isSaturday);
     var satEve = nextSpecial(stream2, specialOffset);
 
-    return "Query=" + query +"; Offset="+regularOffset+"/"+specialOffset+"; Week's GTA Streams - " +
+    return prefix + " Week's GTA Streams - " +
         "Sat Morn: " + satMorn + " | " +
         "Sat Eve: " + satEve + " | " +
         "Sun: " + sunday;
