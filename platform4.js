@@ -2,7 +2,7 @@
  * Nightbot command:
  * !editcom -ul=everyone -cd=5 !platform $(eval schedule('$(query)'); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform4.js);)
  */
-function schedule(query = '', regularOffset = -1, specialOffset = 0) {
+function schedule(query = '', regularOffset = 0, specialOffset = 0) {
     var now = utcDate(new Date());
     if (typeof arguments === 'object' && arguments.length === 1 && arguments[0] instanceof Date) {
         now = utcDate(arguments[0]);
