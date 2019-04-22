@@ -2,7 +2,7 @@
  * Nightbot command:
  * !editcom -ul=everyone -cd=5 !platform $(eval schedule(-1); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform3.js);)
  */
-function schedule(offset) {
+function schedule(offset = 0) {
     var now = utcDate(new Date());
     if (typeof arguments === 'object' && arguments.length === 1 && arguments[0] instanceof Date) {
         now = utcDate(arguments[0]);
@@ -59,7 +59,7 @@ function nextRegular(date) {
     }
 }
 
-function nextSpecial(date, offset) {
+function nextSpecial(date, offset = 0) {
     var count = -1 * offset; /* count streams since origin */
     var from = utcDate(date);
     from.setUTCDate(1);
