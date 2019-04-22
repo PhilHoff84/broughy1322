@@ -11,8 +11,7 @@ function schedule(query = '', regularOffset = -2, specialOffset = 0) {
     /* conveniently move platforms for regular & special streams forward/backwards */
     query = normalize(query);
     if (query === 'next') {
-        regularOffset++;
-        specialOffset++;
+        now = nextDay(now, 7);
     }
 
     if (now.getUTCDay() === 0) {
