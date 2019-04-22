@@ -25,7 +25,7 @@ function schedule(offset = 0) {
     var sunday = nextRegular(stream3);
 
     var stream2 = nextStream(now, isSaturday);
-    var satEve = nextSpecial(stream2, offset);
+    var satEve = nextSpecial(stream2, 0);
 
     return "This Week's GTA Streams - " +
         "Sat Morn: " + satMorn + " | " +
@@ -60,7 +60,7 @@ function nextRegular(date) {
 }
 
 function nextSpecial(date, offset = 0) {
-    var count = -1 * offset; /* count streams since origin */
+    var count = offset; /* count streams since origin */
     var from = utcDate(date);
     from.setUTCDate(1);
     var to = utcDate(date);
