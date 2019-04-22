@@ -25,7 +25,7 @@ function schedule(offset = 0) {
     var sunday = nextRegular(stream3);
 
     var stream2 = nextStream(now, isSaturday);
-    var satEve = nextSpecial(stream2, 0);
+    var satEve = nextSpecial(stream2, offset);
 
     return "This Week's GTA Streams - " +
         "Sat Morn: " + satMorn + " | " +
