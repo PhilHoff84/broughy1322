@@ -54,7 +54,7 @@ function normalize(text) {
     text = text.replace(/[^a-z]+/g, '');
     
     /* Remove everything behind '@' */
-    text = text.replace(/@.*/g, '');
+    text = text.replace(/\s*@.*/g, '');
 
     return text;
 }
