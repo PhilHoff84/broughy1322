@@ -8,12 +8,13 @@ function schedule(query = '', offset = 0) {
         now = utcDate(arguments[0]);
     }
 
-    /* Sanitize the query */
+    /* conveniently move streams forward/backwards by 'offset' weeks */
     query = normalize(query);
     if (query === 'next') {
         offset++;
     }
-    now = nextDay(now, offset * 7);
+    offset = offset * 7;
+    now = nextDay(now, offset);
 
     if (now.getUTCDay() === 0) {
         /* time-travel back to Saturday on Sunday, to keep the output stable */
