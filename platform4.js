@@ -29,7 +29,7 @@ function schedule(query = '', regularOffset = -2, specialOffset = 0) {
     var stream2 = nextStream(now, isSaturday);
     var satEve = nextSpecial(stream2, specialOffset);
 
-    return "q=" + query +";o="+regularOffset+"/"+specialOffset+"; Week's GTA Streams - " +
+    return "Query=" + query +"; Offset="+regularOffset+"/"+specialOffset+"; Week's GTA Streams - " +
         "Sat Morn: " + satMorn + " | " +
         "Sat Eve: " + satEve + " | " +
         "Sun: " + sunday;
