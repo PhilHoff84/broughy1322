@@ -12,6 +12,7 @@ function schedule(query = '', regularOffset = -1, specialOffset = 0) {
     query = normalize(query);
     if (query === 'next') {
         regularOffset++;
+        specialOffset++;
     }
 
     if (now.getUTCDay() === 0) {
@@ -28,7 +29,7 @@ function schedule(query = '', regularOffset = -1, specialOffset = 0) {
     var stream2 = nextStream(now, isSaturday);
     var satEve = nextSpecial(stream2, specialOffset);
 
-    return "q=" + query +"o="+regularOffset+"/"+specialOffset+"; Week's GTA Streams - " +
+    return "q=" + query +";o="+regularOffset+"/"+specialOffset+"; Week's GTA Streams - " +
         "Sat Morn: " + satMorn + " | " +
         "Sat Eve: " + satEve + " | " +
         "Sun: " + sunday;
