@@ -8,7 +8,7 @@ function schedule(query = '', regularOffset = -1, specialOffset = 0) {
         now = utcDate(arguments[0]);
     }
 
-    /* conveniently move platforms for regualr streams forward/backwards by 'offset' weeks */
+    /* conveniently move platforms for regular & special streams forward/backwards */
     query = normalize(query);
     if (query === 'next') {
         regularOffset++;
