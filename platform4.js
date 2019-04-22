@@ -1,20 +1,18 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=5 !platform $(eval schedule('$(query)', -1); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform4.js);)
+ * !editcom -ul=everyone -cd=5 !platform $(eval schedule('$(query)'); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform4.js);)
  */
-function schedule(query = '', offset = 0) {
+function schedule(query = '', regularOffset = -1, specialOffset = 0) {
     var now = utcDate(new Date());
     if (typeof arguments === 'object' && arguments.length === 1 && arguments[0] instanceof Date) {
         now = utcDate(arguments[0]);
     }
 
-    /* conveniently move streams forward/backwards by 'offset' weeks */
+    /* conveniently move platforms for regualr streams forward/backwards by 'offset' weeks */
     query = normalize(query);
     if (query === 'next') {
         offset++;
     }
-    offset = offset * 7;
-    now = nextDay(now, offset);
 
     if (now.getUTCDay() === 0) {
         /* time-travel back to Saturday on Sunday, to keep the output stable */
@@ -22,15 +20,15 @@ function schedule(query = '', offset = 0) {
     }
 
     var stream1 = nextStream(now, isSaturday || isSunday);
-    var satMorn = nextRegular(stream1);
+    var satMorn = nextRegular(stream1, regularOffset);
 
     var stream3 = nextStream(nextDay(stream1), isSunday || isSunday);
-    var sunday = nextRegular(stream3);
+    var sunday = nextRegular(stream3, regularOffset);
 
     var stream2 = nextStream(now, isSaturday);
-    var satEve = nextSpecial(stream2, offset);
+    var satEve = nextSpecial(stream2, specialOffset);
 
-    return "q=" + query +"; o="+ offset + "; Week's GTA Streams - " +
+    return "q=" + query +"; Week's GTA Streams - " +
         "Sat Morn: " + satMorn + " | " +
         "Sat Eve: " + satEve + " | " +
         "Sun: " + sunday;
@@ -60,8 +58,7 @@ function normalize(text) {
     return text;
 }
 
-function nextRegular(date) {
-    var offset = -1; /* number of missed streams */
+function nextRegular(date, offset = 0) {
     var saturdays = 0; /* count Saturdays since origin */
     var sundays = 0; /* count Sundays since origin */
     var from = new Date(Date.UTC(2019, 0, 1));
@@ -87,7 +84,7 @@ function nextRegular(date) {
 }
 
 function nextSpecial(date, offset = 0) {
-    var count = 0 - offset; /* count streams since origin */
+    var count = 0; /* count streams since origin */
     var from = utcDate(date);
     from.setUTCDate(1);
     var to = utcDate(date);
@@ -99,7 +96,7 @@ function nextSpecial(date, offset = 0) {
         }
         from = nextDay(from);
     }
-    switch (count) {
+    switch (count + offset) {
         case 0:
             return 'PS4';
         case 1:
