@@ -51,11 +51,11 @@ function normalize(text) {
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-    /* Remove all chars that are not letters */
-    text = text.replace(/[^a-z]+/g, '');
-    
     /* Remove everything behind '@' */
     text = text.replace(/\s*@.*/, '');
+
+    /* Remove all chars that are not letters */
+    text = text.replace(/[^a-z]+/g, '');
 
     return text;
 }
