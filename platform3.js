@@ -1,6 +1,6 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=5 !platform $(eval schedule(1); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform3.js);)
+ * !editcom -ul=everyone -cd=5 !platform $(eval schedule(-1); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform3.js);)
  */
 function schedule(offset) {
     var now = utcDate(new Date());
