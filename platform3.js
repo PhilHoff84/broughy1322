@@ -1,12 +1,17 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=5 !platform $(eval schedule(); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform3.js);)
+ * !editcom -ul=everyone -cd=5 !platform $(eval schedule(1); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform3.js);)
  */
-function schedule() {
+function schedule(offset) {
     var now = utcDate(new Date());
     if (typeof arguments === 'object' && arguments.length === 1 && arguments[0] instanceof Date) {
         now = utcDate(arguments[0]);
     }
+
+    if (!offset) { /* conveniently move streams fordward/backwards */
+        offset = 0;
+    }
+    now = nextDay(now, offset * 7);
 
     if (now.getUTCDay() === 0) {
         /* time-travel back to Saturday on Sunday, to keep the output stable */
