@@ -30,7 +30,7 @@ function schedule(query = '', offset = 0) {
     var stream2 = nextStream(now, isSaturday);
     var satEve = nextSpecial(stream2, offset);
 
-    return offset + " Week's GTA Streams - " +
+    return "q=" + query +"; o="+ offset + "; Week's GTA Streams - " +
         "Sat Morn: " + satMorn + " | " +
         "Sat Eve: " + satEve + " | " +
         "Sun: " + sunday;
@@ -55,7 +55,7 @@ function normalize(text) {
     text = text.replace(/[^a-z]+/g, '');
     
     /* Remove everything behind '@' */
-    text = text.replace(/\s*@.*/g, '');
+    text = text.replace(/\s*@.*/, '');
 
     return text;
 }
