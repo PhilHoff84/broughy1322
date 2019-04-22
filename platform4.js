@@ -1,15 +1,17 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=5 !platform $(eval schedule(-1); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform4.js);)
+ * !editcom -ul=everyone -cd=5 !platform $(eval schedule('$(query)', -1); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/platform4.js);)
  */
-function schedule(offset = 0) {
+function schedule(query = '', offset = 0) {
     var now = utcDate(new Date());
     if (typeof arguments === 'object' && arguments.length === 1 && arguments[0] instanceof Date) {
         now = utcDate(arguments[0]);
     }
 
-    if (!offset) { /* conveniently move streams fordward/backwards */
-        offset = 0;
+    /* Sanitize the query */
+    query = normalize(query);
+    if (query === 'next') {
+        offset++;
     }
     now = nextDay(now, offset * 7);
 
@@ -31,6 +33,30 @@ function schedule(offset = 0) {
         "Sat Morn: " + satMorn + " | " +
         "Sat Eve: " + satEve + " | " +
         "Sun: " + sunday;
+}
+
+
+function normalize(text) {
+    if (!text) {
+        text = '';
+    }
+
+    /* Convert to lowercase */
+    text = text.toLowerCase();
+
+    /* Remove plural */
+    text = text.replace(/s\b/g, '');
+
+    /* Remove accents */
+    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    /* Remove all chars that are not letters */
+    text = text.replace(/[^a-z]+/g, '');
+    
+    /* Remove everything behind '@' */
+    text = text.replace(/@.*/g, '');
+
+    return text;
 }
 
 function nextRegular(date) {
