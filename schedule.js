@@ -4,7 +4,7 @@
  */
 function schedule(provider='', data = '') {
     if (provider === 'twitch') {
-        return data;
+        return data.replace(/\t/g, ' | ');
     }
 
     return 'Twitch streams start at 18:00 UK time every Wednesday & Sunday plus 09:00 UK time every Saturday. '
