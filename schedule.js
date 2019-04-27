@@ -4,7 +4,7 @@
  */
 function schedule(provider='', data = '') {
     if (provider === 'twitch') {
-        var rows = data.split('\r');
+        var rows = data.split("\r\n");
         return rows.length;
         return (rows[0] + " - " + rows[1]).replace(/\t/g, ' | ');
     }
