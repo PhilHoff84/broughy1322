@@ -6,10 +6,7 @@ function platform(provider='', query = '', data = '') {
     query = normalize(query);
 
     var rows = data.replace(/\t/g, ' | ').split('   ');
-    if (provider === 'twitch') {
-        return rows[query === 'next' ? 1 : 0];
-    }
-    return " • " + rows.join("\n • ");
+    return rows[query === 'next' ? 1 : 0];
 }
 
 function normalize(text) {
