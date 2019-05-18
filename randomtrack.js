@@ -6,6 +6,7 @@ function platform(provider='', query = '', data = '') {
     query = normalize(query);
 
     /* var rows = data.split('\n'); /* .replace(/\t/g, ' | ').split('   '); */
+    return data.substring(1, 300);
     return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
     for (var i = 0; i < rows.length; i++) {
         
