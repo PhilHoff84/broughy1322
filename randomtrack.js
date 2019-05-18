@@ -6,16 +6,16 @@ function platform(provider='', query = '', data = '') {
     query = normalize(query);
 
     var rows = data.replace(/\t/g, ' | ').split('   ');
-    if (/\bps4\b/i.test(query)) {
+    if (/\bps4\b/.test(query)) {
         return 'PS4';
     }
-    if (/\bxb(?:ox)?1?\b/i.test(query)) {
+    if (/\bxb(?:ox)?1?\b/.test(query)) {
         return 'XB1';
     }
-    if (/\bpc\b/i.test(query)) {
+    if (/\bpc\b/.test(query)) {
         return 'PC';
     }
-    if (/\b(?:5|five) ?m\b/i.test(query)) {
+    if (/\b(?:5|five) ?m\b/.test(query)) {
         return 'Five M';
     }
     
@@ -40,7 +40,7 @@ function normalize(text) {
     text = text.replace(/\s*@.*/, '');
 
     /* Remove all chars that are not letters */
-    text = text.replace(/[^a-z]+/g, '');
+    text = text.replace(/[^a-z0-9 ]+/g, '');
 
     return text;
 }
