@@ -6,7 +6,7 @@ function platform(provider='', query = '', data = '') {
     query = normalize(query);
 
     var rows = data.replace(/\t/g, ' | ').split('   ');
-    if (/(?i)\bps4\b/.test(query)) {
+    if (/\bps4\b/i.test(query)) {
         return 'PS4';
     }
     if (/\bxb(?:ox)?1?\b/.test(query)) {
