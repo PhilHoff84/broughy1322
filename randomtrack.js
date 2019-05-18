@@ -5,7 +5,12 @@
 function platform(provider='', query = '', data = '') {
     query = normalize(query);
 
-    var rows = data.replace(/\t/g, ' | ').split('   ');
+    var rows = data.split('\n'); /* .replace(/\t/g, ' | ').split('   '); */
+    return 'n: '+data.split('\n').length + ' r: ' + data.split('\r');
+    for (var i = 0; i < rows.length; i++) {
+        
+    }
+
     if (/\bps4\b/.test(query)) {
         return 'PS4';
     }
