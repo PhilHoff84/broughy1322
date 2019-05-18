@@ -19,7 +19,7 @@ function platform(provider='', query = '', data = '') {
         return 'Five M';
     }
     
-    return 'which platform? (PS4 / PC / XB1 / 5M)';
+    return query + 'which platform? (PS4 / PC / XB1 / 5M)';
 }
 
 function normalize(text) {
