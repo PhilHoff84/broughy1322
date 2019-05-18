@@ -6,10 +6,10 @@ function platform(provider='', query = '', data = '') {
     query = normalize(query);
 
     var rows = data.replace(/\t/g, ' | ').split('   ');
-    if (/\bps4\b/i.test(query)) {
+    if (/\bps4\b/.test(query)) {
         return 'PS4';
     }
-    if (/\bxb(?:ox)?1?\b/.test(query)) {
+    if (/\bxb(?:ox)?1?\b/i.test(query)) {
         return 'XB1';
     }
     if (/\bpc\b/.test(query)) {
