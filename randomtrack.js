@@ -1,16 +1,22 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=5 !randomtrack $(eval platform('$(provider)', '$(query)', "$(urlfetch json https://docs.google.com/spreadsheets/d/15ZGd_KKINKJhqIS56Fy23YhY9DTeglmCoFYkREVFDek/export?exportFormat=tsv)"); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/randomtrack.js);)
+ * !editcom -ul=everyone -cd=5 !randomtrack $(eval track('$(provider)', '$(query)', "$(urlfetch json https://docs.google.com/spreadsheets/d/15ZGd_KKINKJhqIS56Fy23YhY9DTeglmCoFYkREVFDek/export?exportFormat=tsv)"); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/randomtrack.js);)
  */
-function platform(provider='', query = '', data = '') {
+function track(provider='', query = '', data = '') {
     query = normalize(query);
 
     var rows = data.split('<EOL>'); /* .replace(/\t/g, ' | ').split('   '); */
-    return rows.length + "rows. " + data.substring(0, 300);
-    return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
+    var output = [];
     for (var i = 0; i < rows.length; i++) {
-        
+        var row = rows[i];
+        if (/\t+/.test(row)) {
+            output.push(row);
+        }
     }
+    
+    
+    return output.length + "categories. " + output.join(' | ').substring(0, 300);
+    return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
 
     if (/\bps4\b/.test(query)) {
         return 'PS4';
