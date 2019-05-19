@@ -9,7 +9,7 @@ function track(provider='', query = '', data = '') {
     var output = [];
     for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
-        if (/\t+/.test(row)) {
+        if (/\t{3}/.test(row)) {
             output.push(row);
         }
     }
