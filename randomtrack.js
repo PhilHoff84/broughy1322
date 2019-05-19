@@ -14,11 +14,12 @@ function track(provider='', query = '', data = '') {
 
         if (cols.length === 1) {
             type = cols[0];
-        } else {
+        } else if (cols.length === 5) {
+            var track = new Track(type, cols[0], cols[1], cols[2], cols[3], cols[4])
             if (tracks.has(type)) {
-                tracks.set(type, tracks.get(type).push(cols[1]));
+                tracks.set(type, tracks.get(type).push(track));
             }
-            tracks.set(type, [cols[1]]);
+            tracks.set(type, [track]);
         }
     }
     
@@ -63,4 +64,18 @@ function normalize(text) {
     text = text.replace(/[^a-z0-9 ]+/g, '');
 
     return text;
+}
+
+
+function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
+    this._type = _type;
+    this._name = _name;
+    this._ps4 = _ps4.length > 1;
+    this._pc = _pc.length > 1;
+    this._xb1 = _xb1.length > 1;
+    this._fivem = _fivem.length > 1;
+
+    this.toString = function () {
+        return _type + ' ▸ ' + _name;
+    };
 }
