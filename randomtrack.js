@@ -5,17 +5,25 @@
 function track(provider='', query = '', data = '') {
     query = normalize(query);
 
-    var rows = data.split('<EOL>'); /* .replace(/\t/g, ' | ').split('   '); */
-    var output = [];
+    var rows = data.split('<EOL>');
+    var tracks = new Map();
+    var type = 'unknown';
     for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        if (/\t{3}/.test(row)) {
-            output.push(row);
+        var row = rows[i].trim();
+        var cols = row.split('\t');
+
+        if (cols.length === 1) {
+            type = cols[0];
+        } else {
+            if (tracks.has(type)) {
+                tracks.set(type, tracks.get(type).push(cols[1]));
+            }
+            tracks.set(type, [cols[1]]);
         }
     }
     
     
-    return output.length + ": " + output.join(', ').substring(0, 380);
+    return tracks.size + ": " + tracks.keys().join(', ').substring(0, 380);
     return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
 
     if (/\bps4\b/.test(query)) {
