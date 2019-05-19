@@ -6,7 +6,7 @@ function track(provider='', query = '', data = '') {
     query = normalize(query);
 
     var rows = data.split('<EOL>');
-    var tracks = new Map();
+    var tracks = [];
     var type = 'unknown';
     for (var i = 0; i < rows.length; i++) {
         var row = rows[i].trim();
@@ -15,14 +15,23 @@ function track(provider='', query = '', data = '') {
         if (cols.length === 1) {
             type = cols[0];
         } else if (cols.length === 5) {
-            var track = new Track(type, cols[0], cols[1], cols[2], cols[3], cols[4]);
-            if (tracks.has(type)) {
-                tracks.set(type, tracks.get(type).push(track));
-            }
-            tracks.set(type, [track]);
+            tracks.push(new Track(type, cols[0], cols[1], cols[2], cols[3], cols[4]));
         }
     }
     
+    /* Find all tracks that match the specified criteria */
+    var matching_tracks = tracks.filter(function (track) {
+        return track.matches(query);
+    });
+    
+    
+    /* Output a random track (or error message) */
+    if (matching_tracks.length > 0) {
+        var track = track[Math.floor(Math.random() * matching_tracks.length)];
+        return 'Random track 1/' + matching_tracks.length + ': ' + track;
+    } else {
+        return 'Could not find a matching random track ¯\\_(ツ)_/¯';
+    }
     
     return tracks.size + ": " + Array.from(tracks.keys()).join(', ').substring(0, 380);
     return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
@@ -78,4 +87,8 @@ function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
     this.toString = function () {
         return _type + ' ▸ ' + _name;
     };
+    
+    this.matches = function (query) {
+        return true;
+    }
 }
