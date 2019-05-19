@@ -85,10 +85,27 @@ function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
     this._fivem = _fivem.length > 1;
 
     this.toString = function () {
-        return _type + ' ▸ ' + _name;
+        var platforms = [];
+        if (_ps4) {
+            platforms.push('PS4');
+        }
+        if (_pc) {
+            platforms.push('PC');
+        }
+        if (_xb1) {
+            platforms.push('XB1');
+        }
+        if (_fivem) {
+            platforms.push('FiveM PH');
+        }
+        
+        return _type + ' ▸ ' + _name + ' (' + platforms.join(', ') + ')';
     };
     
     this.matches = function (query) {
-        return true;
+        return _ps4 && /\bps4\b/.test(query)
+                || _pc && /\bpc\b/.test(query)
+                || _xb1 && /\bxb(?:ox)?1?\b/.test(query)
+                || _fivem && /\b(?:5|five) ?m\b/.test(query);
     }
 }
