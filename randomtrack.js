@@ -5,8 +5,8 @@
 function platform(provider='', query = '', data = '') {
     query = normalize(query);
 
-    /* var rows = data.split('\n'); /* .replace(/\t/g, ' | ').split('   '); */
-    return data.substring(1, 300);
+    var rows = data.split('<EOL>'); /* .replace(/\t/g, ' | ').split('   '); */
+    return rows.length + "rows. " + data.substring(0, 300);
     return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
     for (var i = 0; i < rows.length; i++) {
         
