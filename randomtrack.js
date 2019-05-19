@@ -15,7 +15,7 @@ function track(provider='', query = '', data = '') {
     }
     
     
-    return output.length + "categories. " + output.join(' | ').substring(0, 300);
+    return output.length + ": " + output.join(' | ').substring(0, 380);
     return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
 
     if (/\bps4\b/.test(query)) {
