@@ -71,25 +71,25 @@ function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
     this.toString = function () {
         var platforms = [];
         if (this._ps4) {
-            platforms.push('PS4'+this._ps4);
+            platforms.push('PS4');
         }
         if (this._pc) {
-            platforms.push('PC'+this._pc);
+            platforms.push('PC');
         }
         if (this._xb1) {
-            platforms.push('XB1'+this._xb1);
+            platforms.push('XB1');
         }
         if (this._fivem) {
-            platforms.push('FiveM PH'+this._fivem);
+            platforms.push('FiveM PH');
         }
         
         return _type + ' ▸ ' + _name + ' (' + platforms.join(', ') + ')';
     };
     
     this.matches = function (query) {
-        return _ps4 && /\bps4\b/.test(query)
-                || _pc && /\bpc\b/.test(query)
-                || _xb1 && /\bxb(?:ox)?1?\b/.test(query)
-                || _fivem && /\b(?:5|five) ?m\b/.test(query);
+        return this._ps4 && /\bps4\b/.test(query)
+                || this._pc && /\bpc\b/.test(query)
+                || this._xb1 && /\bxb(?:ox)?1?\b/.test(query)
+                || this._fivem && /\b(?:5|five) ?m\b/.test(query);
     }
 }
