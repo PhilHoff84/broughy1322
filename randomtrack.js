@@ -15,7 +15,7 @@ function track(provider='', query = '', data = '') {
         if (cols.length === 1) {
             type = cols[0];
         } else if (cols.length === 5) {
-            var track = new Track(type, cols[0], cols[1], cols[2], cols[3], cols[4])
+            var track = new Track(type, cols[0], cols[1], cols[2], cols[3], cols[4]);
             if (tracks.has(type)) {
                 tracks.set(type, tracks.get(type).push(track));
             }
