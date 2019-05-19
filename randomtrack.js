@@ -63,24 +63,24 @@ function normalize(text) {
 function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
     this._type = _type;
     this._name = _name;
-    this._ps4 = _ps4.length > 2;
-    this._pc = _pc.length > 2;
-    this._xb1 = _xb1.length > 2;
-    this._fivem = _fivem.length > 2;
+    this._ps4 = _ps4.length > 1;
+    this._pc = _pc.length > 1;
+    this._xb1 = _xb1.length > 1;
+    this._fivem = _fivem.length > 1;
 
     this.toString = function () {
         var platforms = [];
-        if (_ps4) {
-            platforms.push('PS4'+_ps4);
+        if (this._ps4) {
+            platforms.push('PS4'+this._ps4);
         }
-        if (_pc) {
-            platforms.push('PC'+_pc);
+        if (this._pc) {
+            platforms.push('PC'+this._pc);
         }
-        if (_xb1) {
-            platforms.push('XB1'+_xb1);
+        if (this._xb1) {
+            platforms.push('XB1'+this._xb1);
         }
-        if (_fivem) {
-            platforms.push('FiveM PH'+_fivem);
+        if (this._fivem) {
+            platforms.push('FiveM PH'+this._fivem);
         }
         
         return _type + ' ▸ ' + _name + ' (' + platforms.join(', ') + ')';
