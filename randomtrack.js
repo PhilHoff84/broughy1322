@@ -23,7 +23,7 @@ function track(provider='', query = '', data = '') {
     }
     
     
-    return tracks.size + ": " + tracks.keys().join(', ').substring(0, 380);
+    return tracks.size + ": " + Array.from(tracks.keys()).join(', ').substring(0, 380);
     return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
 
     if (/\bps4\b/.test(query)) {
