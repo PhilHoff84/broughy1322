@@ -32,23 +32,7 @@ function track(provider='', query = '', data = '') {
     } else {
         return 'Could not find a matching random track ¯\\_(ツ)_/¯';
     }
-    
-    return tracks.size + ": " + Array.from(tracks.keys()).join(', ').substring(0, 380);
-    return 'n: '+data.split('\n').length + ' r: ' + data.split('\r').length;
 
-    if (/\bps4\b/.test(query)) {
-        return 'PS4';
-    }
-    if (/\bxb(?:ox)?1?\b/.test(query)) {
-        return 'XB1';
-    }
-    if (/\bpc\b/.test(query)) {
-        return 'PC';
-    }
-    if (/\b(?:5|five) ?m\b/.test(query)) {
-        return 'Five M';
-    }
-    
     return query + 'which platform? (PS4 / PC / XB1 / 5M)';
 }
 
@@ -79,24 +63,24 @@ function normalize(text) {
 function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
     this._type = _type;
     this._name = _name;
-    this._ps4 = _ps4.length > 1;
-    this._pc = _pc.length > 1;
-    this._xb1 = _xb1.length > 1;
-    this._fivem = _fivem.length > 1;
+    this._ps4 = _ps4.length > 2;
+    this._pc = _pc.length > 2;
+    this._xb1 = _xb1.length > 2;
+    this._fivem = _fivem.length > 2;
 
     this.toString = function () {
         var platforms = [];
         if (_ps4) {
-            platforms.push('PS4');
+            platforms.push('PS4'+_ps4);
         }
         if (_pc) {
-            platforms.push('PC');
+            platforms.push('PC'+_pc);
         }
         if (_xb1) {
-            platforms.push('XB1');
+            platforms.push('XB1'+_xb1);
         }
         if (_fivem) {
-            platforms.push('FiveM PH');
+            platforms.push('FiveM PH'+_fivem);
         }
         
         return _type + ' ▸ ' + _name + ' (' + platforms.join(', ') + ')';
