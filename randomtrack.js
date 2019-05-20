@@ -27,8 +27,9 @@ function track(provider='', query = '', data = '') {
     
     /* Output a random track (or error message) */
     if (matching_tracks.length > 0) {
-        var track = matching_tracks[Math.floor(Math.random() * matching_tracks.length)];
-        return 'Random track 1/' + matching_tracks.length + ': ' + track;
+        var i = Math.floor(Math.random() * matching_tracks.length);
+        var track = matching_tracks[i];
+        return 'Random track ' + i + '/' + matching_tracks.length + ': ' + track;
     } else {
         return 'Could not find a matching random track ¯\\_(ツ)_/¯';
     }
