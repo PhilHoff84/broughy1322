@@ -47,8 +47,8 @@ function normalize(text) {
     /* Convert to lowercase */
     text = text.toLowerCase();
 
-    /* Remove plural */
-    text = text.replace(/s\b/g, '');
+    /* Remove plural (unless part of 'PS 4')*/
+    text = text.replace(/(?<=\bp)s\b(?=4)/g, '');
 
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
