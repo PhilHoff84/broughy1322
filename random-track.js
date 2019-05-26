@@ -4,15 +4,12 @@
  */
 function track(provider='', query = '', data = '') {
     query = normalize(query);
-    var aux = parse_query(query);
-/*
-    var platform_filter = aux;
-    var type_filter = query;
-    return platform_filter + ' | ' + type_filter;
+
+    var [platform_filter, type_filter] = parse_query(query);
     if (platform_filter === '') {
         return 'which platform? (PS4 / PC / XB1 / 5M)';
     }
-*/
+
     var rows = data.split('<EOL>');
     var tracks = [];
     var type = 'unknown';
@@ -29,7 +26,7 @@ function track(provider='', query = '', data = '') {
 
     /* Find all tracks that match the specified criteria */
     var matching_tracks = tracks.filter(function (track) {
-        return track.matches(query);
+        return track.matches(platform_filter, type_filter);
     });
 
 
@@ -39,7 +36,7 @@ function track(provider='', query = '', data = '') {
         var track = matching_tracks[i];
         return 'Random track ' + i + '/' + matching_tracks.length + ': ' + track;
     }
-    return 'Could not find a matching random track ¯\\_(ツ)_/¯';
+    return type_filter+'Could not find a matching random track ¯\\_(ツ)_/¯';
 }
 
 function normalize(text) {
@@ -64,67 +61,60 @@ function normalize(text) {
 
     return text;
 }
-function parse_query(query_before) {
-    query_before+=' bla';
-    return 'ps';
-    if (!query_before) {
-        query_before = '';
-    }
+
+function parse_query(query_before='') {
     var query_after = '';
 
-/*
     query_after = query_before.replace(/\bps ?4\b/g, '');
-    if (query_before !== query_after) return ['ps', query_after];
+    if (query_before !== query_after) return ['ps', query_after.trim()];
 
     query_after = query_before.replace(/\bpc\b/g, '');
-    if (query_before !== query_after) return ['pc', query_after];
+    if (query_before !== query_after) return ['pc', query_after.trim()];
 
     query_after = query_before.replace(/\bxb(?:ox)? ?1?\b/g, '');
-    if (query_before !== query_after) return ['xb', query_after];
+    if (query_before !== query_after) return ['xb', query_after.trim()];
 
     query_after = query_before.replace(/\b(?:5|five) ?m\b/g, '');
-    if (query_before !== query_after) return ['5m', query_after];
+    if (query_before !== query_after) return ['5m', query_after.trim()];
 
-*/
     return ['', query_before];
 }
 
 
-function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
+function Track(_type, _name, _ps, _pc, _xb, _5m) {
     this._type = _type;
     this._name = _name;
-    this._ps4 = _ps4.length > 1;
+    this._ps = _ps.length > 1;
     this._pc = _pc.length > 1;
-    this._xb1 = _xb1.length > 1;
-    this._fivem = _fivem.length > 1;
+    this._xb = _xb.length > 1;
+    this._5m = _5m.length > 1;
 
     this.toString = function () {
         var platforms = [];
-        if (this._ps4) {
+        if (this._ps) {
             platforms.push('PS4');
         }
         if (this._pc) {
             platforms.push('PC');
         }
-        if (this._xb1) {
+        if (this._xb) {
             platforms.push('XB1');
         }
-        if (this._fivem) {
+        if (this._5m) {
             platforms.push('FiveM PH');
         }
 
         return _type + ' ▸ ' + _name + ' (' + platforms.join(', ') + ')';
     };
 
-    this.matches = function (query) {
-        return true;
-        /*
-        if (type_filter !== '' && this._type.indexOf(type_filter) === -1) return false;
+    this.matches = function (platform_filter, type_filter) {
+        if (type_filter !== '' && this._type.indexOf(type_filter) === -1) {
+            return false;
+        }
 
         return     this._ps && platform_filter === 'ps'
                 || this._pc && platform_filter === 'pc'
                 || this._xb && platform_filter === 'xb'
                 || this._5m && platform_filter === '5m';
-        */
     };
 }
