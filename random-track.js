@@ -36,7 +36,7 @@ function track(provider='', query = '', data = '') {
         var track = matching_tracks[i];
         return 'Random track ' + i + '/' + matching_tracks.length + ': ' + track;
     }
-    return type_filter+'Could not find a matching random track ¯\\_(ツ)_/¯';
+    return 'Could not find a matching random track ¯\\_(ツ)_/¯';
 }
 
 function normalize(text) {
@@ -65,7 +65,7 @@ function normalize(text) {
 function parse_query(query_before='') {
     var query_after = '';
 
-    query_after = query_before.replace(/\bps ?4\b/g, '');
+    query_after = query_before.replace(/\bps ?4?\b/g, '');
     if (query_before !== query_after) return ['ps', query_after.trim()];
 
     query_after = query_before.replace(/\bpc\b/g, '');
@@ -108,7 +108,7 @@ function Track(_type, _name, _ps, _pc, _xb, _5m) {
     };
 
     this.matches = function (platform_filter, type_filter) {
-        if (type_filter !== '' && this._type.indexOf(type_filter) === -1) {
+        if (type_filter !== '' && normalize(this._type).indexOf(type_filter) === -1) {
             return false;
         }
 
