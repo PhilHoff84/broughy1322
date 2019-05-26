@@ -4,8 +4,8 @@
  */
 function track(provider='', query = '', data = '') {
     query = normalize(query);
-/*
     var aux = parse_query(query);
+/*
     var platform_filter = aux;
     var type_filter = query;
     return platform_filter + ' | ' + type_filter;
@@ -64,7 +64,6 @@ function normalize(text) {
 
     return text;
 }
-/*
 function parse_query(query_before) {
     query_before+=' bla';
     return 'ps';
@@ -86,9 +85,9 @@ function parse_query(query_before) {
     query_after = query_before.replace(/\b(?:5|five) ?m\b/g, '');
     if (query_before !== query_after) return ['5m', query_after];
 
+*/
     return ['', query_before];
 }
-*/
 
 
 function Track(_type, _name, _ps4, _pc, _xb1, _fivem) {
