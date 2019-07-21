@@ -12,7 +12,7 @@ A Discord application can be created on the [Developer Portal](https://discordap
 * Click `Create an application` and enter a name.
 * Navigate to the `Bot` section, click `Add Bot` and then confirm the dialog.
 * Enter or update its username.
-* If you are the owner of the Discord server you want the bot to join, uncheck `Pucblic Bot`.
+* If you are the owner of the Discord server you want the bot to join, uncheck `Public Bot`.
   Otherwise keep the bot public until the owner of the server has invited it (see below).
 * Uncheck `Requires OAuth2 Code Grant`.
 * Click `Save Changes`.
