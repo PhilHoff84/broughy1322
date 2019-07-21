@@ -9,7 +9,7 @@ and can not be directly invoked by a user with sufficient permissions.
 
 A Discord application can be created on the [Developer Portal](https://discordapp.com/developers/applications/):
 
-* Click `Create an application` and enter an name.
+* Click `Create an application` and enter a name.
 * Navigate to the `Bot` section, click `Add Bot` and then confirm the dialog.
 * Enter or update its username.
 * If you are the owner of the Discord server you want the bot to join, uncheck `Pucblic Bot`.
