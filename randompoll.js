@@ -15,10 +15,11 @@ function get_number(text) {
     text = text.replace(/^\s*(\d+).*$/, '$1');
 
     var parsed = parseInt(text);
+  	var MAX = 7424995;
     if (isNaN(parsed) || parsed < 1 || parsed > 7) {
-        return randomBetween(1, 7424995);
+        return randomBetween(1, MAX);
     }
-    return randomBetween(Math.pow(10, parsed - 1), Math.pow(10, parsed));
+    return randomBetween(Math.pow(10, parsed - 1), Math.min(Math.pow(10, parsed), MAX));
 }
 
 function randomBetween(min, max) {
