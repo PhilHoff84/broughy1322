@@ -6,7 +6,7 @@ function viewer(user = '', text = '') {
     try {
         user = user.toLowerCase();
         var viewers = JSON.parse(text).chatters.viewers.filter(function (viewer) {
-            return viewer.toLowerCase()) != user;
+            return viewer.toLowerCase() != user;
         });
         return viewers.length;
 
