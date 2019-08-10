@@ -2,7 +2,7 @@
  * Nightbot command:
  * !editcom -ul=everyone -cd=30 !boom $(eval boom(); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/boom.js);)
  */
-function poll() {
+function boom() {
     var result = '';
     result += randomBetween(0, 1) == 0 ? 'B' : 'b';
 /*
