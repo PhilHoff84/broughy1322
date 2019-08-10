@@ -9,17 +9,18 @@ function poll() {
     var n = randomBetween(2, 10);
     for (var i = 0; i < n; i++) {
         switch(randomBetween(0, 2)) {
-        case 0: {
-            result += 'O';
-            break;
-        }
-        case 1: {
-            result += 'o';
-            break;
-        }
-        case 2: {
-            result += '0';
-            break;
+            case 0: {
+                result += 'O';
+                break;
+            }
+            case 1: {
+                result += 'o';
+                break;
+            }
+            case 2: {
+                result += '0';
+                break;
+            }
         }
     }
 
