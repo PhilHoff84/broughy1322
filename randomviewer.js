@@ -1,6 +1,6 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=30 !randomviewer $(eval viewer(`$(urlfetch json http://tmi.twitch.tv/group/user/$(channel)/chatters)`); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/randomviewer.js);)
+ * !editcom -ul=everyone -cd=30 !randomviewer $(eval viewer(`$(urlfetch json http://tmi.twitch.tv/group/user/broughy1322/chatters)`); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/randomviewer.js);)
  */
 function viewer(text = {}) {
     try {
