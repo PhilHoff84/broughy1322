@@ -5,11 +5,12 @@
 function viewer(user = '', text = '') {
     try {
         user = user.toLowerCase();
-        return JSON.parse(text).chatters.viewers[0];
-/*      var viewers = JSON.parse(text).chatters.viewers/*.filter(viewer => user.toLowerCase() != viewer.toLowerCase());
+        var viewers = JSON.parse(text).chatters.viewers.filter(function (viewer) {
+            return viewer.toLowerCase()) != user;
+        });
 
         if (viewers.length) {
-            return "Thanks for watching " + viewers[Math.floor(Math.random() * viewers.length) + " broughyLove";
+            return "Thanks for watching " + viewers[Math.floor(Math.random() * viewers.length)] + " broughyLove";
         }
         return "No viewer";*/
     } catch(e) {
