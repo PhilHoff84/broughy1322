@@ -10,7 +10,7 @@ function viewer(user = '', text = '') {
         });
 
         if (viewers.length) {
-            return "Thanks for watching " + viewers[Math.floor(Math.random() * viewers.length)] + " broughyLove";
+            return "Thanks for watching @" + viewers[Math.floor(Math.random() * viewers.length)] + " broughyLove";
         }
         return "No viewer"
     } catch(e) {
