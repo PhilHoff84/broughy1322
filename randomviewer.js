@@ -10,10 +10,10 @@ function viewer(user = '', text = '') {
         });
         return viewers.length;
 
-        if (viewers.length) {
+        /*if (viewers.length) {
             return "Thanks for watching " + viewers[Math.floor(Math.random() * viewers.length)] + " broughyLove";
         }
-        return "No viewer";
+        return "No viewer";*/
     } catch(e) {
         return ("Couldn't fetch the list of viewers: " + e + ": " + text).slice(0, 400);
     }
