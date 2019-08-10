@@ -5,7 +5,7 @@
 function viewer(user = '', text = '') {
     try {
         user = user.toLowerCase();
-        var viewers = JSON.parse(text).chatters.viewers.filter(viewer => user.toLowerCase() != viewer.toLowerCase());
+        var viewers = JSON.parse(text).chatters.viewers/*.filter(viewer => user.toLowerCase() != viewer.toLowerCase())*/;
 
         if (viewers.length) {
             return "Thanks for watching " + viewers[Math.floor(Math.random() * viewers.length) + " broughyLove";
