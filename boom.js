@@ -4,8 +4,8 @@
  */
 function poll() {
     var result = '';
-    result += randomBetween(0, 1) == 1 ? 'B' : 'b';
-
+    result += randomBetween(0, 1) == 0 ? 'B' : 'b';
+/*
     var n = randomBetween(2, 10);
     for (var i = 0; i < n; i++) {
         switch(randomBetween(0, 2)) {
@@ -23,8 +23,8 @@ function poll() {
             }
         }
     }
-
-    result += randomBetween(0, 1) == 1 ? 'M' : 'm';
+*/
+    result += randomBetween(0, 1) == 0 ? 'M' : 'm';
     return result;
 }
 
