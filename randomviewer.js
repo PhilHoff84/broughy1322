@@ -8,6 +8,7 @@ function viewer(user = '', text = '') {
         var viewers = JSON.parse(text).chatters.viewers.filter(function (viewer) {
             return viewer.toLowerCase()) != user;
         });
+        return viewers.length;
 
         if (viewers.length) {
             return "Thanks for watching " + viewers[Math.floor(Math.random() * viewers.length)] + " broughyLove";
