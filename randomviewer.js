@@ -5,8 +5,9 @@
 function viewer(user = '', text = '') {
     try {
         user = user.toLowerCase();
-        var viewers = JSON.parse(text).chatters.viewers.filter(function (viewer) {
-            return viewer.toLowerCase() != user;
+        var chatters = JSON.parse(text).chatters;
+        var viewers = chatters.viewers.concat(chatters.moderators).filter(function (viewer) {
+            return viewer.toLowerCase() != user && viewer != 'nightbot' && viewer != 'streamelements';
         });
 
         if (viewers.length) {
