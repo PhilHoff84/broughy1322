@@ -41,15 +41,15 @@ function tier(provider='', query = '', data = '') {
     }
 
     /* Select random tier */
-	var is_random = /\brandom\b/.test(query);
+    var is_random = /\brandom\b/.test(query);
     if (is_random) {
-		if (args.length >= 2) { /* Random select */
-			args = [ args[1] ];
-		} else { /* Random all */
-			var i = Math.floor(Math.random() * vehicles.length);
-			var vehicle = vehicles[i];
-			args = [ normalize(vehicle._clazz), normalize(vehicle._tier) ];
-		}
+        if (args.length >= 2) { /* Random select */
+            args = [ args[1] ];
+        } else { /* Random all */
+            var i = Math.floor(Math.random() * vehicles.length);
+            var vehicle = vehicles[i];
+            args = [ normalize(vehicle._clazz), normalize(vehicle._tier) ];
+        }
     }
 
     var clazz = args[0];
@@ -61,12 +61,12 @@ function tier(provider='', query = '', data = '') {
     }
     clazz = vehicles_by_class[0]._clazz;
 
-	/* Random select */
-	if (is_random) {
-		var i = Math.floor(Math.random() * vehicles_by_class.length);
-		var vehicle = vehicles_by_class[i];
-		args = [ normalize(vehicle._clazz), normalize(vehicle._tier) ];
-	}
+    /* Random select */
+    if (is_random) {
+        var i = Math.floor(Math.random() * vehicles_by_class.length);
+        var vehicle = vehicles_by_class[i];
+        args = [ normalize(vehicle._clazz), normalize(vehicle._tier) ];
+    }
 
     var tier = args[1];
     var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
@@ -120,6 +120,9 @@ function normalize(text) {
     /* Remove all chars that are not letters, '+' or '-' */
     text = text.replace(/[^a-z \+\-]+/g, '');
 
+    /* Temporarily remove 'random' from query */
+    var is_random = /\brandom\b/.test(query);
+
     /* Substitute common aliases with the correct criteria */
     switch (text) {
         case '': /* Print usage, if there was not even a single valid letter in the text */
@@ -131,20 +134,20 @@ function normalize(text) {
         case 'wheel':
         case 'formula':
         case 'open wheel':
-            return 'open-wheel';
+            return (is_random ? 'random' : '') + 'open-wheel';
         case 'classic':
         case 'sportclassic':
         case 'sportsclassic':
         case 'sport classic':
-            return 'sport-classic';
+            return (is_random ? 'random' : '') + 'sport-classic';
         case 'utiliti':
         case 'utilitie':
-            return 'utility';
+            return (is_random ? 'random' : '') + 'utility';
         case 'offroad':
         case 'off road':
-            return 'off-road';
+            return (is_random ? 'random' : '') + 'off-road';
         default:
-            return text.trim();
+            return (is_random ? 'random' : '') + text.trim();
     }
 }
 
