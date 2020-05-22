@@ -23,6 +23,7 @@ function tier(provider='', query = '', data = '') {
         var cols = row.split('\t');
         return new Vehicle(cols[0], cols[1], cols[2]);
     });
+    return 'parsed ' + vehicles.length + 'vehicles';
 
     /* Print usage */
     if (/\busage\b/.test(query)) {
