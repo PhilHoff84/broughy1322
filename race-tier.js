@@ -15,5 +15,5 @@
  * !editcom -ul=everyone -cd=10 !vans -a=!tier vans $(query)
  */
 function tier(provider='', query = '', data = '') {
-	return 'query: ' + query + ' | data: ' + data.substring(0,200).split(/[\r\n]+/).join(' | ');
+	return 'query: ' + query + ' | data: ' + data.substring(0,200).split('<EOL>').join(' | ');
 }
