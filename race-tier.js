@@ -49,7 +49,19 @@ function tier(provider='', query = '', data = '') {
         });
     }
 
-    return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles' +;
+    if (0 === vehicles.length) {
+        return 'Could not find a GTA Car Tier ¯\\_(ツ)_/¯';
+    }
+
+    if (vehicles.length > 10) {
+        return 'Found too many vehicles in GTA Car Tier: ' +  args.join(' ');
+    }
+
+    return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles: ' +
+        vehicles[0]._clazz + ' ' + vehicles[0]._tier + ' ▸ ' +
+        vehicles.map(function (vehicle) {
+            return vehicle._name;
+        }).join(', ');
 }
 
 function normalize(text) {
