@@ -121,7 +121,7 @@ function normalize(text) {
     text = text.replace(/[^a-z \+\-]+/g, '');
 
     /* Temporarily remove 'random' from query */
-    var is_random = /\brandom\b/.test(query);
+    var is_random = /\brandom\b/.test(text);
 
     /* Substitute common aliases with the correct criteria */
     switch (text) {
