@@ -59,23 +59,13 @@ function tier(provider='', query = '', data = '') {
                 unique(
                     vehicles_by_class.map(function (vehicle) {
                         return vehicle._tier;
-                    }).sort(function (a ,b) {
-                        var compare_clazz = a._clazz.localeCompare(b._clazz);
-                        if (compare_clazz !== 0) {
-                            return compare_clazz;
-                        }
-
-                        /* Sort order: S+, S, A, B, C, ... */
-                        var a_tier = a._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
-                        var b_tier = b._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
-                        var compare_tier = a_tier.localeCompare(b_tier);
-                        if (compare_tier !== 0) {
-                            return compare_tier;
-                        }
-
-                        return a._name.localeCompare(b._name);
                     })
-                ).join(', ');
+                ).sort(function (a ,b) {
+                    /* Sort order: S+, S, A, B, C, ... */
+                    var a_tier = a._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
+                    var b_tier = b._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
+                    return a_tier.localeCompare(b_tier);
+                }).join(', ');
         }
     }
 
