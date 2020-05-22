@@ -37,14 +37,14 @@ function tier(provider='', query = '', data = '') {
 
     if (args.length >= 1) {
         var clazz = args[0];
-        vehicles = vehicles.filer(function (vehicle) {
+        vehicles = vehicles.filter(function (vehicle) {
             return normalize(vehicle._clazz) == clazz;
         });
     }
 
     if (args.length >= 2) {
         var tier = args[1];
-        vehicles = vehicles.filer(function (vehicle) {
+        vehicles = vehicles.filter(function (vehicle) {
             return normalize(vehicle._tier) == tier;
         });
     }
