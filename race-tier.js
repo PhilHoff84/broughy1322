@@ -49,7 +49,7 @@ function tier(provider='', query = '', data = '') {
         });
     }
 
-    return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles';
+    return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles' +;
 }
 
 function normalize(text) {
@@ -69,8 +69,11 @@ function normalize(text) {
     /* Remove everything behind '@' */
     text = text.replace(/\s*@.*/, '');
 
-    /* Remove all chars that are not letters, whitespace, the plus or minus char */
-    text = text.replace(/[^a-z\s\+\-]+/g, '');
+    /* Convert whitespace to ' ' */
+    text = text.replace(/\s+/g, ' ');
+
+    /* Remove all chars that are not letters, '+' or '-' */
+    text = text.replace(/[^a-z \+\-]+/g, '');
 
     /* Substitute common aliases with the correct criteria */
     switch (text) {
