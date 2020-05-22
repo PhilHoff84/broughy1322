@@ -69,8 +69,8 @@ function normalize(text) {
     /* Remove everything behind '@' */
     text = text.replace(/\s*@.*/, '');
 
-    /* Remove all chars that are not letters, whitespace or the plus char */
-    text = text.replace(/[^a-z\s\+]+/g, '');
+    /* Remove all chars that are not letters, whitespace, the plus or minus char */
+    text = text.replace(/[^a-z\s\+\-]+/g, '');
 
     /* Substitute common aliases with the correct criteria */
     switch (text) {
@@ -79,13 +79,23 @@ function normalize(text) {
         case 'option':
         case 'instruction':
             return 'usage';
+        case 'open':
+        case 'wheel':
+        case 'formula':
+        case 'open wheel':
+            return 'open-wheel';
+        case 'classic':
         case 'sportclassic':
         case 'sportsclassic':
         case 'sport classic':
-            return 'classic';
+            return 'sport-classic';
         case 'utiliti':
         case 'utilitie':
             return 'utility';
+        case 'utiliti':
+        case 'offroad':
+        case 'off road':
+            return 'off-road';
         default:
             return text.trim();
     }
