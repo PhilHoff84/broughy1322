@@ -69,13 +69,13 @@ function tier(provider='', query = '', data = '') {
         }
     }
 
-    if (vehicles.length > 10) {
+    if (vehicles_by_tier.length > 10) {
         return 'Found too many vehicles in GTA Car Tier: '+ args.join(' ') + ' ¯\\_(ツ)_/¯';
     }
 
-    return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles: ' +
-        vehicles[0]._clazz + ' ' + vehicles[0]._tier + ' ▸ ' +
-        vehicles.map(function (vehicle) {
+    return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles_by_tier.length + ' vehicles: ' +
+        vehicles_by_tier[0]._clazz + ' ' + vehicles_by_tier[0]._tier + ' ▸ ' +
+        vehicles_by_tier.map(function (vehicle) {
             return vehicle._name;
         }).join(', ');
 }
@@ -123,7 +123,6 @@ function normalize(text) {
         case 'utiliti':
         case 'utilitie':
             return 'utility';
-        case 'utiliti':
         case 'offroad':
         case 'off road':
             return 'off-road';
