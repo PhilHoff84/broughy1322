@@ -1,6 +1,7 @@
 /*
  * Nightbot command:
  * !editcom -ul=everyone -cd=10 !tier $(eval tier('$(provider)', '$(query)', "$(urlfetch json https://docs.google.com/spreadsheets/d/17NQWlnzrHHPDXbPhoHyevwdQjDqHQGdIWgK4goiwy5U/export?exportFormat=tsv)"); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/race-tier.js);)
+ * !editcom -ul=everyone -cd=10 !randomclass -a=!tier random $(query)
  * !editcom -ul=everyone -cd=10 !compacts -a=!tier compacts $(query)
  * !editcom -ul=everyone -cd=10 !coupes -a=!tier coupes $(query)
  * !editcom -ul=everyone -cd=10 !muscle -a=!tier muscle $(query)
@@ -29,7 +30,7 @@ function tier(provider='', query = '', data = '') {
         return 'Could not parse GTA Car Tiers ¯\\_(ツ)_/¯';
     }
 
-    /* Print usage (for !tier)*/
+    /* Print all available tiers */
     if (args.length === 0 || /\busage\b/.test(query)) {
         return 'GTA Car Tiers: ' +
             unique(
@@ -37,6 +38,18 @@ function tier(provider='', query = '', data = '') {
                     return vehicle._clazz;
                 })
             ).join(', ');
+    }
+
+    /* Select random tier */
+	var is_random = /\brandom\b/.test(query);
+    if (is_random) {
+		if (args.length >= 2) { /* Random select */
+			args = [ args[1] ];
+		} else { /* Random all */
+			var i = Math.floor(Math.random() * vehicles.length);
+			var vehicle = vehicles[i];
+			args = [ normalize(vehicle._clazz), normalize(vehicle._tier) ];
+		}
     }
 
     var clazz = args[0];
@@ -47,6 +60,13 @@ function tier(provider='', query = '', data = '') {
         return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
     }
     clazz = vehicles_by_class[0]._clazz;
+
+	/* Random select */
+	if (is_random) {
+		var i = Math.floor(Math.random() * vehicles_by_class.length);
+		var vehicle = vehicles_by_class[i];
+		args = [ normalize(vehicle._clazz), normalize(vehicle._tier) ];
+	}
 
     var tier = args[1];
     var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
@@ -71,7 +91,7 @@ function tier(provider='', query = '', data = '') {
         return 'Found too many vehicles in GTA Car Tier: ' + clazz + ' ' + tier + ' ¯\\_(ツ)_/¯';
     }
 
-    return 'GTA Car Tiers: ' + clazz + ' ' + tier + ' ▸ ' +
+    return (is_random ? 'Random ' : '') + 'GTA Car Tiers: ' + clazz + ' ' + tier + ' ▸ ' +
         vehicles_by_tier.map(function (vehicle) {
             return vehicle._name;
         }).join(', ');
