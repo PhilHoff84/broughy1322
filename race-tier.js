@@ -32,11 +32,11 @@ function tier(provider='', query = '', data = '') {
     /* Print usage (for !tier)*/
     if (args.length === 0 || /\busage\b/.test(query)) {
         return 'GTA Car Tiers: ' +
-            [...new Set(
+            unique(
                 vehicles.map(function (vehicle) {
                     return vehicle._clazz;
                 })
-            )].join(', ');
+            ).join(', ');
     }
 
     if (args.length >= 1) {
@@ -44,9 +44,9 @@ function tier(provider='', query = '', data = '') {
         var vehicles_by_class = vehicles.filter(function (vehicle) {
             return normalize(vehicle._clazz) == clazz;
         });
-		if (0 === vehicles_by_class.length) {
-			return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
-		}
+        if (0 === vehicles_by_class.length) {
+            return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
+        }
     }
 
     if (args.length >= 2) {
@@ -54,13 +54,29 @@ function tier(provider='', query = '', data = '') {
         var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
             return normalize(vehicle._tier) == tier;
         });
-		if (0 === vehicles_by_tier.length) {
-			return 'GTA Car Tiers for ' +
-				vehicles[0]._clazz + ': ' +
-				vehicles_by_class.map(function (vehicle) {
-					return vehicle._tier;
-				}).join(', ');
-		}
+        if (0 === vehicles_by_tier.length) {
+            return 'GTA Car Tiers for ' + vehicles[0]._clazz + ': ' +
+                unique(
+                    vehicles_by_class.map(function (vehicle) {
+                        return vehicle._tier;
+                    }).sort(function (a ,b) {
+                        var compare_clazz = a._clazz.localeCompare(b._clazz);
+                        if (compare_clazz !== 0) {
+                            return compare_clazz;
+                        }
+
+                        /* Sort order: S+, S, A, B, C, ... */
+                        var a_tier = a._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
+                        var b_tier = b._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
+                        var compare_tier = a_tier.localeCompare(b_tier);
+                        if (compare_tier !== 0) {
+                            return compare_tier;
+                        }
+
+                        return a._name.localeCompare(b._name);
+                    })
+                ).join(', ');
+        }
     }
 
     if (vehicles.length > 10) {
@@ -127,8 +143,12 @@ function normalize(text) {
     }
 }
 
+/* Returns only unique values from the specified argument */
+function unique(values) {
+    return [...new Set(values)];
+}
+
 function Vehicle(_clazz, _tier, _name) {
-    /* Normalize the class name to match the normalized query */
     this._clazz = _clazz;
     this._tier = _tier;
     this._name = _name;
