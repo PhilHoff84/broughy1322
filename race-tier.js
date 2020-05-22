@@ -62,8 +62,8 @@ function tier(provider='', query = '', data = '') {
                     })
                 ).sort(function (a ,b) {
                     /* Sort order: S+, S, A, B, C, ... */
-                    var a_tier = a._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
-                    var b_tier = b._tier.replace(/^S\+/i, '0').replace(/^S/i, '1');
+                    var a_tier = a.replace(/^S\+/i, '0').replace(/^S/i, '1');
+                    var b_tier = b.replace(/^S\+/i, '0').replace(/^S/i, '1');
                     return a_tier.localeCompare(b_tier);
                 }).join(', ');
         }
