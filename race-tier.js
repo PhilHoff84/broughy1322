@@ -26,7 +26,7 @@ function tier(provider='', query = '', data = '') {
     });
 
     /* Print usage (for !tier)*/
-    if (args.length() === 0 || /\busage\b/.test(query)) {
+    if (args.length === 0 || /\busage\b/.test(query)) {
         return 'GTA Car Tiers: ' +
             [...new Set(
                 vehicles.map(function (vehicle) {
@@ -35,14 +35,14 @@ function tier(provider='', query = '', data = '') {
             )].join(', ');
     }
 
-    if (args.length() >= 1) {
+    if (args.length >= 1) {
         var clazz = args[0];
         vehicles = vehicles.filer(function (vehicle) {
             return normalize(vehicle._clazz) == clazz;
         });
     }
 
-    if (args.length() >= 2) {
+    if (args.length >= 2) {
         var tier = args[1];
         vehicles = vehicles.filer(function (vehicle) {
             return normalize(vehicle._tier) == tier;
