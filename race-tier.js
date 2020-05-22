@@ -25,6 +25,10 @@ function tier(provider='', query = '', data = '') {
         return new Vehicle(cols[0], cols[1], cols[2]);
     });
 
+    if (0 === vehicles.length) {
+        return 'Could not parse GTA Car Tiers ¯\\_(ツ)_/¯';
+    }
+
     /* Print usage (for !tier)*/
     if (args.length === 0 || /\busage\b/.test(query)) {
         return 'GTA Car Tiers: ' +
@@ -37,24 +41,31 @@ function tier(provider='', query = '', data = '') {
 
     if (args.length >= 1) {
         var clazz = args[0];
-        vehicles = vehicles.filter(function (vehicle) {
+        var vehicles_by_class = vehicles.filter(function (vehicle) {
             return normalize(vehicle._clazz) == clazz;
         });
+		if (0 === vehicles_by_class.length) {
+			return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
+		}
     }
 
     if (args.length >= 2) {
         var tier = args[1];
-        vehicles = vehicles.filter(function (vehicle) {
+        var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
             return normalize(vehicle._tier) == tier;
         });
-    }
-
-    if (0 === vehicles.length) {
-        return 'Could not find a GTA Car Tier ¯\\_(ツ)_/¯';
+		if (0 === vehicles_by_tier.length) {
+			return 'GTA Car Tiers for ' +
+				vehicles[0]._clazz + ': ' +
+				vehicles_by_class.map(function (vehicle) {
+					return vehicle._tier;
+				}).join(', ');
+		}
     }
 
     if (vehicles.length > 10) {
-        return 'Found too many vehicles in GTA Car Tier: ' +  args.join(' ');
+        return 'Found too many vehicles in GTA Car Tier: '+
+            vehicles[0]._clazz + ' ' + vehicles[0]._tier + ' ¯\\_(ツ)_/¯';
     }
 
     return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles: ' +
