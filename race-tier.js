@@ -23,11 +23,10 @@ function tier(provider='', query = '', data = '') {
         var cols = row.split('\t');
         return new Vehicle(cols[0], cols[1], cols[2]);
     });
-    return 'parsed ' + vehicles.length + 'vehicles';
 
     /* Print usage */
     if (/\busage\b/.test(query)) {
-        return 'GTA tier lists are available for the following classes: ' +
+        return 'GTA Car Tiers: ' +
             [...new Set(
                 vehicles.map(function (vehicle) {
                     return vehicle._clazz;
@@ -35,7 +34,7 @@ function tier(provider='', query = '', data = '') {
             )].join(', ');
     }
 
-    return 'query: ' + query + ' | data: ' + data.split('<EOL>').join(' | ');
+    return 'query: ' + query + ' -> ' + vehicles.length + ' vehicles';
 }
 
 function normalize(text) {
