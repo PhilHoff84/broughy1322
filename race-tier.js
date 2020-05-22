@@ -17,6 +17,7 @@
 function tier(provider='', query = '', data = '') {
     /* Sanitize the filter criteria specified in the query */
     query = normalize(query);
+    var args = query.split(/\s+/);
 
     /* Parse vehicles */
     var vehicles = data.split('<EOL>').map(function (row) {
@@ -24,8 +25,8 @@ function tier(provider='', query = '', data = '') {
         return new Vehicle(cols[0], cols[1], cols[2]);
     });
 
-    /* Print usage */
-    if (/\busage\b/.test(query)) {
+    /* Print usage (for !tier)*/
+    if (args.length() === 0 || /\busage\b/.test(query)) {
         return 'GTA Car Tiers: ' +
             [...new Set(
                 vehicles.map(function (vehicle) {
@@ -34,7 +35,21 @@ function tier(provider='', query = '', data = '') {
             )].join(', ');
     }
 
-    return 'query: ' + query + ' -> ' + vehicles.length + ' vehicles';
+    if (args.length() >= 1) {
+        var clazz = args[0];
+        vehicles = vehicles.filer(function (vehicle) {
+            return normalize(vehicle._clazz) == clazz;
+        });
+    }
+
+    if (args.length() >= 2) {
+        var tier = args[1];
+        vehicles = vehicles.filer(function (vehicle) {
+            return normalize(vehicle._tier) == tier;
+        });
+    }
+
+    return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles';
 }
 
 function normalize(text) {
@@ -46,7 +61,7 @@ function normalize(text) {
     text = text.toLowerCase();
 
     /* Remove plural */
-    text = text.replace(/s\b/g, '');
+    text = text.replace(/(?<=\S)s\b/g, '');
 
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -66,12 +81,13 @@ function normalize(text) {
             return 'usage';
         case 'sportclassic':
         case 'sportsclassic':
+        case 'sport classic':
             return 'classic';
         case 'utiliti':
         case 'utilitie':
             return 'utility';
         default:
-            return text;
+            return text.trim();
     }
 }
 
