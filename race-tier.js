@@ -57,7 +57,7 @@ function tier(provider='', query = '', data = '') {
             return normalize(vehicle._tier) == tier;
         });
         if (0 === vehicles_by_tier.length) {
-            return 'GTA Car Tiers for ' + vehicles[0]._clazz + ': ' +
+            return 'GTA Car Tiers for ' + vehicles_by_class[0]._clazz + ': ' +
                 unique(
                     vehicles_by_class.map(function (vehicle) {
                         return vehicle._tier;
