@@ -39,37 +39,31 @@ function tier(provider='', query = '', data = '') {
             ).join(', ');
     }
 
-    var vehicles_by_class = [];
-    if (args.length >= 1) {
-        var clazz = args[0];
-        vehicles_by_class = vehicles.filter(function (vehicle) {
-            return normalize(vehicle._clazz) == clazz;
-        });
-        if (0 === vehicles_by_class.length) {
-            return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
-        }
-    }
+	var clazz = args[0];
+	var vehicles_by_class = vehicles.filter(function (vehicle) {
+		return normalize(vehicle._clazz) == clazz;
+	});
+	if (0 === vehicles_by_class.length) {
+		return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
+	}
 
-    var vehicles_by_tier = [];
-    if (args.length >= 2) {
-        var tier = args[1];
-        vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
-            return normalize(vehicle._tier) == tier;
-        });
-        if (0 === vehicles_by_tier.length) {
-            return 'GTA Car Tiers for ' + vehicles_by_class[0]._clazz + ': ' +
-                unique(
-                    vehicles_by_class.map(function (vehicle) {
-                        return vehicle._tier;
-                    })
-                ).sort(function (a ,b) {
-                    /* Sort order: S+, S, A, B, C, ... */
-                    var a_tier = a.replace(/^S\+/i, '0').replace(/^S/i, '1');
-                    var b_tier = b.replace(/^S\+/i, '0').replace(/^S/i, '1');
-                    return a_tier.localeCompare(b_tier);
-                }).join(', ');
-        }
-    }
+	var tier = args[1];
+	var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
+		return normalize(vehicle._tier) == tier;
+	});
+	if (0 === vehicles_by_tier.length) {
+		return 'GTA Car Tiers for ' + vehicles_by_class[0]._clazz + ': ' +
+			unique(
+				vehicles_by_class.map(function (vehicle) {
+					return vehicle._tier;
+				})
+			).sort(function (a ,b) {
+				/* Sort order: S+, S, A, B, C, ... */
+				var a_tier = a.replace(/^S\+/i, '0').replace(/^S/i, '1');
+				var b_tier = b.replace(/^S\+/i, '0').replace(/^S/i, '1');
+				return a_tier.localeCompare(b_tier);
+			}).join(', ');
+	}
 
     /*if (vehicles_by_tier.length > 10) {
         return 'Found too many vehicles in GTA Car Tier: ' +
