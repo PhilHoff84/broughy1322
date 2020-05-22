@@ -70,8 +70,7 @@ function tier(provider='', query = '', data = '') {
     }
 
     if (vehicles.length > 10) {
-        return 'Found too many vehicles in GTA Car Tier: '+
-            vehicles[0]._clazz + ' ' + vehicles[0]._tier + ' ¯\\_(ツ)_/¯';
+        return 'Found too many vehicles in GTA Car Tier: '+ args.join(' ') + ' ¯\\_(ツ)_/¯';
     }
 
     return 'query: ' + query + ' -> args: ' + args.join(', ') + ' filtered: ' + vehicles.length + ' vehicles: ' +
