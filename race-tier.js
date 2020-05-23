@@ -33,11 +33,23 @@ function tier(provider='', query = '', data = '') {
     /* Print all available classes */
     if (args.length === 0 || /\busage\b/.test(query)) {
         return 'Usage: !randomclass (<class> | all)';
+        /*
+        return 'GTA Car Tiers: ' +
+            unique(
+                vehicles.map(function (vehicle) {
+                    return vehicle._clazz;
+                })
+            ).join(', ');
+        }
+        */
     }
 
     /* Select random tier */
     var is_random = /\brandom\b/.test(query);
     if (is_random) {
+        if (args.length === 1) {
+            return 'Usage: !randomclass (<class> | all)';
+        }
         if (args.length >= 2 && args[1] !== 'all') { /* Random select */
             args = [ args[1] ];
         } else { /* Random all */
