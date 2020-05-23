@@ -57,9 +57,9 @@ function tier(provider='', query = '', data = '') {
         return normalize(vehicle._clazz) == clazz;
     });
     if (0 === vehicles_by_class.length) {
-		if (is_random) {
-			return 'Could not find a GTA Car Tier for: ' + query + ' | ' + args.join(', ') + ' ¯\\_(ツ)_/¯';
-		}
+        if (is_random) {
+            return 'Could not find a GTA Car Tier for: ' + query + ' | ' + args.join(', ') + ' ¯\\_(ツ)_/¯';
+        }
         return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
     }
     clazz = vehicles_by_class[0]._clazz;
@@ -135,7 +135,12 @@ function normalize(text) {
     var result;
     switch (text) {
         case '': /* Print usage, if there was not even a single valid letter in the text */
+            if (is_random) {
+                result = '';
+                break;
+            } /* else fallthrough */
         case 'help':
+        case 'info':
         case 'option':
         case 'instruction':
             result = 'usage';
@@ -165,7 +170,7 @@ function normalize(text) {
             break;
     }
 
-    return (is_random ? 'random ' : '') + text.trim();
+    return ((is_random ? 'random ' : '') + text).trim();
 }
 
 /* Returns only unique values from the specified argument */
