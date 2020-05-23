@@ -121,34 +121,46 @@ function normalize(text) {
     text = text.replace(/[^a-z \+\-]+/g, '');
 
     /* Temporarily remove 'random' from query */
-    var random_prefix = /\brandom\b/.test(text) ? 'random ' : '';
+    var is_random = /\brandom\b/.test(text);
+    if (is_random) {
+        text = text.replace(/\brandom\b/g, '');
+    }
 
     /* Substitute common aliases with the correct criteria */
+    var result;
     switch (text) {
         case '': /* Print usage, if there was not even a single valid letter in the text */
         case 'help':
         case 'option':
         case 'instruction':
-            return 'usage';
+            result = 'usage';
+            break;
         case 'open':
         case 'wheel':
         case 'formula':
         case 'open wheel':
-            return random_prefix + 'open-wheel';
+            result = 'open-wheel';
+            break;
         case 'classic':
         case 'sportclassic':
         case 'sportsclassic':
         case 'sport classic':
-            return random_prefix + 'sport-classic';
+            result = 'sport-classic';
+            break;
         case 'utiliti':
         case 'utilitie':
-            return random_prefix + 'utility';
+            result = 'utility';
+            break;
         case 'offroad':
         case 'off road':
-            return random_prefix + 'off-road';
+            result = 'off-road';
+            break;
         default:
-            return random_prefix + text.trim();
+            result = text.trim();
+            break;
     }
+
+    return (is_random ? 'random ' : '') + text.trim();
 }
 
 /* Returns only unique values from the specified argument */
