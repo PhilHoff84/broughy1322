@@ -52,13 +52,14 @@ function tier(provider='', query = '', data = '') {
         }
     }
 
+    /* Filter vehicles by class */
     var clazz = args[0];
     var vehicles_by_class = vehicles.filter(function (vehicle) {
         return normalize(vehicle._clazz) == clazz;
     });
     if (0 === vehicles_by_class.length) {
         if (is_random) {
-            return 'Could not find a GTA Car Tier for: ' + query + ' | ' + args.join(', ') + ' ¯\\_(ツ)_/¯';
+            return 'Could not find a Random GTA Car Tier for: ' + query + ' ¯\\_(ツ)_/¯';
         }
         return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
     }
@@ -71,10 +72,12 @@ function tier(provider='', query = '', data = '') {
         args = [ normalize(vehicle._clazz), normalize(vehicle._tier) ];
     }
 
+    /* Filter vehicles by tier */
     var tier = args[1];
     var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
         return normalize(vehicle._tier) == tier;
     });
+    /* Print tiers for selected class */
     if (0 === vehicles_by_tier.length) {
         return 'GTA Car Tiers for ' + vehicles_by_class[0]._clazz + ': ' +
             unique(
@@ -90,6 +93,7 @@ function tier(provider='', query = '', data = '') {
     }
     tier = vehicles_by_tier[0]._tier;
 
+    /* Print selected tiers */
     var result = (is_random ? 'Random ' : '') + 'GTA Car Tiers: ' + clazz + ' ' + tier + ' ▸ ' +
         vehicles_by_tier.map(function (vehicle) {
             return vehicle._name;
