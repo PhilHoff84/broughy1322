@@ -30,20 +30,15 @@ function tier(provider='', query = '', data = '') {
         return 'Could not parse GTA Car Tiers ¯\\_(ツ)_/¯';
     }
 
-    /* Print all available tiers */
+    /* Print all available classes */
     if (args.length === 0 || /\busage\b/.test(query)) {
-        return 'GTA Car Tiers: ' +
-            unique(
-                vehicles.map(function (vehicle) {
-                    return vehicle._clazz;
-                })
-            ).join(', ');
+        return 'Usage: !randomclass (<class> | all)';
     }
 
     /* Select random tier */
     var is_random = /\brandom\b/.test(query);
     if (is_random) {
-        if (args.length >= 2) { /* Random select */
+        if (args.length >= 2 && args[1] !== 'all') { /* Random select */
             args = [ args[1] ];
         } else { /* Random all */
             var i = Math.floor(Math.random() * vehicles.length);
@@ -59,7 +54,7 @@ function tier(provider='', query = '', data = '') {
     });
     if (0 === vehicles_by_class.length) {
         if (is_random) {
-            return 'Could not find a Random GTA Car Tier for: ' + query + ' ¯\\_(ツ)_/¯';
+            return 'Could not find a random GTA Car Tier for: ' + query + ' ¯\\_(ツ)_/¯';
         }
         return 'Could not find a GTA Car Tier for: ' + clazz + ' ¯\\_(ツ)_/¯';
     }
@@ -79,7 +74,7 @@ function tier(provider='', query = '', data = '') {
     });
     /* Print tiers for selected class */
     if (0 === vehicles_by_tier.length) {
-        return 'GTA Car Tiers for ' + vehicles_by_class[0]._clazz + ': ' +
+        return clazz + ': ' +
             unique(
                 vehicles_by_class.map(function (vehicle) {
                     return vehicle._tier;
@@ -94,7 +89,7 @@ function tier(provider='', query = '', data = '') {
     tier = vehicles_by_tier[0]._tier;
 
     /* Print selected tiers */
-    var result = (is_random ? 'Random ' : '') + 'GTA Car Tiers: ' + clazz + ' ' + tier + ' ▸ ' +
+    var result = clazz + ' ' + tier + ' ▸ ' +
         vehicles_by_tier.map(function (vehicle) {
             return vehicle._name;
         }).join(', ');
