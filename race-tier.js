@@ -122,7 +122,7 @@ function normalize(text) {
     text = text.toLowerCase();
 
     /* Remove plural */
-    text = text.replace(/(?<=\S)s\b/g, '');
+    text = text.replace(/(?!<=\S)s\b/g, '');
 
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -181,7 +181,7 @@ function normalize(text) {
             break;
     }
 
-    return ((is_random ? 'random ' : '') + text).trim();
+    return ((is_random ? 'random ' : '') + result).trim();
 }
 
 /* Returns only unique values from the specified argument */
