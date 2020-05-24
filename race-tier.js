@@ -122,7 +122,7 @@ function normalize(text) {
     text = text.toLowerCase();
 
     /* Remove plural */
-    text = text.replace(/(?!<=\S)s\b/g, '');
+    text = text.replace(/(\S)s\b/g, '$1');
 
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
