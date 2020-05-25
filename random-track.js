@@ -7,7 +7,7 @@ function track(provider='', query = '', data = '') {
 
     var [platform_filter, type_filter] = parse_query(query);
     if (platform_filter === '') {
-        return 'which platform? (PS4 / PC / XB1 / 5M)';
+        return 'Usage: !randomtrack (PS4 | XB1 | PC | 5M) (<category>)';
     }
 
     var rows = data.split('<EOL>');
@@ -34,7 +34,7 @@ function track(provider='', query = '', data = '') {
     if (matching_tracks.length > 0) {
         var i = Math.floor(Math.random() * matching_tracks.length);
         var track = matching_tracks[i];
-        return 'Random track ' + (i + 1) + '/' + matching_tracks.length + ': ' + track;
+        return 'Random Track ' + (i + 1) + '/' + matching_tracks.length + ': ' + track;
     }
     return 'Could not find a matching random track ¯\\_(ツ)_/¯';
 }
