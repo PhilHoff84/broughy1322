@@ -20,7 +20,7 @@ function randomSong(query) {
     if (songs.length > 0) {
         var i = Math.floor(Math.random() * songs.length);
         var song = songs[i];
-        return 'Random song ' + i +'/' + songs.length + ': ' + song;
+        return 'Random Song ' + i +'/' + songs.length + ': ' + song;
     } else {
         return 'Could not find a matching random song ¯\\_(ツ)_/¯';
     }
@@ -35,7 +35,7 @@ function normalize(text) {
     text = ('' + text).toLowerCase();
 
     /* Remove plural */
-    text = text.replace(/s\b/g, '');
+    text = text.replace(/(\S)s\b/g, '$1');
 
     /* Remove accents */
     text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
