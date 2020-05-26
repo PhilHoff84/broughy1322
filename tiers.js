@@ -24,12 +24,6 @@ function tiers(provider='', query = '', data = '') {
         return new Vehicle(cols[0], cols[1], cols[2]);
     });
     
-    /* Parse vehicles */
-    var vehicles = data.split('<EOL>').map(function (row) {
-        var cols = row.split('\t');
-        return new Vehicle(cols[0], cols[1], cols[2]);
-    });
-    
     /* Determine all classes and tiers */
     var all_classes_and_tiers = vehicles.reduce(function (accumulator, vehicle) {
         if (!accumulator.has(vehicle._clazz)) {
@@ -38,7 +32,18 @@ function tiers(provider='', query = '', data = '') {
         accumulator.get(vehicle._clazz).add(vehicle._tier);
         return accumulator;
     }, new Map());
-    return 'all: ' + all_classes_and_tiers.size;
+    
+    /* Determine raceable classes and tiers */
+    var raceable_classes_and_tiers = new Map();
+    for (var [clazz, tier] of all_classes_and_tiers.) {
+        if ('-' !== tier) {
+            if (!raceable_classes_and_tiers.has(clazz)) {
+                raceable_classes_and_tiers.set(clazz, new Set());
+            }
+            raceable_classes_and_tiers.set(k, v);
+        }
+    }
+    return 'all: ' + all_classes_and_tiers.size + ' | raceable: ' + raceable_classes_and_tiers.size;
 }
 
 function Vehicle(_clazz, _tier, _name) {
