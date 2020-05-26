@@ -24,7 +24,21 @@ function tiers(provider='', query = '', data = '') {
         return new Vehicle(cols[0], cols[1], cols[2]);
     });
     
-    return 'vehicles: ' + vehicles.length;
+    /* Parse vehicles */
+    var vehicles = data.split('<EOL>').map(function (row) {
+        var cols = row.split('\t');
+        return new Vehicle(cols[0], cols[1], cols[2]);
+    });
+    
+    /* Determine all classes and tiers */
+    var all_classes_and_tiers = vehicles.reduce(function (accumulator, vehicle) {
+        if (accumulator.has(vehicle._clazz)) {
+            accumulator.set(vehicle._clazz, new Set());
+        }
+        accumulator.get(vehicle._clazz).add(vehicle._tier);
+        return accumulator;
+    }, new Map());
+    return 'all: ' + all_classes_and_tiers.size;
 }
 
 function Vehicle(_clazz, _tier, _name) {
