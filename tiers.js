@@ -40,7 +40,7 @@ function tiers(provider='', query = '', data = '') {
             if (!raceable_classes_and_tiers.has(clazz)) {
                 raceable_classes_and_tiers.set(clazz, new Set());
             }
-            raceable_classes_and_tiers.set(k, v);
+            raceable_classes_and_tiers.set(clazz, tier);
         }
     }
     return 'all: ' + all_classes_and_tiers.size + ' | raceable: ' + raceable_classes_and_tiers.size;
