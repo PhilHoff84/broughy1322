@@ -32,7 +32,7 @@ function tiers(provider='', query = '', data = '') {
     
     /* Determine all classes and tiers */
     var all_classes_and_tiers = vehicles.reduce(function (accumulator, vehicle) {
-        if (accumulator.has(vehicle._clazz)) {
+        if (!accumulator.has(vehicle._clazz)) {
             accumulator.set(vehicle._clazz, new Set());
         }
         accumulator.get(vehicle._clazz).add(vehicle._tier);
