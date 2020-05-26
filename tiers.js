@@ -35,7 +35,7 @@ function tiers(provider='', query = '', data = '') {
     
     /* Determine raceable classes and tiers */
     var raceable_classes_and_tiers = new Map();
-    for (var [clazz, tier] of all_classes_and_tiers.) {
+    for (var [clazz, tier] of all_classes_and_tiers) {
         if ('-' !== tier) {
             if (!raceable_classes_and_tiers.has(clazz)) {
                 raceable_classes_and_tiers.set(clazz, new Set());
