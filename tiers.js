@@ -27,7 +27,8 @@ function tiers(provider='', query = '', data = '') {
         return new Vehicle(cols[0], cols[1], cols[2]);
     });
     
-    /* Determine all classes and tiers */
+    return 'vehicles: ' + vehicles.length;
+    /* Determine all classes and tiers *
     var all_classes_and_tiers = vehicles.reduce(function (accumulator, vehicle) {
         if (accumulator.has(vehicle._clazz)) {
             accumulator.set(vehicle._clazz, new Set());
@@ -36,7 +37,7 @@ function tiers(provider='', query = '', data = '') {
         return accumulator;
     }, new Map());
     
-    /* Determine raceable classes and tiers */
+    /* Determine raceable classes and tiers *
     var raceable_classes_and_tiers = new Map();
     for (var [clazz, tier] of all_classes_and_tiers.) {
         if ('-' !== tier) {
