@@ -32,7 +32,7 @@ function tier(provider='', query = '', data = '') {
 
     /* Print all available classes */
     if (args.length === 0 || /\busage\b/.test(query)) {
-        return 'Usage: !randomclass (<class> | all)';
+        return 'Usage: !randomtier (<class> | all)';
         /*
         return 'GTA Car Tiers: ' +
             unique(
@@ -48,7 +48,7 @@ function tier(provider='', query = '', data = '') {
     var is_random = /\brandom\b/.test(query);
     if (is_random) {
         if (args.length === 1) {
-            return 'Usage: !randomclass (<class> | all)';
+            return 'Usage: !randomtier (<class> | all)';
         }
         if (args.length >= 2 && args[1] !== 'all') { /* Random select */
             args = [ args[1] ];
