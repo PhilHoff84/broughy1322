@@ -63,15 +63,15 @@ function tiers(provider='', query = '', data = '') {
     }, new Map());
 
     /* Determine raceable classes and tiers */
-    var raceable_classes_and_tiers = new Map();
-    for (var [clazz, tiers] of all_classes_and_tiers) {
-        if ('-' !== tiers) {
-            if (!raceable_classes_and_tiers.has(clazz)) {
-                raceable_classes_and_tiers.set(clazz, new Set());
+    var raceable_classes_and_tiers = Array.from(all_classes_and_tiers.entries())
+        .reduce(function (accumulator, [clazz, all_tiers]) {
+            var raceable_tiers = new Set(all_tiers);
+            raceable_tiers.delete('-');
+            if (raceable_tiers.size > 1) {
+                accumulator.set(clazz, raceable_tiers);
             }
-            raceable_classes_and_tiers.set(clazz, tiers);
-        }
-    }
+            return accumulator;
+        }, new Map());
 
     if (args[0] === 'random-class') {
         return random_class(args, all_classes_and_tiers, raceable_classes_and_tiers);
