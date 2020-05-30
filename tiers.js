@@ -191,7 +191,24 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
     if (args.length >= 2) {
         /* !randomtier all */
         if (args[1] === 'all') {
-            return '!randomtier all';
+            var classes_and_tiers = Array.from(raceable_classes_and_tiers.entries())
+                .reduce(function(accumulator, [clazz, tiers]) {
+                    tiers.forEach(function(tier){
+                        accumulator.push([clazz, tier]);
+                    });
+                    return accumulator;
+                }, []);
+
+            var i = Math.floor(Math.random() * classes_and_tiers.length);
+            var [clazz, tier] = classes_and_tiers[i];
+
+            /* Print selected tier */
+            return 'Random Tier ' + (i + 1) + '/' + classes_and_tiers.length + ': ' + clazz + ' ' + tier + ' ▸ ' +
+                vehicles.filter(function (vehicle) {
+                    return clazz == vehicle._clazz && tier == vehicle._tier;
+                }).map(function (vehicle) {
+                    return vehicle._name;
+                }).join(', ');
         }
 
         /* !randomtier <class> */
