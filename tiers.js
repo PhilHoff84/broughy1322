@@ -176,25 +176,22 @@ function tiers(provider='', query = '', data = '') {
 }
 
 function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
-    if (args.length < 2) {
-        return 'Usage: !randomclass (race | all)';
-    }
+    if (args.length >= 2) {
+        if (args[1] === 'race') {
+            var classes = Array.from(raceable_classes_and_tiers.keys());
+            var i = Math.floor(Math.random() * classes.length);
+            var clazz = classes[i];
+            return 'Random Class ' (i + 1) + '/' + classes.length + ': ' + clazz;
+        }
 
-    if (args[1] === 'race') {
-        var classes = Array.from(raceable_classes_and_tiers.keys());
-        var i = Math.floor(Math.random() * classes.length);
-        var clazz = classes[i];
-        return 'Random Class ' (i + 1) + '/' + classes.length + ': ' + clazz;
+        if (args[1] === 'all') {
+            var classes = Array.from(all_classes_and_tiers.keys());
+            var i = Math.floor(Math.random() * classes.length);
+            var clazz = classes[i];
+            return 'Random Class ' (i + 1) + '/' + classes.length + ': ' + clazz;
+        }
     }
-
-    if (args[1] === 'all') {
-        var classes = Array.from(all_classes_and_tiers.keys());
-        var i = Math.floor(Math.random() * classes.length);
-        var clazz = classes[i];
-        return 'Random Class ' (i + 1) + '/' + classes.length + ': ' + clazz;
-    }
-
-    return 'Could not find a random class ¯\\_(ツ)_/¯';
+    return 'Usage: !randomclass (race | all)';
 }
 
 /*
