@@ -76,22 +76,11 @@ function tiers(provider='', query = '', data = '') {
     if (args[0] === 'random-class') {
         return random_class(args, all_classes_and_tiers, raceable_classes_and_tiers);
     }
-    return args.join(', ');
-/*
-    if (args[0] === 'random-tier') {
-        /*return random_tier(args, raceable_classes_and_tiers, vehicles);*
-        if (args.length < 2) {
-            return 'Usage: !randomtier (<class> | all)';
-        }
-        
-        if (args[1] === 'all') {
-            return '!randomtier all';
-        }
 
-        /* !randomtier <class> *
-        return '!randomtier <class>';
+    if (args[0] === 'random-tier') {
+        return random_tier(args, raceable_classes_and_tiers, vehicles);
     }
-*/
+
     return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
 
 
@@ -177,6 +166,7 @@ function tiers(provider='', query = '', data = '') {
 
 function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
     if (args.length >= 2) {
+        /* !randomclass race */
         if (args[1] === 'race') {
             var classes = Array.from(raceable_classes_and_tiers.keys());
             var i = Math.floor(Math.random() * classes.length);
@@ -184,6 +174,7 @@ function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
             return 'Random Class ' + (i + 1) + '/' + classes.length + ': ' + clazz;
         }
 
+        /* !randomclass all */
         if (args[1] === 'all') {
             var classes = Array.from(all_classes_and_tiers.keys());
             var i = Math.floor(Math.random() * classes.length);
@@ -191,39 +182,39 @@ function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
             return 'Random Class ' + (i + 1) + '/' + classes.length + ': ' + clazz;
         }
     }
+
     return 'Usage: !randomclass (race | all)';
 }
 
-/*
+
 function random_tier(args, raceable_classes_and_tiers, vehicles) {
-    if (args.length < 2) {
-        return 'Usage: !randomtier (<class> | all)';
-    }
-    
-    if (args[1] === 'all') {
-        return '!randomtier all';
-    }
+    if (args.length >= 2) {
+        /* !randomtier all */
+        if (args[1] === 'all') {
+            return '!randomtier all';
+        }
 
-    /* !randomtier <class> *
-    var class_and_tiers = Array.from(raceable_classes_and_tiers.entries()).filter(function([clazz, tiers]) {
-        return args[1] === normalize(clazz);
-    });
-    if (class_and_tiers.length !== 1) {
-        return 'Could not find a random tier ¯\\_(ツ)_/¯';
-    }
-    var [clazz, tiers] = class_and_tiers[0];
-    tiers = Array.from(tiers);
-    var i = Math.floor(Math.random() * tiers.length);
-    var tier = tiers[i];
+        /* !randomtier <class> */
+        var class_and_tiers = Array.from(raceable_classes_and_tiers.entries()).filter(function([clazz, tiers]) {
+            return args[1] === normalize(clazz);
+        });
+        if (class_and_tiers.length === 1) {
+            var [clazz, tiers] = class_and_tiers[0];
+            tiers = Array.from(tiers);
+            var i = Math.floor(Math.random() * tiers.length);
+            var tier = tiers[i];
 
-    /* Print selected tier *
-    return 'Random Tier: ' + clazz + ' ' + tier + ' ▸ ' +
-        vehicles.filter(function (vehicle) {
-            return clazz == vehicle._clazz && tier == vehicle._tier;
-        }).map(function (vehicle) {
-            return vehicle._name;
-        }).join(', ');
-}*/
+            /* Print selected tier */
+            return 'Random Tier ' + (i + 1) + '/' + tiers.length + ': ' + clazz + ' ' + tier + ' ▸ ' +
+                vehicles.filter(function (vehicle) {
+                    return clazz == vehicle._clazz && tier == vehicle._tier;
+                }).map(function (vehicle) {
+                    return vehicle._name;
+                }).join(', ');
+        }
+    }
+    return 'Usage: !randomtier (<class> | all)';
+}
 
 function normalize(text) {
     if (!text) {
