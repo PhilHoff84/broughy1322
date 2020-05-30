@@ -62,7 +62,7 @@ function tiers(provider='', query = '', data = '') {
 
         /* Print tiers for selected class (if an invalid tier was specified) */
         if (0 === vehicles_by_tier.length) {
-            return clazz + ': ' + [...raceable_classes_and_tiers.get(class)].join(', ');
+            return clazz + ': ' + [...raceable_classes_and_tiers.get(clazz)].join(', ');
         }
         tier = vehicles_by_tier[0]._tier;
         return truncate(vehicles_with_class_and_tier(vehicles, clazz, tier));
