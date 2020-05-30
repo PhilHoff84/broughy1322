@@ -236,47 +236,14 @@ function normalize(text) {
     /* Remove all chars that are not letters, '+' or '-' */
     text = text.replace(/[^a-z \+\-]+/g, '');
 
-    /* Temporarily remove 'random' from query */
-    var is_random = /\brandom\b/.test(text);
-    if (is_random) {
-        text = text.replace(/\brandom\b/g, '');
-    }
+    /* Substitute common aliases with the correct keywords */
+    text = text.replace(/\b(?:help|info|option|instruction)\b/g, 'usage')
+		.replace(/\b(?:open wheel|open|wheel|formula)\b/g, 'open-wheel')
+		.replace(/\b(?:sport classic|sportsclassic|sportclassic|classic)\b/g, 'sport-classic')
+		.replace(/\b(?:utilitie|utiliti)\b/g, 'utility')
+		.replace(/\b(?:off road|offroad)\b/g, 'off-road');
 
-    /* Substitute common aliases with the correct criteria */
-    var result;
-    switch (text) {
-        case 'help':
-        case 'info':
-        case 'option':
-        case 'instruction':
-            result = 'usage';
-            break;
-        case 'open':
-        case 'wheel':
-        case 'formula':
-        case 'open wheel':
-            result = 'open-wheel';
-            break;
-        case 'classic':
-        case 'sportclassic':
-        case 'sportsclassic':
-        case 'sport classic':
-            result = 'sport-classic';
-            break;
-        case 'utiliti':
-        case 'utilitie':
-            result = 'utility';
-            break;
-        case 'offroad':
-        case 'off road':
-            result = 'off-road';
-            break;
-        default:
-            result = text.trim();
-            break;
-    }
-
-    return ((is_random ? 'random ' : '') + result).trim();
+    return text.trim();
 }
 
 /* Returns only unique values from the specified argument */
