@@ -43,7 +43,7 @@ function tiers(provider='', query = '', data = '') {
         return truncate(random_tier(args, raceable_classes_and_tiers, vehicles));
     }
 
-    /* Filter vehicles in specified class */
+    /* Filter vehicles in specified class *
     var clazz = args[0];
     var vehicles_by_class = vehicles.filter(function (vehicle) {
         return clazz === normalize(vehicle._clazz);
@@ -53,20 +53,20 @@ function tiers(provider='', query = '', data = '') {
     }
     clazz = vehicles_by_class[0]._clazz;
 
-    /* Filter vehicles in specified tier */
+    /* Filter vehicles in specified tier *
     if (args.length >= 2) {
         var tier = args[1];
         var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
             return tier === normalize(vehicle._tier);
         });
 
-        /* Print tiers for selected class (if an invalid tier was specified) */
+        /* Print tiers for selected class (if an invalid tier was specified) *
         if (0 === vehicles_by_tier.length) {
             return clazz + ': ' + [...raceable_classes_and_tiers.get(class)].join(', ');
         }
         tier = vehicles_by_tier[0]._tier;
         return truncate(vehicles_with_class_and_tier(vehicles, clazz, tier));
-    }
+    }*/
 
     return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
 }
