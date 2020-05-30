@@ -43,7 +43,7 @@ function tiers(provider='', query = '', data = '') {
         return truncate(random_tier(args, raceable_classes_and_tiers, vehicles));
     }
 
-    /* Filter vehicles in specified class *
+    /* Filter vehicles in specified class */
     var clazz = args[0];
     var vehicles_by_class = vehicles.filter(function (vehicle) {
         return clazz === normalize(vehicle._clazz);
@@ -53,22 +53,64 @@ function tiers(provider='', query = '', data = '') {
     }
     clazz = vehicles_by_class[0]._clazz;
 
-    /* Filter vehicles in specified tier *
+    /* Filter vehicles in specified tier */
     if (args.length >= 2) {
         var tier = args[1];
         var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
             return tier === normalize(vehicle._tier);
         });
 
-        /* Print tiers for selected class (if an invalid tier was specified) *
+        /* Print tiers for selected class (if an invalid tier was specified) */
         if (0 === vehicles_by_tier.length) {
             return clazz + ': ' + [...raceable_classes_and_tiers.get(class)].join(', ');
         }
         tier = vehicles_by_tier[0]._tier;
         return truncate(vehicles_with_class_and_tier(vehicles, clazz, tier));
-    }*/
+    }
 
     return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
+}
+
+function normalize(text) {
+    if (!text) {
+        text = '';
+    }
+
+    /* Convert to lowercase */
+    text = text.toLowerCase();
+
+    /* Remove plural */
+    text = text.replace(/(\S)s\b/g, '$1');
+
+    /* Remove accents */
+    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    /* Remove everything behind '@' */
+    text = text.replace(/\s*@.*/, '');
+
+    /* Convert whitespace to ' ' */
+    text = text.replace(/\s+/g, ' ');
+
+    /* Remove all chars that are not letters, '+' or '-' */
+    text = text.replace(/[^a-z +\-]+/g, '');
+
+    /* Substitute common aliases with the correct keywords */
+    text = text.replace(/\b(?:help|info|option|instruction)\b/g, 'usage')
+        .replace(/\b(?:open\swheel|open|wheel|formula)\b/g, 'open-wheel')
+        .replace(/\b(?:sport\sclassic|sportsclassic|sportclassic|classic)\b/g, 'sport-classic')
+        .replace(/\b(?:utilitie|utiliti)\b/g, 'utility')
+        .replace(/\b(?:off\sroad|offroad)\b/g, 'off-road')
+        .replace(/\b(?:random[\s\-]clase?)\b/g, 'random-class')
+        .replace(/\b(?:random\stier)\b/g, 'random-tier');
+
+    return text.trim();
+}
+
+function parse_vehicles(data) {
+    return data.split('<EOL>').map(function (row) {
+        var cols = row.split('\t');
+        return new Vehicle(cols[0], cols[1], cols[2]);
+    });
 }
 
 function Vehicle(_clazz, _tier, _name) {
@@ -79,13 +121,6 @@ function Vehicle(_clazz, _tier, _name) {
     this.toString = function () {
         return _name;
     };
-}
-
-function parse_vehicles(data) {
-    return data.split('<EOL>').map(function (row) {
-        var cols = row.split('\t');
-        return new Vehicle(cols[0], cols[1], cols[2]);
-    });
 }
 
 function group_tiers_by_class(vehicles) {
@@ -100,11 +135,11 @@ function group_tiers_by_class(vehicles) {
     /* Sort order: S+, S, A, B, C, ... */
     result.forEach(function (value, key, map) {
         map.set(key, new Set(
-            [...value].sort(function (a ,b) {
+            [...value].sort(function (a, b) {
                 var a_tier = a.replace(/^S\+/i, '0').replace(/^S/i, '1');
                 var b_tier = b.replace(/^S\+/i, '0').replace(/^S/i, '1');
                 return a_tier.localeCompare(b_tier);
-            }
+            })
         ));
     });
 
@@ -191,47 +226,6 @@ function vehicles_with_class_and_tier(vehicles, clazz, tier) {
             return vehicle._name;
         }).join(', ');
 }
-
-function normalize(text) {
-    if (!text) {
-        text = '';
-    }
-
-    /* Convert to lowercase */
-    text = text.toLowerCase();
-
-    /* Remove plural */
-    text = text.replace(/(\S)s\b/g, '$1');
-
-    /* Remove accents */
-    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-    /* Remove everything behind '@' */
-    text = text.replace(/\s*@.*/, '');
-
-    /* Convert whitespace to ' ' */
-    text = text.replace(/\s+/g, ' ');
-
-    /* Remove all chars that are not letters, '+' or '-' */
-    text = text.replace(/[^a-z \+\-]+/g, '');
-
-    /* Substitute common aliases with the correct keywords */
-    text = text.replace(/\b(?:help|info|option|instruction)\b/g, 'usage')
-        .replace(/\b(?:open wheel|open|wheel|formula)\b/g, 'open-wheel')
-        .replace(/\b(?:sport classic|sportsclassic|sportclassic|classic)\b/g, 'sport-classic')
-        .replace(/\b(?:utilitie|utiliti)\b/g, 'utility')
-        .replace(/\b(?:off road|offroad)\b/g, 'off-road')
-        .replace(/\b(?:random[ \-]clase?)\b/g, 'random-class')
-        .replace(/\b(?:random tier)\b/g, 'random-tier');
-
-    return text.trim();
-}
-
-/* Returns only unique values from the specified argument */
-function unique(values) {
-    return [...new Set(values)];
-}
-
 
 function truncate(text) {
     if (text.length > 400) {
