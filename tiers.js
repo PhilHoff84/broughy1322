@@ -241,7 +241,9 @@ function normalize(text) {
 		.replace(/\b(?:open wheel|open|wheel|formula)\b/g, 'open-wheel')
 		.replace(/\b(?:sport classic|sportsclassic|sportclassic|classic)\b/g, 'sport-classic')
 		.replace(/\b(?:utilitie|utiliti)\b/g, 'utility')
-		.replace(/\b(?:off road|offroad)\b/g, 'off-road');
+		.replace(/\b(?:off road|offroad)\b/g, 'off-road')
+		.replace(/\b(?:random[ \-]clase?)\b/g, 'random-class')
+		.replace(/\b(?:random tier)\b/g, 'random-tier');
 
     return text.trim();
 }
