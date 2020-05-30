@@ -46,7 +46,7 @@ function tiers(provider='', query = '', data = '') {
     /* Filter vehicles in specified class */
     var clazz = args[0];
     var vehicles_by_class = vehicles.filter(function (vehicle) {
-        return clazz === normalize(vehicle._clazz);
+        return clazz === normalize(vehicle._clazz) && '-' !== normalize(vehicle._tier);
     });
     if (vehicles_by_class.length > 0) {
         clazz = vehicles_by_class[0]._clazz;
