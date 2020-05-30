@@ -186,7 +186,6 @@ function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
     return 'Usage: !randomclass (race | all)';
 }
 
-
 function random_tier(args, raceable_classes_and_tiers, vehicles) {
     if (args.length >= 2) {
         /* !randomtier all */
@@ -203,12 +202,8 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
             var [clazz, tier] = classes_and_tiers[i];
 
             /* Print selected tier */
-            return 'Random Tier ' + (i + 1) + '/' + classes_and_tiers.length + ': ' + clazz + ' ' + tier + ' ▸ ' +
-                vehicles.filter(function (vehicle) {
-                    return clazz == vehicle._clazz && tier == vehicle._tier;
-                }).map(function (vehicle) {
-                    return vehicle._name;
-                }).join(', ');
+            return 'Random Tier ' + (i + 1) + '/' + classes_and_tiers.length + ': ' +
+                vehicles_with_class_and_tier(vehicles, clazz, tier);
         }
 
         /* !randomtier <class> */
@@ -222,15 +217,20 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
             var tier = tiers[i];
 
             /* Print selected tier */
-            return 'Random Tier ' + (i + 1) + '/' + tiers.length + ': ' + clazz + ' ' + tier + ' ▸ ' +
-                vehicles.filter(function (vehicle) {
-                    return clazz == vehicle._clazz && tier == vehicle._tier;
-                }).map(function (vehicle) {
-                    return vehicle._name;
-                }).join(', ');
+            return 'Random Tier ' + (i + 1) + '/' + tiers.length + ': ' +
+                vehicles_with_class_and_tier(vehicles, clazz, tier);
         }
     }
     return 'Usage: !randomtier (<class> | all)';
+}
+
+function vehicles_with_class_and_tier(vehicles, clazz, tier) {
+    return clazz + ' ' + tier + ' ▸ ' +
+        vehicles.filter(function (vehicle) {
+            return clazz == vehicle._clazz && tier == vehicle._tier;
+        }).map(function (vehicle) {
+            return vehicle._name;
+        }).join(', ');
 }
 
 function normalize(text) {
