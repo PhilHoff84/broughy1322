@@ -72,7 +72,7 @@ function tiers(provider='', query = '', data = '') {
             raceable_classes_and_tiers.set(clazz, tiers);
         }
     }
-
+/*
 	if (args[0] === 'random-class') {
 		if (args.length >== 2) {
 			if (args[1] === 'race') {
