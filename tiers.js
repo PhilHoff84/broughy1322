@@ -48,14 +48,11 @@ function tiers(provider='', query = '', data = '') {
     var vehicles_by_class = vehicles.filter(function (vehicle) {
         return clazz === normalize(vehicle._clazz);
     });
-    if (0 === vehicles_by_class.length) {
-        return 'Could not find class: ' + clazz + ' ¯\\_(ツ)_/¯';
-    }
-    clazz = vehicles_by_class[0]._clazz;
+    if (vehicles_by_class.length > 0) {
+        clazz = vehicles_by_class[0]._clazz;
 
-    /* Filter vehicles in specified tier */
-    if (args.length >= 2) {
-        var tier = args[1];
+        /* Filter vehicles in specified tier */
+        var tier = args.length >= 2 ? args[1] : '-';
         var vehicles_by_tier = vehicles_by_class.filter(function (vehicle) {
             return tier === normalize(vehicle._tier);
         });
@@ -64,7 +61,7 @@ function tiers(provider='', query = '', data = '') {
         if (0 === vehicles_by_tier.length) {
             return clazz + ': ' + [...raceable_classes_and_tiers.get(clazz)].join(', ');
         }
-        tier = vehicles_by_tier[0]._tier;
+        var tier = vehicles_by_tier[0]._tier;
         return truncate(vehicles_with_class_and_tier(vehicles, clazz, tier));
     }
 
