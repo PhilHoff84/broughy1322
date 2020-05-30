@@ -134,13 +134,12 @@ function group_tiers_by_class(vehicles) {
 
     /* Sort order: S+, S, A, B, C, ... */
     result.forEach(function (value, key, map) {
-        map.set(key, new Set(
-            [...value].sort(function (a, b) {
-                var a_tier = a.replace(/^S\+/i, '0').replace(/^S/i, '1');
-                var b_tier = b.replace(/^S\+/i, '0').replace(/^S/i, '1');
-                return a_tier.localeCompare(b_tier);
-            })
-        ));
+        value = [...value].sort(function (a, b) {
+            var a_tier = a.replace(/^S\+/i, '0').replace(/^S/i, '1');
+            var b_tier = b.replace(/^S\+/i, '0').replace(/^S/i, '1');
+            return a_tier.localeCompare(b_tier);
+        });
+        map.set(key, new Set(value));
     });
 
     return result;
