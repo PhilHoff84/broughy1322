@@ -64,12 +64,12 @@ function tiers(provider='', query = '', data = '') {
 
     /* Determine raceable classes and tiers */
     var raceable_classes_and_tiers = new Map();
-    for (var [clazz, tier] of all_classes_and_tiers) {
-        if ('-' !== tier) {
+    for (var [clazz, tiers] of all_classes_and_tiers) {
+        if ('-' !== tiers) {
             if (!raceable_classes_and_tiers.has(clazz)) {
                 raceable_classes_and_tiers.set(clazz, new Set());
             }
-            raceable_classes_and_tiers.set(clazz, tier);
+            raceable_classes_and_tiers.set(clazz, tiers);
         }
     }
 
@@ -84,11 +84,21 @@ function tiers(provider='', query = '', data = '') {
 		}
 		return 'Usage: !randomclass (race | all)';
 	}
-
+/*
 	if (args[0] === 'random-tier') {
-		return random_tier(args, raceable_classes_and_tiers, vehicles);
+		/*return random_tier(args, raceable_classes_and_tiers, vehicles);*
+		if (args.length < 2) {
+			return 'Usage: !randomtier (<class> | all)';
+		}
+		
+		if (args[1] === 'all') {
+			return '!randomtier all';
+		}
+
+		/* !randomtier <class> *
+		return '!randomtier <class>';
 	}
-	
+*/
 	return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
 
 
@@ -171,7 +181,7 @@ function tiers(provider='', query = '', data = '') {
 
     return result;*/
 }
-
+/*
 function random_tier(args, raceable_classes_and_tiers, vehicles) {
 	if (args.length < 2) {
 		return 'Usage: !randomtier (<class> | all)';
@@ -181,7 +191,7 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
 		return '!randomtier all';
 	}
 
-	/* !randomtier <class> */
+	/* !randomtier <class> *
 	var class_and_tiers = Array.from(raceable_classes_and_tiers.entries()).filter(function([clazz, tiers]) {
 		return args[1] === normalize(clazz);
 	});
@@ -193,14 +203,14 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
 	var i = Math.floor(Math.random() * tiers.length);
 	var tier = tiers[i];
 
-	/* Print selected tier */
+	/* Print selected tier *
 	return 'Random Tier: ' + clazz + ' ' + tier + ' ▸ ' +
 		vehicles.filter(function (vehicle) {
 			return clazz == vehicle._clazz && tier == vehicle._tier;
 		}).map(function (vehicle) {
 			return vehicle._name;
 		}).join(', ');
-}
+}*/
 
 function normalize(text) {
     if (!text) {
