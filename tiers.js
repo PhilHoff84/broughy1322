@@ -20,28 +20,28 @@ function tiers(provider='', query = '', data = '') {
     /* Sanitize the filter criteria specified in the query */
     query = normalize(query);
     var args = query.split(/\s+/);
-	
-	/*
-		random-class
-		random-class help
-		random-class race
-		random-class all
-		random-tier
-		random-tier help
-		random-tier <class>
-		random-tier all
-		sports
-		sports a
-	*/
+    
+    /*
+        random-class
+        random-class help
+        random-class race
+        random-class all
+        random-tier
+        random-tier help
+        random-tier <class>
+        random-tier all
+        sports
+        sports a
+    */
 
-	/* Print general information, if there was not even a single valid letter in the text */
+    /* Print general information, if there was not even a single valid letter in the text */
     /*if (args.length === 0) {
-		return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
-	}*/
+        return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
+    }*/
 
     /* Print usage
     if (/\busage\b/.test(query)) {
-		return 'Usage: !randomtier (<class> | all)';
+        return 'Usage: !randomtier (<class> | all)';
     } */
 
     /* Parse vehicles */
@@ -73,26 +73,26 @@ function tiers(provider='', query = '', data = '') {
         }
     }
 
-	if (args[0] === 'random-class') {
-		return random_class(args, all_classes_and_tiers, raceable_classes_and_tiers);
-	}
-	return args.join(', ');
+    if (args[0] === 'random-class') {
+        return random_class(args, all_classes_and_tiers, raceable_classes_and_tiers);
+    }
+    return args.join(', ');
 /*
-	if (args[0] === 'random-tier') {
-		/*return random_tier(args, raceable_classes_and_tiers, vehicles);*
-		if (args.length < 2) {
-			return 'Usage: !randomtier (<class> | all)';
-		}
-		
-		if (args[1] === 'all') {
-			return '!randomtier all';
-		}
+    if (args[0] === 'random-tier') {
+        /*return random_tier(args, raceable_classes_and_tiers, vehicles);*
+        if (args.length < 2) {
+            return 'Usage: !randomtier (<class> | all)';
+        }
+        
+        if (args[1] === 'all') {
+            return '!randomtier all';
+        }
 
-		/* !randomtier <class> *
-		return '!randomtier <class>';
-	}
+        /* !randomtier <class> *
+        return '!randomtier <class>';
+    }
 */
-	return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
+    return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
 
 
 
@@ -176,56 +176,56 @@ function tiers(provider='', query = '', data = '') {
 }
 
 function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
-	if (args.length < 2) {
-		return 'Usage: !randomclass (race | all)';
-	}
+    if (args.length < 2) {
+        return 'Usage: !randomclass (race | all)';
+    }
 
-	if (args[1] === 'race') {
-		var classes = Array.from(raceable_classes_and_tiers.keys());
-		var i = Math.floor(Math.random() * classes.length);
-		var clazz = classes[i];
-		return 'Random Class ' (i + 1) '/' + classes.length + ': ' + clazz;
-	}
+    if (args[1] === 'race') {
+        var classes = Array.from(raceable_classes_and_tiers.keys());
+        var i = Math.floor(Math.random() * classes.length);
+        var clazz = classes[i];
+        return 'Random Class ' (i + 1) + '/' + classes.length + ': ' + clazz;
+    }
 
-	if (args[1] === 'all') {
-		var classes = Array.from(all_classes_and_tiers.keys());
-		var i = Math.floor(Math.random() * classes.length);
-		var clazz = classes[i];
-		return 'Random Class ' (i + 1) '/' + classes.length + ': ' + clazz;
-	}
+    if (args[1] === 'all') {
+        var classes = Array.from(all_classes_and_tiers.keys());
+        var i = Math.floor(Math.random() * classes.length);
+        var clazz = classes[i];
+        return 'Random Class ' (i + 1) + '/' + classes.length + ': ' + clazz;
+    }
 
-	return 'Could not find a random class ¯\\_(ツ)_/¯';
+    return 'Could not find a random class ¯\\_(ツ)_/¯';
 }
 
 /*
 function random_tier(args, raceable_classes_and_tiers, vehicles) {
-	if (args.length < 2) {
-		return 'Usage: !randomtier (<class> | all)';
-	}
-	
-	if (args[1] === 'all') {
-		return '!randomtier all';
-	}
+    if (args.length < 2) {
+        return 'Usage: !randomtier (<class> | all)';
+    }
+    
+    if (args[1] === 'all') {
+        return '!randomtier all';
+    }
 
-	/* !randomtier <class> *
-	var class_and_tiers = Array.from(raceable_classes_and_tiers.entries()).filter(function([clazz, tiers]) {
-		return args[1] === normalize(clazz);
-	});
-	if (class_and_tiers.length !== 1) {
-		return 'Could not find a random tier ¯\\_(ツ)_/¯';
-	}
-	var [clazz, tiers] = class_and_tiers[0];
-	tiers = Array.from(tiers);
-	var i = Math.floor(Math.random() * tiers.length);
-	var tier = tiers[i];
+    /* !randomtier <class> *
+    var class_and_tiers = Array.from(raceable_classes_and_tiers.entries()).filter(function([clazz, tiers]) {
+        return args[1] === normalize(clazz);
+    });
+    if (class_and_tiers.length !== 1) {
+        return 'Could not find a random tier ¯\\_(ツ)_/¯';
+    }
+    var [clazz, tiers] = class_and_tiers[0];
+    tiers = Array.from(tiers);
+    var i = Math.floor(Math.random() * tiers.length);
+    var tier = tiers[i];
 
-	/* Print selected tier *
-	return 'Random Tier: ' + clazz + ' ' + tier + ' ▸ ' +
-		vehicles.filter(function (vehicle) {
-			return clazz == vehicle._clazz && tier == vehicle._tier;
-		}).map(function (vehicle) {
-			return vehicle._name;
-		}).join(', ');
+    /* Print selected tier *
+    return 'Random Tier: ' + clazz + ' ' + tier + ' ▸ ' +
+        vehicles.filter(function (vehicle) {
+            return clazz == vehicle._clazz && tier == vehicle._tier;
+        }).map(function (vehicle) {
+            return vehicle._name;
+        }).join(', ');
 }*/
 
 function normalize(text) {
@@ -253,12 +253,12 @@ function normalize(text) {
 
     /* Substitute common aliases with the correct keywords */
     text = text.replace(/\b(?:help|info|option|instruction)\b/g, 'usage')
-		.replace(/\b(?:open wheel|open|wheel|formula)\b/g, 'open-wheel')
-		.replace(/\b(?:sport classic|sportsclassic|sportclassic|classic)\b/g, 'sport-classic')
-		.replace(/\b(?:utilitie|utiliti)\b/g, 'utility')
-		.replace(/\b(?:off road|offroad)\b/g, 'off-road')
-		.replace(/\b(?:random[ \-]clase?)\b/g, 'random-class')
-		.replace(/\b(?:random tier)\b/g, 'random-tier');
+        .replace(/\b(?:open wheel|open|wheel|formula)\b/g, 'open-wheel')
+        .replace(/\b(?:sport classic|sportsclassic|sportclassic|classic)\b/g, 'sport-classic')
+        .replace(/\b(?:utilitie|utiliti)\b/g, 'utility')
+        .replace(/\b(?:off road|offroad)\b/g, 'off-road')
+        .replace(/\b(?:random[ \-]clase?)\b/g, 'random-class')
+        .replace(/\b(?:random tier)\b/g, 'random-tier');
 
     return text.trim();
 }
