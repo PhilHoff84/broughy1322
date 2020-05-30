@@ -84,6 +84,7 @@ function tiers(provider='', query = '', data = '') {
 		}
 		return 'Usage: !randomclass (race | all)';
 	}
+	return args.join(', ');
 /*
 	if (args[0] === 'random-tier') {
 		/*return random_tier(args, raceable_classes_and_tiers, vehicles);*
