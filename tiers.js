@@ -93,8 +93,8 @@ function normalize(text) {
 
     /* Substitute common aliases with the correct keywords */
     text = text.replace(/\b(?:help|info|option|instruction)\b/g, 'usage')
-        .replace(/\b(?:open\swheel|open|wheel|formula)\b/g, 'open-wheel')
-        .replace(/\b(?:sport\sclassic|sportsclassic|sportclassic|classic)\b/g, 'sport-classic')
+        .replace(/\b(?:open[\s\-]wheel|open|wheel|formula)\b/g, 'open-wheel')
+        .replace(/\b(?:sports?[\s\-]classic|sportsclassic|sportclassic|classic)\b/g, 'sport-classics')
         .replace(/\b(?:utilitie|utiliti)\b/g, 'utility')
         .replace(/\b(?:off\sroad|offroad)\b/g, 'off-road')
         .replace(/\b(?:random[\s\-]clase?)\b/g, 'random-class')
