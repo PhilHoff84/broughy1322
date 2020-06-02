@@ -161,7 +161,7 @@ function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
             var classes = Array.from(raceable_classes_and_tiers.keys());
             var i = Math.floor(Math.random() * classes.length);
             var clazz = classes[i];
-            return 'Random Class ' + (i + 1) + '/' + classes.length + ': ' + clazz;
+            return 'Random Class: ' + clazz;
         }
 
         /* !randomclass all */
@@ -169,7 +169,7 @@ function random_class(args, all_classes_and_tiers, raceable_classes_and_tiers) {
             var classes = Array.from(all_classes_and_tiers.keys());
             var i = Math.floor(Math.random() * classes.length);
             var clazz = classes[i];
-            return 'Random Class ' + (i + 1) + '/' + classes.length + ': ' + clazz;
+            return 'Random Class: ' + clazz;
         }
     }
 
@@ -192,7 +192,7 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
             var [clazz, tier] = classes_and_tiers[i];
 
             /* Print selected tier */
-            return 'Random Tier ' + (i + 1) + '/' + classes_and_tiers.length + ': ' +
+            return 'Random Tier: ' +
                 vehicles_with_class_and_tier(vehicles, clazz, tier);
         }
 
@@ -207,7 +207,7 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
             var tier = tiers[i];
 
             /* Print selected tier */
-            return 'Random Tier ' + (i + 1) + '/' + tiers.length + ': ' +
+            return 'Random Tier: ' +
                 vehicles_with_class_and_tier(vehicles, clazz, tier);
         }
     }
