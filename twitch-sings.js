@@ -19,7 +19,7 @@ function randomSong(query) {
     /* Output a random song (or error message) */
     if (songs.length > 0) {
         var song = songs[Math.floor(Math.random() * songs.length)];
-        return 'Random song 1/' + songs.length + ': ' + song;
+        return 'Random song: ' + song;
     } else {
         return 'Could not find a matching random song ¯\\_(ツ)_/¯';
     }
