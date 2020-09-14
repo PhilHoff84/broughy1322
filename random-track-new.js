@@ -16,7 +16,7 @@ function track(query = '', data = {}) {
 
     /* Find all tracks that match the specified criteria */
     var matching_tracks = [];
-    for (var track_type in data) {
+    for (var track_type in tracks) {
         matching_tracks.push(normalize(track_type));
         if (normalize(track_type).indexOf(type_filter) === -1) {
             continue;
