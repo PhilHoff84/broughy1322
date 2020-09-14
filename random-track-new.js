@@ -17,6 +17,7 @@ function track(query = '', data = {}) {
     /* Find all tracks that match the specified criteria */
     var matching_tracks = [];
     for (var track_type in data) {
+        matching_tracks.push(normalize(track_type));
         if (normalize(track_type).indexOf(type_filter) === -1) {
             continue;
         }
@@ -27,7 +28,7 @@ function track(query = '', data = {}) {
          * Array.prototype.push.apply(vegetables, moreVegs)
          */
     };
-    return 'platform:'+platform_filter + ' type:'+type_filter + ' -> ' + matching_tracks.length;
+    return truncate('platform:'+platform_filter + ' type:'+type_filter + ' -> ' + JSON.stringify(matching_tracks));
 
     /* Output a random track (or error message) */
     if (matching_tracks.length > 0) {
@@ -77,4 +78,11 @@ function parse_query(query_before='') {
     if (query_before !== query_after) return ['5M', query_after.trim()];
 
     return ['', query_before];
+}
+
+function truncate(text) {
+    if (text.length > 400) {
+        return text.substring(0, 399) + '…';
+    }
+    return text;
 }
