@@ -2,11 +2,12 @@
  * Nightbot command:
  * !editcom -ul=everyone -cd=30 !randomtrack $(eval track('$(query)', $(urlfetch json https://docs.google.com/spreadsheets/d/15ZGd_KKINKJhqIS56Fy23YhY9DTeglmCoFYkREVFDek/export?exportFormat=tsv&gid=219652588)); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-track-new.js);)
  */
-function track(query = '', data = '') {
+function track(query = '', data = {}) {
     query = normalize(query);
 
     const [platform_filter, type_filter] = parse_query(query);
-    if (platform_filter === '' || !data[platform_filter]) {
+    if (platform_filter === '' || data[platform_filter] !== undefined) {
+        return 'Usage: platform:'+platform_filter + ' type:'+type_filter;
         return 'Usage: !randomtrack (PS4 | XB1 | PC | 5M) (<category>)';
     }
 
