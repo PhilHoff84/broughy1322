@@ -1,6 +1,6 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=30 !randomtrack $(eval track('$(provider)', '$(query)', "$(urlfetch json https://docs.google.com/spreadsheets/d/15ZGd_KKINKJhqIS56Fy23YhY9DTeglmCoFYkREVFDek/export?exportFormat=tsv&gid=219652588)"); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-track-new.js);)
+ * !editcom -ul=everyone -cd=30 !randomtrack $(eval track('$(query)', $(urlfetch json https://docs.google.com/spreadsheets/d/15ZGd_KKINKJhqIS56Fy23YhY9DTeglmCoFYkREVFDek/export?exportFormat=tsv&gid=219652588)); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-track-new.js);)
  */
 function track(query = '', data = '') {
     query = normalize(query);
@@ -20,9 +20,11 @@ function track(query = '', data = '') {
             continue;
         }
         matching_tracks = matching_tracks.concat(tracks[track_type]);
-        // Merge the second array into the first one
-        // Equivalent to vegetables.push('celery', 'beetroot')
-        //Array.prototype.push.apply(vegetables, moreVegs)
+        /*
+         * Merge the second array into the first one
+         * Equivalent to vegetables.push('celery', 'beetroot')
+         * Array.prototype.push.apply(vegetables, moreVegs)
+         */
     };
 
     /* Output a random track (or error message) */
