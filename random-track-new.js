@@ -12,7 +12,6 @@ function track(query = '', data = '') {
 
     /* Find all tracks that match the specified platform */
     const tracks = data[platform_filter];
-    return 'platform:'+platform_filter + ' type:'+type_filter + ' -> ' + tracks.length;
 
     /* Find all tracks that match the specified criteria */
     var matching_tracks = [];
@@ -27,6 +26,7 @@ function track(query = '', data = '') {
          * Array.prototype.push.apply(vegetables, moreVegs)
          */
     };
+    return 'platform:'+platform_filter + ' type:'+type_filter + ' -> ' + matching_tracks.length;
 
     /* Output a random track (or error message) */
     if (matching_tracks.length > 0) {
