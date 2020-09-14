@@ -65,16 +65,16 @@ function parse_query(query_before='') {
     var query_after = '';
 
     query_after = query_before.replace(/\bps ?4?\b/g, '');
-    if (query_before !== query_after) return ['ps', query_after.trim()];
+    if (query_before !== query_after) return ['PS4', query_after.trim()];
 
     query_after = query_before.replace(/\bpc\b/g, '');
-    if (query_before !== query_after) return ['pc', query_after.trim()];
+    if (query_before !== query_after) return ['PC', query_after.trim()];
 
     query_after = query_before.replace(/\bxb(?:ox)? ?1?\b/g, '');
-    if (query_before !== query_after) return ['xb', query_after.trim()];
+    if (query_before !== query_after) return ['XB1', query_after.trim()];
 
     query_after = query_before.replace(/\b(?:5|five) ?m\b/g, '');
-    if (query_before !== query_after) return ['5m', query_after.trim()];
+    if (query_before !== query_after) return ['5M', query_after.trim()];
 
     return ['', query_before];
 }
