@@ -1,39 +1,32 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=30 !randomtrack $(eval track('$(provider)', '$(query)', "$(urlfetch json https://docs.google.com/spreadsheets/d/15ZGd_KKINKJhqIS56Fy23YhY9DTeglmCoFYkREVFDek/export?exportFormat=tsv)"); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-track.js);)
+ * !editcom -ul=everyone -cd=30 !randomtrack $(eval track('$(query)', $(urlfetch json https://docs.google.com/spreadsheets/d/15ZGd_KKINKJhqIS56Fy23YhY9DTeglmCoFYkREVFDek/export?exportFormat=tsv)); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-track-new.js);)
  */
-function track(provider='', query = '', data = '') {
+function track(query = '', data = {}) {
     query = normalize(query);
 
-    var [platform_filter, type_filter] = parse_query(query);
-    if (platform_filter === '') {
+    /* Find all tracks that match the specified platform */
+    const [platform, category] = parse_query(query);
+    const tracks = data[platform];
+    if (tracks !== Object(tracks)) {
         return 'Usage: !randomtrack (PS4 | XB1 | PC | 5M) (<category>)';
     }
 
-    var rows = data.split('<EOL>');
-    var tracks = [];
-    var type = 'unknown';
-    for (var i = 0; i < rows.length; i++) {
-        var row = rows[i].trim();
-        var cols = row.split('\t');
-
-        if (cols.length === 1) {
-            type = cols[0];
-        } else if (cols.length === 5) {
-            tracks.push(new Track(type, cols[0], cols[1], cols[2], cols[3], cols[4]));
+    /* Find all tracks that match the specified category */
+    const matching_tracks = [];
+    for (var track_category in tracks) {
+        if (category !== '' && normalize(track_category).indexOf(category) === -1) {
+            continue;
         }
-    }
-
-    /* Find all tracks that match the specified criteria */
-    var matching_tracks = tracks.filter(function (track) {
-        return track.matches(platform_filter, type_filter);
-    });
-
+        Array.prototype.push.apply(matching_tracks, tracks[track_category].map(function(track_name) {
+            return track_category + ' ▸ ' + track_name;
+        }));
+    };
 
     /* Output a random track (or error message) */
     if (matching_tracks.length > 0) {
-        var i = Math.floor(Math.random() * matching_tracks.length);
-        var track = matching_tracks[i];
+        const i = Math.floor(Math.random() * matching_tracks.length);
+        const track = matching_tracks[i];
         return 'Random Track: ' + track;
     }
     return 'Could not find a matching random track ¯\\_(ツ)_/¯';
@@ -66,55 +59,16 @@ function parse_query(query_before='') {
     var query_after = '';
 
     query_after = query_before.replace(/\bps ?4?\b/g, '');
-    if (query_before !== query_after) return ['ps', query_after.trim()];
+    if (query_before !== query_after) return ['PS4', query_after.trim()];
 
     query_after = query_before.replace(/\bpc\b/g, '');
-    if (query_before !== query_after) return ['pc', query_after.trim()];
+    if (query_before !== query_after) return ['PC', query_after.trim()];
 
     query_after = query_before.replace(/\bxb(?:ox)? ?1?\b/g, '');
-    if (query_before !== query_after) return ['xb', query_after.trim()];
+    if (query_before !== query_after) return ['XB1', query_after.trim()];
 
     query_after = query_before.replace(/\b(?:5|five) ?m\b/g, '');
-    if (query_before !== query_after) return ['5m', query_after.trim()];
+    if (query_before !== query_after) return ['5M', query_after.trim()];
 
     return ['', query_before];
-}
-
-
-function Track(_type, _name, _ps, _pc, _xb, _5m) {
-    this._type = _type;
-    this._name = _name;
-    this._ps = _ps.length > 1;
-    this._pc = _pc.length > 1;
-    this._xb = _xb.length > 1;
-    this._5m = _5m.length > 1;
-
-    this.toString = function () {
-        var platforms = [];
-        if (this._ps) {
-            platforms.push('PS4');
-        }
-        if (this._pc) {
-            platforms.push('PC');
-        }
-        if (this._xb) {
-            platforms.push('XB1');
-        }
-        if (this._5m) {
-            platforms.push('FiveM PH');
-        }
-
-        return _type + ' ▸ ' + _name + ' (' + platforms.join(', ') + ')';
-    };
-
-    this.matches = function (platform_filter, type_filter) {
-        if (type_filter !== '' && normalize(this._type).indexOf(type_filter) === -1) {
-            return false;
-        }
-
-        return     this._ps && platform_filter === 'ps'
-                || this._pc && platform_filter === 'pc'
-                || this._xb && platform_filter === 'xb'
-                || this._5m && platform_filter === '5m';
-    };
 }
