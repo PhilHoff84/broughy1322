@@ -6,7 +6,7 @@ function track(query = '', data = {}) {
     query = normalize(query);
 
     const [platform_filter, type_filter] = parse_query(query);
-    if (platform_filter === '' || data[platform_filter] !== undefined) {
+    if (platform_filter === '') {
         return 'Usage: platform:'+platform_filter + ' type:'+type_filter;
         return 'Usage: !randomtrack (PS4 | XB1 | PC | 5M) (<category>)';
     }
