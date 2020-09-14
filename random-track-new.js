@@ -5,35 +5,28 @@
 function track(query = '', data = {}) {
     query = normalize(query);
 
-    const [platform_filter, type_filter] = parse_query(query);
-    if (platform_filter === '') {
-        return 'Usage: platform:'+platform_filter + ' type:'+type_filter;
+    /* Find all tracks that match the specified platform */
+    const [platform, category] = parse_query(query);
+    const tracks = data[platform];
+    if (tracks !== Object(tracks)) {
         return 'Usage: !randomtrack (PS4 | XB1 | PC | 5M) (<category>)';
     }
 
-    /* Find all tracks that match the specified platform */
-    const tracks = data[platform_filter];
-
-    /* Find all tracks that match the specified criteria */
-    var matching_tracks = [];
-    for (var track_type in tracks) {
-        matching_tracks.push(normalize(track_type));
-        if (normalize(track_type).indexOf(type_filter) === -1) {
+    /* Find all tracks that match the specified category */
+    const matching_tracks = [];
+    for (var track_category in tracks) {
+        if (category !== '' && normalize(track_category).indexOf(category) === -1) {
             continue;
         }
-        matching_tracks = matching_tracks.concat(tracks[track_type]);
-        /*
-         * Merge the second array into the first one
-         * Equivalent to vegetables.push('celery', 'beetroot')
-         * Array.prototype.push.apply(vegetables, moreVegs)
-         */
+        Array.prototype.push.apply(matching_tracks, tracks[track_category].map(function(track_name) {
+            return track_category + ' ▸ ' + track_name;
+        }));
     };
-    return truncate('platform:'+platform_filter + ' type:'+type_filter + ' -> ' + JSON.stringify(matching_tracks));
 
     /* Output a random track (or error message) */
     if (matching_tracks.length > 0) {
-        var i = Math.floor(Math.random() * matching_tracks.length);
-        var track = matching_tracks[i];
+        const i = Math.floor(Math.random() * matching_tracks.length);
+        const track = matching_tracks[i];
         return 'Random Track: ' + track;
     }
     return 'Could not find a matching random track ¯\\_(ツ)_/¯';
@@ -78,11 +71,4 @@ function parse_query(query_before='') {
     if (query_before !== query_after) return ['5M', query_after.trim()];
 
     return ['', query_before];
-}
-
-function truncate(text) {
-    if (text.length > 400) {
-        return text.substring(0, 399) + '…';
-    }
-    return text;
 }
