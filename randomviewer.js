@@ -7,7 +7,7 @@ function viewer(user = '', text = '') {
         user = user.toLowerCase();
         
         if (user==='broughy1322') {
-            return "Paint your Dubsta 2 chrome, if you want this to stop broughyLove";
+            return "Paint your Dubsta 2 chrome, if you want this to work broughyLove";
         }
         
         var chatters = JSON.parse(text).chatters;
@@ -16,7 +16,7 @@ function viewer(user = '', text = '') {
         });
 
         if (viewers.length) {
-            return "Thanks for watching @" + viewers[Math.floor(Math.random() * viewers.length)] + " broughyLove - Please remind @Broughy1322 to paint his Dubsta 2 chrome!";
+            return "Thanks for watching @" + viewers[Math.floor(Math.random() * viewers.length)] + " broughyLove";
         }
         return "No viewer"
     } catch(e) {
