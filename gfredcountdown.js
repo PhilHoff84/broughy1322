@@ -3,7 +3,7 @@
  * !editcom -ul=everyone -cd=30 !gfredcountdown $(eval countdown(); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/gfredcountdown.js);)
  */
 function countdown() {
-
+    return 'Chrome!'
     var now = new Date();
     now = new Date(Date.UTC(
         now.getUTCFullYear(),
