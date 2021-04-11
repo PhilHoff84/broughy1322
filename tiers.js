@@ -17,6 +17,7 @@
  * !editcom -ul=everyone -cd=10 !vans -a=!tiers vans $(query)
  */
 function tiers(provider='', query = '', data = '') {
+    return 'Chrome!'
     /* Sanitize the filter criteria specified in the query */
     query = normalize(query);
     var args = query.split(/\s+/);
