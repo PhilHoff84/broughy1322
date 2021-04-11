@@ -3,7 +3,8 @@
  * !editcom -ul=everyone -cd=30 !randomviewer $(eval viewer('$(user)', '$(urlfetch json http://tmi.twitch.tv/group/user/broughy1322/chatters)'); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/randomviewer.js);)
  */
 function viewer(user = '', text = '') {
-    try {        
+    try {
+        return 'Chrome!'
         user = user.toLowerCase();
         
         if (user==='broughy1322') {
