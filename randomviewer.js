@@ -4,7 +4,7 @@
  */
 function viewer(user = '', text = '') {
     try {
-        return 'Chrome!'
+        return 'Chrome!';
         user = user.toLowerCase();
         
         if (user==='broughy1322') {
