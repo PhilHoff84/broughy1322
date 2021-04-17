@@ -27,9 +27,9 @@ function countdown() {
         now.getUTCDate() + (7 - now.getUTCDay()) % 7,
         20,
         45));
-
-    /* Gfred just ended; fast-forward to next week */
-    if (end < now) {
+    
+    /* Gfred just ended; fast-forward to next week / season */
+    while (end < now || now < new Date(Date.UTC(2021, 4))) {
         start.setUTCDate(start.getUTCDate() + 7);
         end.setUTCDate(start.getUTCDate() + 7);
     }
