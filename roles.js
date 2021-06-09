@@ -4,7 +4,7 @@
  */
 function roles(provider='') {
   if (provider === 'discord') {
-    return 'Please read the instructions in the #welcome channel to claim your Patreon, YouTube, Twitch or Regular role.'
+    return 'Please read the instructions in the #welcome channel to claim your *Patreon*, *YouTube*, *Twitch* or *Regular* role.'
   }
-  return '';
+  return ' ';
 }
