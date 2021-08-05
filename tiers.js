@@ -14,6 +14,7 @@
  * !editcom -ul=everyone -cd=10 !classics -a=!tiers sports-classics $(query)
  * !editcom -ul=everyone -cd=10 !supers -a=!tiers supers $(query)
  * !editcom -ul=everyone -cd=10 !suvs -a=!tiers suvs $(query)
+ * !editcom -ul=everyone -cd=10 !tuners -a=!tiers tuners $(query)
  * !editcom -ul=everyone -cd=10 !utility -a=!tiers utility $(query)
  * !editcom -ul=everyone -cd=10 !vans -a=!tiers vans $(query)
  */
@@ -166,6 +167,7 @@ function filter_raceable_tiers_by_class(all_classes_and_tiers) {
         .reduce(function(accumulator, [clazz, all_tiers]) {
             const raceable_tiers = new Set(all_tiers);
             raceable_tiers.delete('-');
+            raceable_tiers.delete('?');
             if (raceable_tiers.size > 1) {
                 accumulator.set(clazz, raceable_tiers);
             }
