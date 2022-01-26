@@ -1,80 +1,18 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=30 !randomclip $(eval clip(); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-clip.js);)
+ * !editcom -ul=everyone -cd=30 !randomclip $(eval clip(`$(urlfetch json https://docs.google.com/spreadsheets/d/1xB2vwnA4CeqQcR6bO1tIvTjInVeodwB4nnYjrArQDF0/export?format=tsv&id=1xB2vwnA4CeqQcR6bO1tIvTjInVeodwB4nnYjrArQDF0&gid=565945120)); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-clip.js);)
  */
-function clip() {
+function clip(data = '') {
+    const clips = data.split('<EOL>');
 
-    var clips = [
-        `http://twitch.tv/broughy1322/clip/FlaccidDullBulgogiBCouch-KXHz1o0yoZESlWaV`,
-        `http://twitch.tv/broughy1322/clip/SilkySlipperyZucchiniSquadGoals`,
-        `http://twitch.tv/broughy1322/clip/EphemeralImportantYakinikuFUNgineer`,
-        `http://twitch.tv/broughy1322/clip/AbrasiveRockyIguanaFailFish`,
-        `http://twitch.tv/broughy1322/clip/AlertDullCheddarKappaPride`,
-        `http://twitch.tv/broughy1322/clip/ConfidentDeliciousSalsifyPeanutButterJellyTime`,
-        `http://twitch.tv/broughy1322/clip/ViscousLongBibimbapAliens`,
-        `http://twitch.tv/broughy1322/clip/SucculentComfortableMonkeyCharlieBitMe`,
-        `http://twitch.tv/broughy1322/clip/SlickPreciousAlligatorDatBoi`,
-        `http://twitch.tv/broughy1322/clip/SoftFunnyKaleBCWarrior`,
-        `http://twitch.tv/broughy1322/clip/KnottyHumbleBottleDoubleRainbow`,
-        `http://twitch.tv/broughy1322/clip/HealthyAgitatedSowOhMyDog`,
-        `http://twitch.tv/broughy1322/clip/TenderGleamingChamoisBrokeBack`,
-        `http://twitch.tv/broughy1322/clip/DependableGracefulStarHassaanChop`,
-        `http://twitch.tv/broughy1322/clip/RelatedSquareTofuPJSalt`,
-        `http://twitch.tv/broughy1322/clip/OddFreezingChoughSpicyBoy-LzGlZdASgVWRwufu`,
-        `http://twitch.tv/broughy1322/clip/BlightedAmazingKaleThisIsSparta-gTmanHb40l0xVkzX`,
-        `http://twitch.tv/broughy1322/clip/SweetGleamingRhinocerosDatBoi-ps7t263YBQoXh5Pu`,
-        `http://twitch.tv/broughy1322/clip/TangibleLittleFinchAliens-0rkN8Pxk2sPXJDhY`,
-        `http://twitch.tv/broughy1322/clip/ViscousHelplessSardineDogFace`,
-        `http://twitch.tv/broughy1322/clip/SoftArtsyMouseRedCoat`,
-        `http://twitch.tv/broughy1322/clip/EagerInspiringBatPlanking`,
-        `http://twitch.tv/broughy1322/clip/PatientAgreeableDadBudBlast-32Y5LhbHS6T2fGyO`,
-        `http://twitch.tv/broughy1322/clip/TenderSecretiveSamosaSaltBae`,
-        `http://twitch.tv/broughy1322/clip/SmokyStormyVampirePupper`,
-        `http://twitch.tv/broughy1322/clip/EagerPrettyCarrotSwiftRage`,
-        `http://twitch.tv/broughy1322/clip/RelatedSquareTofuPJSalt`,
-        `http://twitch.tv/broughy1322/clip/GeniusInnocentArtichokeNerfRedBlaster`,
-        `http://twitch.tv/broughy1322/clip/SpoopyReliableCarrotPartyTime`,
-        `http://twitch.tv/broughy1322/clip/AltruisticPowerfulHawk4Head`,
-        `http://twitch.tv/broughy1322/clip/BlazingSavoryCattleOptimizePrime`,
-        `http://twitch.tv/broughy1322/clip/AstuteYummyDogPeoplesChamp`,
-        `http://twitch.tv/broughy1322/clip/EnthusiasticVictoriousPassionfruitRedCoat`,
-        `http://twitch.tv/broughy1322/clip/EndearingEagerShieldBCWarrior`,
-        `http://twitch.tv/broughy1322/clip/StrangeOilyMochaMingLee`,
-        `http://twitch.tv/broughy1322/clip/OnerousAmusedPlumBleedPurple`,
-        `http://twitch.tv/broughy1322/clip/ShortCooperativeHeronTheTarFu`,
-        `http://twitch.tv/broughy1322/clip/TentativeRamshackleClamKevinTurtle`,
-        `http://twitch.tv/broughy1322/clip/ResourcefulWiseAlfalfaWholeWheat`,
-        `http://twitch.tv/broughy1322/clip/StupidDreamyLaptopOpieOP-sX5jUZBHT1BUZBas`,
-        `http://twitch.tv/broughy1322/clip/JazzyCooperativePterodactylOSfrog`,
-        `http://twitch.tv/broughy1322/clip/PreciousWiseTeaGrammarKing`,
-        `http://twitch.tv/broughy1322/clip/HealthyDirtySamosaOMGScoots`,
-        `http://twitch.tv/broughy1322/clip/RealSourSquirrelSpicyBoy`,
-        `http://twitch.tv/broughy1322/clip/JazzyPlausibleCakeFeelsBadMan`,
-        `http://twitch.tv/broughy1322/clip/AnnoyingCarelessOrangeAMPEnergyCherry`,
-        `http://twitch.tv/broughy1322/clip/GloriousKindWaterRalpherZ`,
-        `http://twitch.tv/broughy1322/clip/HelplessCallousClintBatChest`,
-        `http://twitch.tv/broughy1322/clip/StrongSarcasticTildePupper`,
-        `http://twitch.tv/broughy1322/clip/DifficultTemperedLardPraiseIt`,
-        `http://twitch.tv/broughy1322/clip/EnjoyableImportantHerringCclamChamp`,
-        `http://twitch.tv/broughy1322/clip/CoySlipperyBaboonFUNgineer`,
-        `http://twitch.tv/broughy1322/clip/DarlingSpoopyTurtlePastaThat`,
-        `http://twitch.tv/broughy1322/clip/SourBoxyCaribouHeyGuys`,
-        `http://twitch.tv/broughy1322/clip/CovertRefinedGiraffeLitFam`,
-        `http://twitch.tv/broughy1322/clip/DeterminedDirtyTaroCorgiDerp`,
-        `http://twitch.tv/broughy1322/clip/PolishedRealRaccoonPartyTime`,
-        `http://twitch.tv/broughy1322/clip/HelplessAstuteBorkOSkomodo`,
-        `http://twitch.tv/broughy1322/clip/AstutePuzzledChipmunkPanicBasket`,
-        `http://twitch.tv/broughy1322/clip/HyperFitOkapiResidentSleeper`,
-        `http://twitch.tv/broughy1322/clip/SullenSavageKoupreyLitty`,
-        `http://twitch.tv/broughy1322/clip/SavageMistySangPeoplesChamp`,
-        `http://twitch.tv/broughy1322/clip/MistyCuriousAntDoggo`,
-        `http://twitch.tv/broughy1322/clip/ShyAwkwardHorseDoritosChip`,
-        `http://twitch.tv/broughy1322/clip/CoweringScrumptiousPlumberCoolCat`,
-        `http://twitch.tv/broughy1322/clip/PluckyGoldenPuddingNomNom`,
-        `http://twitch.tv/broughy1322/clip/ShortCooperativeHeronTheTarFu`,
-        `http://twitch.tv/broughy1322/clip/HeadstrongMuddyClipzKevinTurtle`,
-    ];
+    if (clips.length > 1) {
+        const i = Math.floor(Math.random() * clips.length);
+        var clip = clips[i];
+        if (clip.startsWith('twitch.tv')) {
+            clip = `https://${clip}`;
+        }
+        return 'Random Clip: ' + clip;
+    }
 
-    var i = Math.floor(Math.random() * clips.length);
-    return 'Random Clip: ' + clips[i];
+    return 'Could not find a clip ¯\\_(ツ)_/¯';
 }
