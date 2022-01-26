@@ -1,6 +1,6 @@
 /*
  * Nightbot command:
- * !editcom -ul=everyone -cd=30 !randomvideo $(eval video('$(query)', "$(urlfetch json https://docs.google.com/spreadsheets/d/1xB2vwnA4CeqQcR6bO1tIvTjInVeodwB4nnYjrArQDF0/export?format=tsv&id=1xB2vwnA4CeqQcR6bO1tIvTjInVeodwB4nnYjrArQDF0)"); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-video.js);)
+ * !editcom -ul=everyone -cd=30 !randomvideo $(eval video(`$(query)`, `$(urlfetch json https://docs.google.com/spreadsheets/d/1xB2vwnA4CeqQcR6bO1tIvTjInVeodwB4nnYjrArQDF0/export?format=tsv&id=1xB2vwnA4CeqQcR6bO1tIvTjInVeodwB4nnYjrArQDF0&gid=229679351)`); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/random-video.js);)
  */
 function video(query = '', data = '') {
     /* Sanitize the filter criteria specified in the query */
