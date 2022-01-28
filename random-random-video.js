@@ -8,8 +8,8 @@ function random_video(data = '') {
     if (random_videos.length > 1) {
         const i = Math.floor(Math.random() * random_videos.length);
         const random_video = random_videos[i];
-        return 'Random² Video: ' + random_video;
+        return 'Random Random: ' + random_video;
     }
 
-    return 'Could not find a video ¯\\_(ツ)_/¯';
+    return 'Could not find a random ¯\\_(ツ)_/¯';
 }
