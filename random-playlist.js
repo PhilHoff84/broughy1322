@@ -7,26 +7,26 @@ function playlist(query = '', data = {}) {
 
     /* Find all tracks that match the specified platform */
     const platform = parse_platform(query);
+
     const tracks = data[platform];
     if (tracks !== Object(tracks)) {
         return 'Usage: !randomplaylist (PS4 | XB1 | PC)';
     }
 
-    const categories = ['Airport', 'Blaine', 'City', 'Hills', 'Custom'];
-
     /* Find all tracks that match the specified category */
+    const categories = ['Airport', 'Blaine', 'City', 'Hills', 'Custom'];
+    const matching_tracks = [];
     try {
-        const matching_tracks = [];
-        for (var category in categories) {
+        for (const category of categories) {
             matching_tracks.push(
-                track(track_category, tracks)
+                track(category, tracks)
             );
         }
-
-        return 'Random Playlist: ' + matching_tracks.join(' | ');
     } catch (e) {
         return 'Could not generate a random playlist ¯\\_(ツ)_/¯';
     }
+
+    return truncate('Random Playlist: ' + matching_tracks.join(' | '));
 }
 
 function track(category = '', tracks = {}) {
@@ -35,11 +35,12 @@ function track(category = '', tracks = {}) {
     /* Find all tracks that match the specified category */
     const matching_tracks = [];
     for (var track_category in tracks) {
+
         if (category !== '' && normalize(track_category).indexOf(category) === -1) {
             continue;
         }
         Array.prototype.push.apply(matching_tracks, tracks[track_category].map(function(track_name) {
-            return track_category + ' ▸ ' + track_name;
+            return track_name;
         }));
     };
 
@@ -81,4 +82,11 @@ function parse_platform(query='') {
     if (query.match(/\bxb(?:ox)? ?1?\b/g) !== null) return 'XB1';
 
     return '';
+}
+
+function truncate(text) {
+    if (text.length > 400) {
+        return text.substring(0, 399) + '…';
+    }
+    return text;
 }
