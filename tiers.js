@@ -82,7 +82,7 @@ function tiers(provider = '', query = '', data = '') {
         return truncate(vehicle_with_class_and_tier(vehicle_by_name));
     }
 
-    return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://broughy.com/gta5cars';
+    return 'GTA 5 Vehicle Info Spreadsheet, Tier Lists & More: https://gtacars.net/gta5/tiers';
 }
 
 function normalize(text) {
