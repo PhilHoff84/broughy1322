@@ -17,7 +17,7 @@ function countdown() {
         now.getUTCFullYear(),
         now.getUTCMonth(),
         now.getUTCDate() + (7 - now.getUTCDay()) % 7,
-        19,
+        18,
         15));
 
     /* Gfred ends at 20:45 UK */
@@ -25,7 +25,7 @@ function countdown() {
         now.getUTCFullYear(),
         now.getUTCMonth(),
         now.getUTCDate() + (7 - now.getUTCDay()) % 7,
-        19,
+        18,
         45));
     
     /* Gfred just ended; fast-forward to next week / season */
