@@ -10,7 +10,7 @@ function playlist(query = '', data = {}) {
 
     const tracks = data[platform];
     if (tracks !== Object(tracks)) {
-        return 'Usage: !randomplaylist (PS4 | XB1 | PC)';
+        return 'Usage: !randomplaylist (PS5 | PS4 | XSX | XB1 | PC)';
     }
 
     /* Find all tracks that match the specified category */
@@ -77,9 +77,11 @@ function normalize(text) {
 }
 
 function parse_platform(query='') {
-    if (query.match(/\bps ?4?\b/g) !== null) return 'PS4';
+    if (query.match(/\bps ?5?\b/g) !== null) return 'PS5';
+    if (query.match(/\bps ?4\b/g) !== null) return 'PS4';
     if (query.match(/\bpc\b/g) !== null) return 'PC';
-    if (query.match(/\bxb(?:ox)? ?1?\b/g) !== null) return 'XB1';
+    if (query.match(/\b(?:xb(?:ox)? ?|xsx)\b/g) !== null) return 'XSX';
+    if (query.match(/\bxb(?:ox)? ?1\b/g) !== null) return 'XB1';
 
     return '';
 }
