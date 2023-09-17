@@ -3,8 +3,8 @@
  * !editcom -ul=everyone -cd=10 !schedule $(eval schedule('$(provider)'); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/schedule.js);)
  */
 function schedule(provider = 'twitch') {
-    if (provider != "discord") {
-        return "Twitch streams start at 17:00 UK time every Wednesday & Sunday plus 09:00 UK time every Saturday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)";
+    if (provider != 'discord') {
+        return 'Twitch streams start at 17:00 UK time every Wednesday & Sunday plus 09:00 UK time every Saturday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)';
     }
 
     var now = new Date();
@@ -38,5 +38,5 @@ function schedule(provider = 'twitch') {
       00
     ));
 
-    return "Twitch streams usually start at <t:${Math.floor(wed/1000)}:t> every Wednesday, <t:${Math.floor(sat/1000)}:t> every Saturday and <t:${Math.floor(sun/1000)}:t> every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)";
+    return `Twitch streams usually start at <t:${Math.floor(wed/1000)}:t> every Wednesday, <t:${Math.floor(sat/1000)}:t> every Saturday and <t:${Math.floor(sun/1000)}:t> every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)`;
 }
