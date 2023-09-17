@@ -3,7 +3,7 @@
  * !editcom -ul=everyone -cd=10 !schedule $(eval schedule('$(provider)'); $(urlfetch json https://raw.githubusercontent.com/PhilHoff84/broughy1322/master/schedule.js);)
  */
 function schedule(provider = 'twitch') {
-    if provider != "discord" {
+    if (provider != "discord") {
         return "Twitch streams start at 17:00 UK time every Wednesday & Sunday plus 09:00 UK time every Saturday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)";
     }
 
