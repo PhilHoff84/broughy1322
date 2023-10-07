@@ -8,6 +8,7 @@
  * !editcom -ul=everyone -cd=5 !coupes -a=!tiers coupes $(query)
  * !editcom -ul=everyone -cd=5 !muscle -a=!tiers muscle $(query)
  * !editcom -ul=everyone -cd=5 !offroad -a=!tiers off-road $(query)
+ * !editcom -ul=everyone -cd=5 !offroads -a=!tiers off-road $(query)
  * !editcom -ul=everyone -cd=5 !openwheel -a=!tiers open-wheel $(query)
  * !editcom -ul=everyone -cd=5 !sedans -a=!tiers sedans $(query)
  * !editcom -ul=everyone -cd=5 !sports -a=!tiers sports $(query)
