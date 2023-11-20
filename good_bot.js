@@ -6,5 +6,5 @@ function good_bot(query='') {
     if (query.trim() === 'bot') {
          return 'Thank you. 🥰';
     }
-    return false;
+    return ' ';
 }
