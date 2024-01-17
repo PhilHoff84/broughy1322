@@ -18,7 +18,7 @@ function schedule(provider = 'twitch') {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()-4) % 7,
-      15,
+      17,
       00
     ));
 
