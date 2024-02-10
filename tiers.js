@@ -237,7 +237,7 @@ function random_tier(args, raceable_classes_and_tiers, vehicles) {
 function random_car(args, vehicles) {
     if (args.length >= 2) {
         /* !randomcar <pseudo class> */
-        const random_vehicles = vehicles.filter(function(vehicle) {
+        var random_vehicles = vehicles.filter(function(vehicle) {
             const multi_class = vehicle._name.indexOf('[') !== -1;
             switch (args[1]) {
                 case 'car':
@@ -302,7 +302,7 @@ function random_car(args, vehicles) {
 
         if (args.length >= 3 && args[2].length == 1) {
             /* !randomcar <pseudo class> <tier> */
-            const random_vehicles = random_vehicles.filter(function(vehicle) {
+            random_vehicles = random_vehicles.filter(function(vehicle) {
                 /* Random vehicle from the specified tier */
                 return vehicle._tier === args[2];
             });
