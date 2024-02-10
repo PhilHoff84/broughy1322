@@ -302,6 +302,7 @@ function random_car(args, vehicles) {
 
         if (args.length >= 3 && args[2].length == 1) {
             /* !randomcar <pseudo class> <tier> */
+            return "Args" + args.join('_');
             const random_vehicles = vehicles.filter(function(vehicle) {
                 /* Random vehicle from the specified tier */
                 return vehicle._tier === args[2];
