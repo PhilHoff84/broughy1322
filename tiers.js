@@ -300,6 +300,14 @@ function random_car(args, vehicles) {
             }
         });
 
+        if (args.length >= 3 && args[2].length == 1) {
+            /* !randomcar <pseudo class> <tier> */
+            const random_vehicles = vehicles.filter(function(vehicle) {
+                /* Random vehicle from the specified tier */
+                return vehicle._tier === args[2];
+            });
+        }
+
         if (random_vehicles.length > 0) {
             const i = Math.floor(Math.random() * random_vehicles.length);
             const random_vehicle = random_vehicles[i];
@@ -308,7 +316,7 @@ function random_car(args, vehicles) {
             return 'Random Vehicle: ' + vehicle_with_class_and_tier(random_vehicle);
         }
     }
-    return 'Usage: !randomcar (<class> | car | bike | land | air | sea | all [regular | transform | other])';
+    return 'Usage: !randomcar (<class> (<tier>) | car | bike | land | air | sea | all [regular | transform | other])';
 }
 
 function vehicles_with_class_and_tier(vehicles, clazz, tier) {
