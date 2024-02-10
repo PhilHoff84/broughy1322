@@ -306,8 +306,6 @@ function random_car(args, vehicles) {
                 /* Random vehicle from the specified tier */
                 return args[2] === normalize(vehicle._tier);
             });
-
-            return 'Debug: class=' + args[1] + ' tier=' + args[2] + ' length=' + random_vehicles.length;
         }
 
         if (random_vehicles.length > 0) {
