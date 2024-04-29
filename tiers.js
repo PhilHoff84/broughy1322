@@ -171,6 +171,8 @@ function filter_raceable_tiers_by_class(all_classes_and_tiers) {
             raceable_tiers.delete('?');
             if (raceable_tiers.size > 1) {
                 accumulator.set(clazz, raceable_tiers);
+            } else {
+                accumulator.set(clazz, []);
             }
             return accumulator;
         }, new Map());
