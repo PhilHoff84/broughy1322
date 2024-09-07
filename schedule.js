@@ -4,7 +4,7 @@
  */
 function schedule(provider = 'twitch') {
     if (provider != 'discord') {
-        return 'Twitch streams usually start at 15:00 UK time every Wednesday, 09:00 UK time every Saturday and 17:00 UK time every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)';
+        return 'Twitch streams usually start at 17:00 UK time every Wednesday, 09:00 UK time every Saturday and 17:00 UK time every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)';
     }
 
     var now = new Date();
