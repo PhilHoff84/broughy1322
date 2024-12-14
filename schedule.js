@@ -21,6 +21,7 @@ function schedule(provider = 'twitch') {
       17,
       00
     ));
+    wed.setTime(wed.getTime() + getOffset(wed) * 60 * 60 * 1000);
 
     var sat=new Date(Date.UTC(
       now.getUTCFullYear(),
@@ -29,6 +30,7 @@ function schedule(provider = 'twitch') {
       09,
       00
     ));
+    sat.setTime(sat.getTime() + getOffset(sat) * 60 * 60 * 1000);
 
     var sun=new Date(Date.UTC(
       now.getUTCFullYear(),
@@ -37,6 +39,16 @@ function schedule(provider = 'twitch') {
       17,
       00
     ));
+    sun.setTime(sun.getTime() + getOffset(sun) * 60 * 60 * 1000);
 
     return `Twitch streams usually start at <t:${Math.floor(wed/1000)}:t> every Wednesday, <t:${Math.floor(sat/1000)}:t> every Saturday and <t:${Math.floor(sun/1000)}:t> every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)`;
+}
+
+function getOffset(date) {
+  const rawTime = new Intl.DateTimeFormat('en-GB', {
+    timeStyle: 'long',
+    timeZone: 'Europe/London'
+  }).format(date);
+
+  return rawTime.endsWith('BST') ? -1 : 0;
 }
