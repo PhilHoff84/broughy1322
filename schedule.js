@@ -4,7 +4,7 @@
  */
 function schedule(provider = 'twitch') {
     if (provider != 'discord') {
-        return 'Twitch streams usually at 17:00 UK time every Wednesday & Sunday plus 09:00 UK time every Saturday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)';
+        return 'Twitch streams usually at 13:00 UK time every Wednesday, 09:00 UK time every Saturday and 14:00 UK time every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)';
     }
 
     var now = new Date();
@@ -18,7 +18,7 @@ function schedule(provider = 'twitch') {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()-4) % 7,
-      17,
+      13,
       00
     ));
     wed.setTime(wed.getTime() + getOffset(wed) * 60 * 60 * 1000);
@@ -36,7 +36,7 @@ function schedule(provider = 'twitch') {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()) % 7,
-      17,
+      14,
       00
     ));
     sun.setTime(sun.getTime() + getOffset(sun) * 60 * 60 * 1000);
