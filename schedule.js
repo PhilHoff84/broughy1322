@@ -18,7 +18,7 @@ function schedule(provider = 'twitch') {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()-3) % 7,
-      14,
+      13,
       00
     ));
     thu.setTime(thu.getTime() + getOffset(thu) * 60 * 60 * 1000);
@@ -27,7 +27,7 @@ function schedule(provider = 'twitch') {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()-1) % 7,
-      08,
+      07,
       00
     ));
     sat.setTime(sat.getTime() + getOffset(sat) * 60 * 60 * 1000);
@@ -36,7 +36,7 @@ function schedule(provider = 'twitch') {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()) % 7,
-      17,
+      16,
       00
     ));
     sun.setTime(sun.getTime() + getOffset(sun) * 60 * 60 * 1000);
