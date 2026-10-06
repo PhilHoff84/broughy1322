@@ -14,14 +14,14 @@ function schedule(provider = 'twitch') {
       now.getUTCDate()
     ));
 
-    var thurs=new Date(Date.UTC(
+    var thu=new Date(Date.UTC(
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()-3) % 7,
       14,
       00
     ));
-    thurs.setTime(wed.getTime() + getOffset(thurs) * 60 * 60 * 1000);
+    thu.setTime(wed.getTime() + getOffset(thu) * 60 * 60 * 1000);
 
     var sat=new Date(Date.UTC(
       now.getUTCFullYear(),
@@ -41,7 +41,7 @@ function schedule(provider = 'twitch') {
     ));
     sun.setTime(sun.getTime() + getOffset(sun) * 60 * 60 * 1000);
 
-    return `Twitch streams usually start at <t:${Math.floor(thurs/1000)}:t> every Thursday, <t:${Math.floor(sat/1000)}:t> every Saturday and <t:${Math.floor(sun/1000)}:t> every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)`;
+    return `Twitch streams usually start at <t:${Math.floor(thu/1000)}:t> every Thursday, <t:${Math.floor(sat/1000)}:t> every Saturday and <t:${Math.floor(sun/1000)}:t> every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)`;
 }
 
 function getOffset(date) {
