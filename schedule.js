@@ -21,7 +21,7 @@ function schedule(provider = 'twitch') {
       14,
       00
     ));
-    thu.setTime(wed.getTime() + getOffset(thu) * 60 * 60 * 1000);
+    thu.setTime(thu.getTime() + getOffset(thu) * 60 * 60 * 1000);
 
     var sat=new Date(Date.UTC(
       now.getUTCFullYear(),
