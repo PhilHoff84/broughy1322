@@ -4,7 +4,7 @@
  */
 function schedule(provider = 'twitch') {
     if (provider != 'discord') {
-        return 'Twitch streams usually at 13:00 UK time every Wednesday, 08:00 UK time every Saturday and 15:00 UK time every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)';
+        return 'Twitch streams usually at 14:00 UK time every Thursday, 08:00 UK time every Saturday and 17:00 UK time every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)';
     }
 
     var now = new Date();
@@ -14,14 +14,14 @@ function schedule(provider = 'twitch') {
       now.getUTCDate()
     ));
 
-    var wed=new Date(Date.UTC(
+    var thurs=new Date(Date.UTC(
       now.getUTCFullYear(),
       now.getUTCMonth(),
-      now.getUTCDate() + (7 - now.getUTCDay()-4) % 7,
-      13,
+      now.getUTCDate() + (7 - now.getUTCDay()-3) % 7,
+      14,
       00
     ));
-    wed.setTime(wed.getTime() + getOffset(wed) * 60 * 60 * 1000);
+    thurs.setTime(wed.getTime() + getOffset(thurs) * 60 * 60 * 1000);
 
     var sat=new Date(Date.UTC(
       now.getUTCFullYear(),
@@ -36,12 +36,12 @@ function schedule(provider = 'twitch') {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate() + (7 - now.getUTCDay()) % 7,
-      15,
+      17,
       00
     ));
     sun.setTime(sun.getTime() + getOffset(sun) * 60 * 60 * 1000);
 
-    return `Twitch streams usually start at <t:${Math.floor(wed/1000)}:t> every Wednesday, <t:${Math.floor(sat/1000)}:t> every Saturday and <t:${Math.floor(sun/1000)}:t> every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)`;
+    return `Twitch streams usually start at <t:${Math.floor(thurs/1000)}:t> every Thursday, <t:${Math.floor(sat/1000)}:t> every Saturday and <t:${Math.floor(sun/1000)}:t> every Sunday. Full details are here: https://broughy.com/schedule (use !plans for games & GTA stream platform info)`;
 }
 
 function getOffset(date) {
